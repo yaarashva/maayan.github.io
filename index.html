@@ -506,6 +506,35 @@
       animation: bob 1.8s ease-in-out infinite;
     }
 
+    .win-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 8;
+    }
+
+    .win-trophy {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(4rem, 18vw, 8rem);
+      line-height: 1;
+      filter: drop-shadow(0 12px 18px rgba(23, 50, 77, 0.28));
+      animation: trophy-spin 3s ease-in-out forwards;
+    }
+
+    .win-confetti {
+      position: absolute;
+      top: -14%;
+      width: 14px;
+      height: 26px;
+      border-radius: 999px;
+      opacity: 0.95;
+      animation: win-confetti-fall 3s linear forwards;
+    }
+
     .footer-note {
       margin-top: 1rem;
       text-align: center;
@@ -554,6 +583,39 @@
     @keyframes bob {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
+    }
+
+    @keyframes trophy-spin {
+      0% {
+        transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        transform: translate(-50%, -50%) scale(1.15) rotate(220deg);
+        opacity: 1;
+      }
+      75% {
+        transform: translate(-50%, -50%) scale(1) rotate(980deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(0.85) rotate(1180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes win-confetti-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(140%) rotate(720deg);
+        opacity: 0;
+      }
     }
 
     @keyframes confetti-drift {
@@ -709,6 +771,7 @@ If you share more ideas with me - I can build them for you!</p>
     function win(text) {
       state.running = false;
       setMessage(text || "You did it!", "#2b9b63");
+      showWinCelebration();
     }
 
     function lose(text) {
@@ -723,6 +786,38 @@ If you share more ideas with me - I can build them for you!</p>
       el.style.left = `${left}px`;
       el.style.top = `${top}px`;
       return el;
+    }
+
+    function showWinCelebration() {
+      const existing = gameArea.querySelector(".win-overlay");
+      if (existing) {
+        existing.remove();
+      }
+
+      const overlay = document.createElement("div");
+      overlay.className = "win-overlay";
+
+      const trophy = document.createElement("div");
+      trophy.className = "win-trophy";
+      trophy.textContent = "🏆";
+      overlay.appendChild(trophy);
+
+      const colors = ["#ff5d73", "#ffb703", "#84d8ff", "#9be7c4", "#c89bff", "#ffffff"];
+      for (let i = 0; i < 42; i += 1) {
+        const piece = document.createElement("div");
+        piece.className = "win-confetti";
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.background = colors[i % colors.length];
+        piece.style.animationDelay = `${Math.random() * 0.45}s`;
+        piece.style.animationDuration = `${2.4 + Math.random() * 1.1}s`;
+        piece.style.transform = `translateY(0) rotate(${Math.random() * 180}deg)`;
+        overlay.appendChild(piece);
+      }
+
+      gameArea.appendChild(overlay);
+      schedule(() => {
+        overlay.remove();
+      }, 3000);
     }
 
     function enableSimpleDrag(element, onDrop) {
