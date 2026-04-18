@@ -204,6 +204,7 @@
       gap: 0.75rem;
       justify-content: center;
       margin-top: 1rem;
+      align-items: center;
     }
 
     .action.primary {
@@ -876,6 +877,7 @@
       #game-view .action-row {
         gap: 0.45rem;
         margin-top: 0.65rem;
+        justify-content: center;
       }
 
       .game-shell {
@@ -1058,10 +1060,6 @@ If you share more ideas with me - I can build them for you!</p>
     <section id="game-view" class="hide">
       <div class="topbar">
         <button class="back" id="back-button" type="button">← Back To Arcade</button>
-        <div class="status">
-          <div class="pill" id="score-pill">Score: 0</div>
-          <div class="pill" id="goal-pill">Goal: 0</div>
-        </div>
       </div>
 
       <div class="hero-box">
@@ -1071,6 +1069,10 @@ If you share more ideas with me - I can build them for you!</p>
         <div class="action-row">
           <button class="action primary" id="start-button" type="button">Start Game</button>
           <button class="action secondary" id="restart-button" type="button">Restart</button>
+          <div class="status">
+            <div class="pill" id="score-pill">Score: 0</div>
+            <div class="pill" id="goal-pill">Goal: 0</div>
+          </div>
         </div>
       </div>
 
