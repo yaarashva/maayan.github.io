@@ -2382,21 +2382,11 @@ If you share more ideas with me - I can build them for you!</p>
     }
 
     startButton.addEventListener("click", () => {
-      const game = games[state.currentGameId];
-      if (game) {
-        getAudioContext();
-        startButton.classList.remove("start-attention");
-        game.start();
-      }
+      restartCurrentGame();
     });
 
     restartButton.addEventListener("click", () => {
-      const game = games[state.currentGameId];
-      if (game) {
-        getAudioContext();
-        startButton.classList.remove("start-attention");
-        game.start();
-      }
+      restartCurrentGame();
     });
 
     backButton.addEventListener("click", goHome);
