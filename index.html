@@ -1296,6 +1296,26 @@ If you share more ideas with me - I can build them for you!</p>
       });
     }
 
+    function playDiscoPadSound(index) {
+      const ctx = getAudioContext();
+      const now = ctx.currentTime;
+      const frequencies = [261.63, 329.63, 392.0, 523.25];
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(frequencies[index] || 440, now);
+
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.09, now + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.24);
+    }
+
     function showBalloonBurst(x, y, good) {
       const burst = document.createElement("div");
       burst.className = "balloon-burst";
@@ -2024,6 +2044,7 @@ If you share more ideas with me - I can build them for you!</p>
 
           function flash(index) {
             pads[index].classList.add("active");
+            playDiscoPadSound(index);
             schedule(() => pads[index].classList.remove("active"), 350);
           }
 
