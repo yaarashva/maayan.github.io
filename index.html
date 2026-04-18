@@ -588,6 +588,43 @@
       animation: win-confetti-fall 3s linear forwards;
     }
 
+    .lose-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(23, 50, 77, 0.18);
+      z-index: 9;
+    }
+
+    .lose-card {
+      width: min(92%, 360px);
+      padding: 1.2rem 1rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 18px 34px rgba(23, 50, 77, 0.22);
+      text-align: center;
+    }
+
+    .lose-banner {
+      margin: 0;
+      color: #9b2445;
+      font-size: clamp(1.3rem, 5vw, 2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .lose-text {
+      margin: 0.7rem 0 0;
+      font-size: 0.98rem;
+    }
+
+    .lose-restart {
+      margin-top: 0.95rem;
+    }
+
     .footer-note {
       margin-top: 1rem;
       text-align: center;
@@ -968,6 +1005,19 @@
         font-size: 0.95rem;
       }
 
+      .lose-card {
+        padding: 1rem 0.85rem;
+        border-radius: 18px;
+      }
+
+      .lose-banner {
+        font-size: 1.1rem;
+      }
+
+      .lose-text {
+        font-size: 0.9rem;
+      }
+
       .win-trophy {
         font-size: min(24vw, 5.2rem);
       }
@@ -1134,8 +1184,10 @@ If you share more ideas with me - I can build them for you!</p>
 
     function lose(text) {
       state.running = false;
-      setMessage(text || "Try again!", "#d96b3b");
+      const loseText = text || "Try again!";
+      setMessage(loseText, "#d96b3b");
       playSadSound();
+      showLoseOverlay(loseText);
     }
 
     function makeSprite(className, text, left, top) {
@@ -1303,6 +1355,40 @@ If you share more ideas with me - I can build them for you!</p>
       }, 3000);
     }
 
+    function restartCurrentGame() {
+      const game = games[state.currentGameId];
+      if (game) {
+        getAudioContext();
+        startButton.classList.remove("start-attention");
+        game.start();
+      }
+    }
+
+    function showLoseOverlay(text) {
+      const existing = gameArea.querySelector(".lose-overlay");
+      if (existing) {
+        existing.remove();
+      }
+
+      const overlay = document.createElement("div");
+      overlay.className = "lose-overlay";
+      overlay.innerHTML = `
+        <div class="lose-card">
+          <p class="lose-banner">Game Over</p>
+          <p class="lose-text">${text}</p>
+          <button class="action primary lose-restart" type="button">Restart</button>
+        </div>
+      `;
+
+      overlay.querySelector(".lose-restart").addEventListener("click", (event) => {
+        event.stopPropagation();
+        overlay.remove();
+        restartCurrentGame();
+      });
+
+      gameArea.appendChild(overlay);
+    }
+
     function enableSimpleDrag(element, onDrop) {
       let dragging = false;
 
@@ -1330,6 +1416,79 @@ If you share more ideas with me - I can build them for you!</p>
       element.addEventListener("pointercancel", () => {
         dragging = false;
       });
+    }
+
+    function generateFrogPads(count = 6) {
+      const pads = [];
+      for (let i = 0; i < count; i += 1) {
+        const baseX = 0.16 + i * 0.14;
+        const x = Math.min(0.88, baseX + randomBetween(-0.02, 0.03));
+        const y = randomBetween(0.42, 0.78);
+        pads.push({ x, y });
+      }
+      return pads;
+    }
+
+    function generateUnicornMaze() {
+      const size = 5;
+      let path = [];
+
+      while (path.length < 10) {
+        const start = Math.floor(Math.random() * (size * size));
+        path = [start];
+        const visited = new Set(path);
+
+        while (path.length < 12) {
+          const current = path[path.length - 1];
+          const row = Math.floor(current / size);
+          const col = current % size;
+          const candidates = [];
+
+          if (col > 0) {
+            candidates.push(current - 1);
+          }
+          if (col < size - 1) {
+            candidates.push(current + 1);
+          }
+          if (row > 0) {
+            candidates.push(current - size);
+          }
+          if (row < size - 1) {
+            candidates.push(current + size);
+          }
+
+          const nextOptions = candidates.filter((cell) => !visited.has(cell));
+          if (!nextOptions.length) {
+            break;
+          }
+
+          const next = nextOptions[Math.floor(Math.random() * nextOptions.length)];
+          path.push(next);
+          visited.add(next);
+        }
+      }
+
+      const sparkleCandidates = [...path.slice(1)];
+      const sparkleSet = new Set();
+      while (sparkleSet.size < 5 && sparkleCandidates.length) {
+        const pickIndex = Math.floor(Math.random() * sparkleCandidates.length);
+        sparkleSet.add(sparkleCandidates.splice(pickIndex, 1)[0]);
+      }
+
+      const pathSet = new Set(path);
+      const freeCells = Array.from({ length: size * size }, (_, index) => index).filter((cell) => !pathSet.has(cell));
+      const wallSet = new Set();
+      while (wallSet.size < 6 && freeCells.length) {
+        const pickIndex = Math.floor(Math.random() * freeCells.length);
+        wallSet.add(freeCells.splice(pickIndex, 1)[0]);
+      }
+
+      return {
+        size,
+        start: path[0],
+        sparkleSet,
+        wallSet
+      };
     }
 
     const games = {
@@ -1522,7 +1681,7 @@ If you share more ideas with me - I can build them for you!</p>
         gameName: "Lily pad leap",
         note: "Hop across the pond without splashing in.",
         subtitle: "Tap the next lily pad to cross the pond.",
-        instructions: "Press Start. Tap the lily pads in order from left to right. Reach the last pad to win.",
+        instructions: "Press Start. Tap the glowing lily pads in order from left to right. Each round makes a new hopping path.",
         goal: 6,
         areaClass: "pond",
         start() {
@@ -1535,17 +1694,23 @@ If you share more ideas with me - I can build them for you!</p>
           frog.textContent = "🐸";
           gameArea.appendChild(frog);
 
-          const pads = [
-            { x: 0.1, y: 0.74 },
-            { x: 0.24, y: 0.58 },
-            { x: 0.4, y: 0.7 },
-            { x: 0.56, y: 0.5 },
-            { x: 0.74, y: 0.66 },
-            { x: 0.88, y: 0.48 }
-          ];
+          const pads = generateFrogPads(this.goal);
+          const padElements = [];
 
           let current = 0;
           setMessage("Tap the first lily pad to start hopping.", "#17324d");
+
+          function updatePadHighlights() {
+            padElements.forEach((pad, index) => {
+              if (index === current) {
+                pad.style.boxShadow = "0 0 0 5px rgba(255, 255, 255, 0.72), inset -10px -4px rgba(0, 0, 0, 0.08)";
+                pad.style.transform = "scale(1.06)";
+              } else {
+                pad.style.boxShadow = "inset -10px -4px rgba(0, 0, 0, 0.08)";
+                pad.style.transform = "scale(1)";
+              }
+            });
+          }
 
           pads.forEach((padData, index) => {
             const left = Math.max(18, Math.min(gameArea.clientWidth - 88, gameArea.clientWidth * padData.x - 36));
@@ -1560,9 +1725,7 @@ If you share more ideas with me - I can build them for you!</p>
             pad.className = "sprite pad";
             pad.style.left = `${left}px`;
             pad.style.top = `${top}px`;
-            if (index === 0) {
-              pad.style.boxShadow = "0 0 0 5px rgba(255, 255, 255, 0.7), inset -10px -4px rgba(0, 0, 0, 0.08)";
-            }
+            pad.textContent = String(index + 1);
             pad.addEventListener("pointerdown", (event) => {
               event.stopPropagation();
               if (!state.running || index !== current) {
@@ -1574,13 +1737,17 @@ If you share more ideas with me - I can build them for you!</p>
               frog.style.top = `${top - 44}px`;
               current += 1;
               setScore(current, true);
-              setMessage(current < pads.length ? "Nice hop. Keep going to the next pad." : "", "#17324d");
+              updatePadHighlights();
+              setMessage(current < pads.length ? `Nice hop. Now tap lily pad ${current + 1}.` : "", "#17324d");
               if (current === pads.length) {
                 win("Splash-free success. Frog champion!");
               }
             });
+            padElements.push(pad);
             gameArea.appendChild(pad);
           });
+
+          updatePadHighlights();
         }
       },
       octopus: {
@@ -1672,7 +1839,7 @@ If you share more ideas with me - I can build them for you!</p>
         gameName: "Rainbow maze",
         note: "Collect all the sparkles before the maze is empty.",
         subtitle: "Tap next-door squares to collect the sparkles.",
-        instructions: "Press Start. Tap a square next to the unicorn to move. Collect all 5 sparkles. Dark blocks are walls.",
+        instructions: "Press Start. Tap a square next to the unicorn to move. Collect all 5 sparkles. The maze changes every time.",
         goal: 5,
         areaClass: "rainbow",
         start() {
@@ -1687,25 +1854,20 @@ If you share more ideas with me - I can build them for you!</p>
           stage.appendChild(grid);
           gameArea.appendChild(stage);
 
-          const cells = [
-            "u", ".", "s", "#", ".",
-            "#", ".", ".", "#", ".",
-            ".", "#", ".", ".", "s",
-            ".", ".", "#", ".", ".",
-            "s", ".", ".", "s", "s"
-          ];
-
-          let unicornIndex = cells.indexOf("u");
-          const sparkleSet = new Set(cells.map((value, index) => value === "s" ? index : -1).filter((value) => value >= 0));
+          const maze = generateUnicornMaze();
+          const size = maze.size;
+          let unicornIndex = maze.start;
+          const sparkleSet = new Set(maze.sparkleSet);
+          const wallSet = new Set(maze.wallSet);
 
           function render() {
             grid.innerHTML = "";
-            cells.forEach((value, index) => {
+            Array.from({ length: size * size }, (_, index) => index).forEach((index) => {
               const cell = document.createElement("button");
               cell.type = "button";
               cell.className = "maze-cell";
 
-              if (value === "#") {
+              if (wallSet.has(index)) {
                 cell.classList.add("wall");
                 cell.disabled = true;
               } else if (index === unicornIndex) {
@@ -1716,12 +1878,12 @@ If you share more ideas with me - I can build them for you!</p>
               }
 
               cell.addEventListener("pointerdown", () => {
-                if (!state.running || value === "#") {
+                if (!state.running || wallSet.has(index)) {
                   return;
                 }
-                const sameRowLeft = index === unicornIndex - 1 && Math.floor(index / 5) === Math.floor(unicornIndex / 5);
-                const sameRowRight = index === unicornIndex + 1 && Math.floor(index / 5) === Math.floor(unicornIndex / 5);
-                const verticalMove = index === unicornIndex - 5 || index === unicornIndex + 5;
+                const sameRowLeft = index === unicornIndex - 1 && Math.floor(index / size) === Math.floor(unicornIndex / size);
+                const sameRowRight = index === unicornIndex + 1 && Math.floor(index / size) === Math.floor(unicornIndex / size);
+                const verticalMove = index === unicornIndex - size || index === unicornIndex + size;
                 const allowed = sameRowLeft || sameRowRight || verticalMove;
                 if (!allowed) {
                   setMessage("The unicorn can only move one square.");
