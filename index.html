@@ -1860,6 +1860,20 @@ If you share more ideas with me - I can build them for you!</p>
           const sparkleSet = new Set(maze.sparkleSet);
           const wallSet = new Set(maze.wallSet);
 
+          function scrollMazeForUnicorn() {
+            const unicornRow = Math.floor(unicornIndex / size);
+            if (unicornRow < size - 2) {
+              return;
+            }
+
+            const maxScroll = Math.max(0, stage.scrollHeight - stage.clientHeight);
+            const targetScroll = unicornRow >= size - 1 ? maxScroll : maxScroll * 0.72;
+            stage.scrollTo({
+              top: targetScroll,
+              behavior: "smooth"
+            });
+          }
+
           function render() {
             grid.innerHTML = "";
             Array.from({ length: size * size }, (_, index) => index).forEach((index) => {
@@ -1903,6 +1917,8 @@ If you share more ideas with me - I can build them for you!</p>
 
               grid.appendChild(cell);
             });
+
+            scrollMazeForUnicorn();
           }
 
           render();
