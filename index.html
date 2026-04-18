@@ -1,0 +1,1519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emoji Game Arcade</title>
+  <style>
+    :root {
+      --ink: #17324d;
+      --card: rgba(255, 255, 255, 0.82);
+      --panel: rgba(255, 255, 255, 0.86);
+      --shadow: rgba(23, 50, 77, 0.18);
+      --good: #2b9b63;
+      --warn: #d96b3b;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Verdana", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.55), transparent 30%),
+        linear-gradient(135deg, #fff7a8, #ffbad4 50%, #9fe6e7);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 1rem));
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    .hero-box {
+      padding: 1rem;
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: 0 18px 34px var(--shadow);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      text-shadow: 0 4px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .subtitle {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0.9rem auto 0;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      box-shadow: 0 10px 22px var(--shadow);
+      font-size: clamp(1rem, 2vw, 1.1rem);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      display: block;
+      width: 100%;
+      min-height: 240px;
+      padding: 1rem;
+      border: 0;
+      border-radius: 28px;
+      text-align: left;
+      color: inherit;
+      background: var(--card);
+      box-shadow: 0 18px 34px var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      cursor: pointer;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-6px) rotate(1deg);
+      box-shadow: 0 24px 38px rgba(23, 50, 77, 0.24);
+      background: rgba(255, 255, 255, 0.92);
+      outline: none;
+    }
+
+    .art {
+      display: grid;
+      place-items: center;
+      height: 130px;
+      margin-bottom: 0.9rem;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)),
+        rgba(255, 255, 255, 0.3);
+      font-size: 4rem;
+    }
+
+    .name {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 1.05rem;
+    }
+
+    .game-name {
+      margin: 0.45rem 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .note {
+      margin: 0.45rem 0 0;
+      font-size: 0.92rem;
+      opacity: 0.82;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .back,
+    .pill,
+    .action {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 10px 20px var(--shadow);
+      color: var(--ink);
+    }
+
+    .back,
+    .action {
+      cursor: pointer;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .action.primary {
+      color: white;
+      background: linear-gradient(135deg, #ff7f99, #ffb04d);
+      box-shadow: 0 12px 20px rgba(255, 127, 153, 0.3);
+    }
+
+    .action.secondary {
+      color: white;
+      background: linear-gradient(135deg, #5d9df7, #70d6ff);
+      box-shadow: 0 12px 20px rgba(93, 157, 247, 0.3);
+    }
+
+    .status {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .game-shell {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .game-area {
+      position: relative;
+      min-height: 430px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 22px 38px var(--shadow);
+      touch-action: none;
+    }
+
+    .instructions,
+    .message {
+      padding: 1rem 1.1rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 16px 28px var(--shadow);
+    }
+
+    .instructions strong {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.95rem;
+    }
+
+    .message {
+      min-height: 56px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--warn);
+    }
+
+    .center-stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .sprite {
+      position: absolute;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .sky {
+      background: linear-gradient(180deg, #bde9ff, #fffef6);
+    }
+
+    .space {
+      background: radial-gradient(circle at top, #284b86, #111d35 64%);
+    }
+
+    .pond {
+      background: linear-gradient(180deg, #d5f8b9, #79d5ff 62%, #57b0e3);
+    }
+
+    .ocean {
+      background: linear-gradient(180deg, #dff8ff, #8ad8ff 40%, #44a4df);
+    }
+
+    .rainbow {
+      background: linear-gradient(135deg, #ffb4d1, #ffd86b, #8cf2d0, #89c7ff);
+    }
+
+    .kitchen {
+      background: linear-gradient(180deg, #fff2d3, #ffcba6);
+    }
+
+    .club {
+      background: radial-gradient(circle at top, #49306c, #180d2b 64%);
+    }
+
+    .circus {
+      background: linear-gradient(180deg, #fff0a6, #ffb5bf);
+    }
+
+    .movie {
+      background: linear-gradient(180deg, #ffe5b5, #ffb36e);
+    }
+
+    .sunny {
+      background: linear-gradient(180deg, #ffe27c, #ff9f6e);
+    }
+
+    .floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 54px;
+      background: rgba(23, 50, 77, 0.12);
+    }
+
+    .juggler {
+      left: 50%;
+      bottom: 34px;
+      transform: translateX(-50%);
+      font-size: 4rem;
+    }
+
+    .ball {
+      font-size: 2rem;
+    }
+
+    .rocket {
+      font-size: 3.2rem;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .rocket-item {
+      font-size: 2rem;
+    }
+
+    .frog {
+      font-size: 3.2rem;
+      transition: left 240ms ease, top 240ms ease;
+    }
+
+    .pad {
+      width: 78px;
+      height: 32px;
+      border-radius: 50%;
+      background: #72bb4a;
+      border: 4px solid #4c8f2f;
+      box-shadow: inset -10px -4px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+    }
+
+    .bucket-zone {
+      position: absolute;
+      bottom: 24px;
+      width: 28%;
+      min-height: 128px;
+      padding-top: 64px;
+      border-radius: 24px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.4);
+      border: 3px dashed rgba(23, 50, 77, 0.24);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .bucket-zone .bucket-emoji {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.3rem;
+    }
+
+    .draggable {
+      font-size: 2.2rem;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .maze-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.55rem;
+      width: min(92vw, 520px);
+      margin: 0 auto;
+    }
+
+    .maze-cell {
+      aspect-ratio: 1;
+      border-radius: 18px;
+      border: 2px solid rgba(23, 50, 77, 0.12);
+      background: rgba(255, 255, 255, 0.52);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .maze-cell.wall {
+      background: rgba(23, 50, 77, 0.2);
+      cursor: not-allowed;
+    }
+
+    .maze-cell.sparkle {
+      background: rgba(255, 255, 255, 0.84);
+    }
+
+    .pizza-base {
+      width: min(78vw, 360px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f4b85b 0 62%, #c97b2f 63% 72%, transparent 73%);
+      margin: 0 auto;
+      position: relative;
+      box-shadow: inset 0 0 0 18px rgba(255, 122, 61, 0.45);
+    }
+
+    .pizza-slot {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      margin: -38px 0 0 -38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.34);
+      border: 3px dashed rgba(23, 50, 77, 0.22);
+      font-size: 2rem;
+    }
+
+    .tray {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(68px, 1fr));
+      gap: 0.75rem;
+      width: min(92vw, 420px);
+      margin: 0 auto;
+      padding-top: 1rem;
+    }
+
+    .memory-pad {
+      aspect-ratio: 1;
+      border-radius: 20px;
+      border: 0;
+      cursor: pointer;
+      opacity: 0.92;
+    }
+
+    .memory-pad.active {
+      transform: scale(1.06);
+      filter: brightness(1.25);
+    }
+
+    .balloon {
+      font-size: 2.5rem;
+      animation: bob 1.5s ease-in-out infinite;
+    }
+
+    .bucket {
+      bottom: 18px;
+      transform: translateX(-50%);
+      font-size: 3.2rem;
+    }
+
+    .pop {
+      font-size: 2.1rem;
+    }
+
+    .heat-bar {
+      width: min(90vw, 380px);
+      height: 22px;
+      margin: 0.5rem auto 0;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 2px rgba(23, 50, 77, 0.12);
+    }
+
+    .heat-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #57c1ff, #ffd154, #ff7c5a);
+      transition: width 120ms linear;
+    }
+
+    .cool-item {
+      font-size: 2.2rem;
+      animation: bob 1.8s ease-in-out infinite;
+    }
+
+    .footer-note {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.94rem;
+      opacity: 0.8;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 700px) {
+      .game-area {
+        min-height: 520px;
+      }
+
+      .bucket-zone {
+        width: 31%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section id="launcher-view">
+      <div class="hero-box">
+        <h1>Emoji Game Arcade</h1>
+        <p class="subtitle">One HTML file, ten tiny games, and a whole lot of testing energy.</p>
+      </div>
+
+      <section class="grid" id="launcher-grid" aria-label="Emoji game launcher"></section>
+      <p class="footer-note">This version is built as one self-contained file for easier offline use on phones.</p>
+    </section>
+
+    <section id="game-view" class="hide">
+      <div class="topbar">
+        <button class="back" id="back-button" type="button">← Back To Arcade</button>
+        <div class="status">
+          <div class="pill" id="score-pill">Score: 0</div>
+          <div class="pill" id="goal-pill">Goal: 0</div>
+        </div>
+      </div>
+
+      <div class="hero-box">
+        <div id="hero-emoji" style="font-size: clamp(3rem, 8vw, 5rem); line-height: 1;">🎮</div>
+        <h1 id="hero-title">Emoji Game</h1>
+        <p class="subtitle" id="hero-subtitle"></p>
+        <div class="action-row">
+          <button class="action primary" id="start-button" type="button">Start Game</button>
+          <button class="action secondary" id="restart-button" type="button">Restart</button>
+        </div>
+      </div>
+
+      <section class="game-shell">
+        <div class="game-area" id="game-area"></div>
+        <div class="instructions">
+          <strong>How To Play</strong>
+          <div id="instructions-text"></div>
+        </div>
+        <div class="message" id="message"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const launcherView = document.getElementById("launcher-view");
+    const gameView = document.getElementById("game-view");
+    const launcherGrid = document.getElementById("launcher-grid");
+    const backButton = document.getElementById("back-button");
+    const gameArea = document.getElementById("game-area");
+    const scorePill = document.getElementById("score-pill");
+    const goalPill = document.getElementById("goal-pill");
+    const heroEmoji = document.getElementById("hero-emoji");
+    const heroTitle = document.getElementById("hero-title");
+    const heroSubtitle = document.getElementById("hero-subtitle");
+    const instructionsText = document.getElementById("instructions-text");
+    const message = document.getElementById("message");
+    const startButton = document.getElementById("start-button");
+    const restartButton = document.getElementById("restart-button");
+
+    const timers = [];
+    const state = {
+      score: 0,
+      goal: 0,
+      running: false,
+      currentGameId: null
+    };
+
+    function randomBetween(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function schedule(fn, delay) {
+      const id = setTimeout(fn, delay);
+      timers.push(id);
+      return id;
+    }
+
+    function clearTimers() {
+      while (timers.length) {
+        clearTimeout(timers.pop());
+      }
+    }
+
+    function setScore(value) {
+      state.score = value;
+      scorePill.textContent = `Score: ${value}`;
+    }
+
+    function setGoal(value) {
+      state.goal = value;
+      goalPill.textContent = `Goal: ${value}`;
+    }
+
+    function setMessage(text, color) {
+      message.textContent = text;
+      message.style.color = color || "#d96b3b";
+    }
+
+    function resetArea(className) {
+      clearTimers();
+      state.running = false;
+      gameArea.className = "game-area";
+      if (className) {
+        gameArea.classList.add(className);
+      }
+      gameArea.innerHTML = "";
+      gameArea.onpointermove = null;
+      gameArea.onpointerdown = null;
+      document.onkeydown = null;
+      setMessage("");
+      setScore(0);
+    }
+
+    function win(text) {
+      state.running = false;
+      setMessage(text || "You did it!", "#2b9b63");
+    }
+
+    function lose(text) {
+      state.running = false;
+      setMessage(text || "Try again!", "#d96b3b");
+    }
+
+    function makeSprite(className, text, left, top) {
+      const el = document.createElement("div");
+      el.className = `sprite ${className}`;
+      el.textContent = text;
+      el.style.left = `${left}px`;
+      el.style.top = `${top}px`;
+      return el;
+    }
+
+    function enableSimpleDrag(element, onDrop) {
+      let dragging = false;
+
+      element.addEventListener("pointerdown", (event) => {
+        dragging = true;
+        element.setPointerCapture(event.pointerId);
+      });
+
+      element.addEventListener("pointermove", (event) => {
+        if (!dragging || !state.running) {
+          return;
+        }
+        const rect = gameArea.getBoundingClientRect();
+        const x = event.clientX - rect.left - element.offsetWidth / 2;
+        const y = event.clientY - rect.top - element.offsetHeight / 2;
+        element.style.left = `${Math.max(6, Math.min(gameArea.clientWidth - element.offsetWidth - 6, x))}px`;
+        element.style.top = `${Math.max(6, Math.min(gameArea.clientHeight - element.offsetHeight - 6, y))}px`;
+      });
+
+      element.addEventListener("pointerup", () => {
+        dragging = false;
+        onDrop();
+      });
+
+      element.addEventListener("pointercancel", () => {
+        dragging = false;
+      });
+    }
+
+    const games = {
+      juggler: {
+        emoji: "🤹",
+        title: "Juggler",
+        gameName: "Keep the balls up",
+        note: "Tap the falling balls before they hit the floor.",
+        subtitle: "Tap the falling balls before they hit the floor.",
+        instructions: "Press Start. Balls drop from the top. Tap each one before it reaches the bottom. Catch 12 to win.",
+        goal: 12,
+        areaClass: "sky",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const floor = document.createElement("div");
+          floor.className = "floor";
+          const juggler = document.createElement("div");
+          juggler.className = "sprite juggler";
+          juggler.textContent = "🤹";
+          gameArea.append(floor, juggler);
+
+          const colors = ["🔴", "🟡", "🔵", "🟢"];
+          let missed = 0;
+
+          function dropBall() {
+            if (!state.running) {
+              return;
+            }
+
+            const ball = document.createElement("div");
+            ball.className = "sprite ball";
+            ball.textContent = colors[Math.floor(Math.random() * colors.length)];
+            ball.style.left = `${randomBetween(20, gameArea.clientWidth - 50)}px`;
+            ball.style.top = "-10px";
+            gameArea.appendChild(ball);
+
+            let top = -10;
+            const speed = randomBetween(2.2, 3.6);
+            const interval = setInterval(() => {
+              if (!state.running) {
+                clearInterval(interval);
+                ball.remove();
+                return;
+              }
+
+              top += speed;
+              ball.style.top = `${top}px`;
+              if (top > gameArea.clientHeight - 70) {
+                clearInterval(interval);
+                ball.remove();
+                missed += 1;
+                if (missed >= 3) {
+                  lose("Three balls escaped. The circus needs another try.");
+                }
+              }
+            }, 16);
+
+            ball.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearInterval(interval);
+              ball.remove();
+              setScore(state.score + 1);
+              if (state.score >= state.goal) {
+                win("Amazing juggling. All the balls stayed up!");
+              }
+            });
+
+            schedule(dropBall, randomBetween(480, 820));
+          }
+
+          dropBall();
+        }
+      },
+      rocket: {
+        emoji: "🚀",
+        title: "Rocket",
+        gameName: "Fly through space",
+        note: "Collect stars and dodge floating junk.",
+        subtitle: "Drag the rocket up and down to collect stars.",
+        instructions: "Press Start. Move the rocket with your finger or mouse. Collect 10 stars. If you hit 3 space junk pieces, the mission ends.",
+        goal: 10,
+        areaClass: "space",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const rocket = document.createElement("div");
+          rocket.className = "sprite rocket";
+          rocket.textContent = "🚀";
+          gameArea.appendChild(rocket);
+
+          let rocketY = gameArea.clientHeight / 2;
+          let hits = 0;
+
+          function clampRocket(y) {
+            rocketY = Math.max(20, Math.min(gameArea.clientHeight - 90, y));
+            rocket.style.top = `${rocketY}px`;
+          }
+
+          clampRocket(rocketY);
+
+          function moveRocket(event) {
+            if (!state.running) {
+              return;
+            }
+            const rect = gameArea.getBoundingClientRect();
+            clampRocket(event.clientY - rect.top - 20);
+          }
+
+          gameArea.onpointermove = moveRocket;
+          gameArea.onpointerdown = moveRocket;
+          document.onkeydown = (event) => {
+            if (!state.running) {
+              return;
+            }
+            if (event.key === "ArrowUp") {
+              clampRocket(rocketY - 30);
+            }
+            if (event.key === "ArrowDown") {
+              clampRocket(rocketY + 30);
+            }
+          };
+
+          function spawnItem() {
+            if (!state.running) {
+              return;
+            }
+
+            const isStar = Math.random() > 0.35;
+            const item = document.createElement("div");
+            item.className = "sprite rocket-item";
+            item.textContent = isStar ? "⭐" : "🛰️";
+            let x = gameArea.clientWidth + 20;
+            const y = randomBetween(30, gameArea.clientHeight - 80);
+            item.style.left = `${x}px`;
+            item.style.top = `${y}px`;
+            gameArea.appendChild(item);
+
+            const interval = setInterval(() => {
+              if (!state.running) {
+                clearInterval(interval);
+                item.remove();
+                return;
+              }
+
+              x -= isStar ? 4.2 : 5.2;
+              item.style.left = `${x}px`;
+
+              const rx = 24;
+              const ry = rocketY + 20;
+              if (Math.abs(x - rx) < 34 && Math.abs(y - ry) < 42) {
+                clearInterval(interval);
+                item.remove();
+                if (isStar) {
+                  setScore(state.score + 1);
+                  if (state.score >= state.goal) {
+                    win("Rocket mission complete. The stars are cheering.");
+                  }
+                } else {
+                  hits += 1;
+                  setMessage(`Bonk. Space junk hits: ${hits}/3`);
+                  if (hits >= 3) {
+                    lose("Too much space junk. The rocket needs repairs.");
+                  }
+                }
+              }
+
+              if (x < -40) {
+                clearInterval(interval);
+                item.remove();
+              }
+            }, 16);
+
+            schedule(spawnItem, randomBetween(700, 1000));
+          }
+
+          spawnItem();
+        }
+      },
+      frog: {
+        emoji: "🐸",
+        title: "Frog",
+        gameName: "Lily pad leap",
+        note: "Hop across the pond without splashing in.",
+        subtitle: "Tap the next lily pad to cross the pond.",
+        instructions: "Press Start. Tap the pads in order from left to right. Reach the last pad to win. Tap the water and the frog splashes.",
+        goal: 6,
+        areaClass: "pond",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const frog = document.createElement("div");
+          frog.className = "sprite frog";
+          frog.textContent = "🐸";
+          frog.style.left = "10px";
+          frog.style.top = "340px";
+          gameArea.appendChild(frog);
+
+          const pads = [
+            { x: 0.1, y: 0.74 },
+            { x: 0.24, y: 0.58 },
+            { x: 0.4, y: 0.7 },
+            { x: 0.56, y: 0.5 },
+            { x: 0.74, y: 0.66 },
+            { x: 0.88, y: 0.48 }
+          ];
+
+          let current = 0;
+          let splashed = false;
+
+          pads.forEach((padData, index) => {
+            const left = Math.max(18, Math.min(gameArea.clientWidth - 88, gameArea.clientWidth * padData.x - 36));
+            const top = Math.max(90, Math.min(gameArea.clientHeight - 80, gameArea.clientHeight * padData.y - 16));
+            const pad = document.createElement("div");
+            pad.className = "sprite pad";
+            pad.style.left = `${left}px`;
+            pad.style.top = `${top}px`;
+            pad.addEventListener("pointerdown", (event) => {
+              event.stopPropagation();
+              if (!state.running || index !== current) {
+                setMessage("Try the next pad in order.");
+                return;
+              }
+
+              frog.style.left = `${left + 18}px`;
+              frog.style.top = `${top - 44}px`;
+              current += 1;
+              setScore(current);
+              if (current === pads.length) {
+                win("Splash-free success. Frog champion!");
+              }
+            });
+            gameArea.appendChild(pad);
+          });
+
+          gameArea.onpointerdown = (event) => {
+            if (!state.running || splashed || event.target !== gameArea) {
+              return;
+            }
+            splashed = true;
+            lose("Plop. The frog jumped into the water.");
+          };
+        }
+      },
+      octopus: {
+        emoji: "🐙",
+        title: "Octopus",
+        gameName: "Sea sorter",
+        note: "Drag ocean things into the matching buckets.",
+        subtitle: "Move the ocean goodies into the right buckets.",
+        instructions: "Press Start. Drag each item into the matching bucket: shell with shell, fish with fish, treasure with treasure. Sort all 9 to win.",
+        goal: 9,
+        areaClass: "ocean",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const octopus = document.createElement("div");
+          octopus.className = "sprite";
+          octopus.textContent = "🐙";
+          octopus.style.left = "50%";
+          octopus.style.top = "14px";
+          octopus.style.transform = "translateX(-50%)";
+          octopus.style.fontSize = "4rem";
+          gameArea.appendChild(octopus);
+
+          const zones = [
+            { key: "shell", label: "Shell Bucket", emoji: "🐚", left: "4%" },
+            { key: "fish", label: "Fish Bucket", emoji: "🐟", left: "36%" },
+            { key: "treasure", label: "Treasure Bucket", emoji: "💰", left: "68%" }
+          ];
+
+          zones.forEach((zone) => {
+            const el = document.createElement("div");
+            el.className = "bucket-zone";
+            el.dataset.key = zone.key;
+            el.style.left = zone.left;
+            el.innerHTML = `<div class="bucket-emoji">${zone.emoji}</div>${zone.label}`;
+            gameArea.appendChild(el);
+          });
+
+          const items = [
+            ["shell", "🐚"], ["shell", "🦪"], ["shell", "🐚"],
+            ["fish", "🐠"], ["fish", "🐟"], ["fish", "🐡"],
+            ["treasure", "💰"], ["treasure", "💎"], ["treasure", "🪙"]
+          ];
+
+          items.forEach(([kind, emoji], index) => {
+            const item = document.createElement("div");
+            item.className = "sprite draggable";
+            item.textContent = emoji;
+            item.dataset.kind = kind;
+            item.style.left = `${40 + (index % 3) * 90}px`;
+            item.style.top = `${110 + Math.floor(index / 3) * 72}px`;
+            gameArea.appendChild(item);
+
+            enableSimpleDrag(item, () => {
+              if (!state.running) {
+                return;
+              }
+
+              const itemRect = item.getBoundingClientRect();
+              const hitZone = [...gameArea.querySelectorAll(".bucket-zone")].find((zone) => {
+                const rect = zone.getBoundingClientRect();
+                const centerX = itemRect.left + itemRect.width / 2;
+                const centerY = itemRect.top + itemRect.height / 2;
+                return centerX >= rect.left && centerX <= rect.right && centerY >= rect.top && centerY <= rect.bottom;
+              });
+
+              if (!hitZone) {
+                return;
+              }
+
+              if (hitZone.dataset.key === kind) {
+                item.remove();
+                setScore(state.score + 1);
+                if (state.score >= state.goal) {
+                  win("Ocean sorting complete. Octopus is impressed.");
+                }
+              } else {
+                setMessage("Wrong bucket. Try a different one.");
+              }
+            });
+          });
+        }
+      },
+      unicorn: {
+        emoji: "🦄",
+        title: "Unicorn",
+        gameName: "Rainbow maze",
+        note: "Collect all the sparkles before the maze is empty.",
+        subtitle: "Tap next-door squares to collect the sparkles.",
+        instructions: "Press Start. Tap a square next to the unicorn to move. Collect all 5 sparkles. Dark blocks are walls.",
+        goal: 5,
+        areaClass: "rainbow",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const stage = document.createElement("div");
+          stage.className = "center-stage";
+          const grid = document.createElement("div");
+          grid.className = "maze-grid";
+          stage.appendChild(grid);
+          gameArea.appendChild(stage);
+
+          const cells = [
+            "u", ".", "s", "#", ".",
+            "#", ".", ".", "#", ".",
+            ".", "#", ".", ".", "s",
+            ".", ".", "#", ".", ".",
+            "s", ".", ".", "s", "s"
+          ];
+
+          let unicornIndex = cells.indexOf("u");
+          const sparkleSet = new Set(cells.map((value, index) => value === "s" ? index : -1).filter((value) => value >= 0));
+
+          function render() {
+            grid.innerHTML = "";
+            cells.forEach((value, index) => {
+              const cell = document.createElement("button");
+              cell.type = "button";
+              cell.className = "maze-cell";
+
+              if (value === "#") {
+                cell.classList.add("wall");
+                cell.disabled = true;
+              } else if (index === unicornIndex) {
+                cell.textContent = "🦄";
+              } else if (sparkleSet.has(index)) {
+                cell.classList.add("sparkle");
+                cell.textContent = "✨";
+              }
+
+              cell.addEventListener("pointerdown", () => {
+                if (!state.running || value === "#") {
+                  return;
+                }
+                const sameRowLeft = index === unicornIndex - 1 && Math.floor(index / 5) === Math.floor(unicornIndex / 5);
+                const sameRowRight = index === unicornIndex + 1 && Math.floor(index / 5) === Math.floor(unicornIndex / 5);
+                const verticalMove = index === unicornIndex - 5 || index === unicornIndex + 5;
+                const allowed = sameRowLeft || sameRowRight || verticalMove;
+                if (!allowed) {
+                  setMessage("The unicorn can only move one square.");
+                  return;
+                }
+
+                unicornIndex = index;
+                if (sparkleSet.has(index)) {
+                  sparkleSet.delete(index);
+                  setScore(state.score + 1);
+                }
+                render();
+                if (sparkleSet.size === 0) {
+                  win("Rainbow maze complete. Sparkles saved.");
+                }
+              });
+
+              grid.appendChild(cell);
+            });
+          }
+
+          render();
+        }
+      },
+      pizza: {
+        emoji: "🍕",
+        title: "Pizza Builder",
+        gameName: "Top the pizza",
+        note: "Put the right toppings in the right places.",
+        subtitle: "Drag the toppings onto the matching pizza spots.",
+        instructions: "Press Start. Move the toppings onto the matching symbols on the pizza. Finish all 4 to serve the pie.",
+        goal: 4,
+        areaClass: "kitchen",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const base = document.createElement("div");
+          base.className = "pizza-base";
+          gameArea.appendChild(base);
+
+          const tray = document.createElement("div");
+          tray.className = "tray";
+          gameArea.appendChild(tray);
+
+          const toppings = [
+            { key: "pepperoni", emoji: "🔴", icon: "🔴", x: "50%", y: "30%" },
+            { key: "mushroom", emoji: "🍄", icon: "🍄", x: "28%", y: "56%" },
+            { key: "olive", emoji: "🫒", icon: "🫒", x: "72%", y: "52%" },
+            { key: "pepper", emoji: "🫑", icon: "🫑", x: "50%", y: "74%" }
+          ];
+
+          toppings.forEach((top, index) => {
+            const slot = document.createElement("div");
+            slot.className = "pizza-slot";
+            slot.dataset.key = top.key;
+            slot.style.left = top.x;
+            slot.style.top = top.y;
+            slot.textContent = top.icon;
+            base.appendChild(slot);
+
+            const item = document.createElement("div");
+            item.className = "sprite draggable";
+            item.textContent = top.emoji;
+            item.dataset.key = top.key;
+            item.style.left = `${40 + index * 76}px`;
+            item.style.top = `${gameArea.clientHeight - 80}px`;
+            gameArea.appendChild(item);
+
+            enableSimpleDrag(item, () => {
+              if (!state.running) {
+                return;
+              }
+              const itemRect = item.getBoundingClientRect();
+              const slotRect = slot.getBoundingClientRect();
+              const centerX = itemRect.left + itemRect.width / 2;
+              const centerY = itemRect.top + itemRect.height / 2;
+              const hit = centerX >= slotRect.left && centerX <= slotRect.right && centerY >= slotRect.top && centerY <= slotRect.bottom;
+
+              if (hit && item.dataset.key === slot.dataset.key) {
+                slot.textContent = item.textContent;
+                item.remove();
+                setScore(state.score + 1);
+                if (state.score >= state.goal) {
+                  win("Pizza complete. Delivery level: delicious.");
+                }
+              } else if (hit) {
+                setMessage("That topping belongs somewhere else.");
+              }
+            });
+          });
+        }
+      },
+      disco: {
+        emoji: "🪩",
+        title: "Disco Memory",
+        gameName: "Copy the beat",
+        note: "Watch the flashing pattern and tap it back.",
+        subtitle: "Repeat the disco light pattern.",
+        instructions: "Press Start. Watch the flashing colors. Repeat the pattern by tapping the pads in the same order. Finish 4 rounds to win.",
+        goal: 4,
+        areaClass: "club",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const stage = document.createElement("div");
+          stage.className = "center-stage";
+          const grid = document.createElement("div");
+          grid.className = "memory-grid";
+          stage.appendChild(grid);
+          gameArea.appendChild(stage);
+
+          const colors = ["#ff5b84", "#ffd84a", "#67e0c0", "#62b7ff"];
+          const pads = [];
+          let sequence = [];
+          let player = [];
+          let round = 0;
+          let locked = true;
+
+          function flash(index) {
+            pads[index].classList.add("active");
+            schedule(() => pads[index].classList.remove("active"), 350);
+          }
+
+          function showSequence() {
+            locked = true;
+            sequence.forEach((value, index) => {
+              schedule(() => flash(value), 500 + index * 520);
+            });
+            schedule(() => {
+              locked = false;
+              player = [];
+              setMessage("Your turn. Copy the pattern.", "#17324d");
+            }, 500 + sequence.length * 520);
+          }
+
+          function nextRound() {
+            round += 1;
+            setScore(round - 1);
+            if (round > state.goal) {
+              win("Disco legend. The crowd wants an encore.");
+              return;
+            }
+            setMessage(`Round ${round}. Watch carefully.`, "#17324d");
+            sequence.push(Math.floor(Math.random() * 4));
+            showSequence();
+          }
+
+          colors.forEach((color, index) => {
+            const pad = document.createElement("button");
+            pad.type = "button";
+            pad.className = "memory-pad";
+            pad.style.background = color;
+            pad.addEventListener("pointerdown", () => {
+              if (!state.running || locked) {
+                return;
+              }
+              flash(index);
+              player.push(index);
+              const current = player.length - 1;
+              if (player[current] !== sequence[current]) {
+                lose("Oops. The dance pattern got mixed up.");
+                return;
+              }
+              if (player.length === sequence.length) {
+                setScore(round);
+                schedule(nextRound, 600);
+              }
+            });
+            pads.push(pad);
+            grid.appendChild(pad);
+          });
+
+          nextRound();
+        }
+      },
+      clown: {
+        emoji: "🤡",
+        title: "Balloon Bop",
+        gameName: "Pop the right balloons",
+        note: "Pop the happy balloons and avoid the prank ones.",
+        subtitle: "Tap good balloons and skip the trick ones.",
+        instructions: "Press Start. Tap the good balloons. Do not tap the skull balloons. Pop 10 good balloons to win.",
+        goal: 10,
+        areaClass: "circus",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          let badPops = 0;
+
+          function spawnBalloon() {
+            if (!state.running) {
+              return;
+            }
+
+            const good = Math.random() > 0.28;
+            const balloon = document.createElement("div");
+            balloon.className = "sprite balloon";
+            balloon.textContent = good ? "🎈" : "💀";
+            balloon.style.left = `${randomBetween(10, gameArea.clientWidth - 60)}px`;
+            balloon.style.top = `${gameArea.clientHeight - 40}px`;
+            balloon.style.animationDelay = `${Math.random()}s`;
+            gameArea.appendChild(balloon);
+
+            let top = gameArea.clientHeight - 40;
+            const speed = randomBetween(1.5, 2.8);
+            const interval = setInterval(() => {
+              if (!state.running) {
+                clearInterval(interval);
+                balloon.remove();
+                return;
+              }
+              top -= speed;
+              balloon.style.top = `${top}px`;
+              if (top < -30) {
+                clearInterval(interval);
+                balloon.remove();
+              }
+            }, 16);
+
+            balloon.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearInterval(interval);
+              balloon.remove();
+              if (good) {
+                setScore(state.score + 1);
+                if (state.score >= state.goal) {
+                  win("Balloon bop master. No prank got past you.");
+                }
+              } else {
+                badPops += 1;
+                if (badPops >= 2) {
+                  lose("Too many prank balloons popped.");
+                } else {
+                  setMessage("That was a prank balloon. One more and the clown wins.");
+                }
+              }
+            });
+
+            schedule(spawnBalloon, randomBetween(420, 760));
+          }
+
+          spawnBalloon();
+        }
+      },
+      popcorn: {
+        emoji: "🍿",
+        title: "Catch The Pops",
+        gameName: "Catch the popcorn",
+        note: "Move the bucket and catch the flying popcorn.",
+        subtitle: "Slide the bucket left and right to catch popcorn.",
+        instructions: "Press Start. Drag or move left and right to slide the bucket. Catch 12 popcorn pieces before 4 fall away.",
+        goal: 12,
+        areaClass: "movie",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          let misses = 0;
+          const bucket = document.createElement("div");
+          bucket.className = "sprite bucket";
+          bucket.textContent = "🪣";
+          gameArea.appendChild(bucket);
+
+          let bucketX = gameArea.clientWidth / 2;
+
+          function moveBucket(event) {
+            const rect = gameArea.getBoundingClientRect();
+            bucketX = Math.max(28, Math.min(gameArea.clientWidth - 28, event.clientX - rect.left));
+            bucket.style.left = `${bucketX}px`;
+          }
+
+          gameArea.onpointermove = moveBucket;
+          gameArea.onpointerdown = moveBucket;
+
+          function spawnPop() {
+            if (!state.running) {
+              return;
+            }
+
+            const pop = document.createElement("div");
+            pop.className = "sprite pop";
+            pop.textContent = "🍿";
+            const x = randomBetween(20, gameArea.clientWidth - 30);
+            let y = 20;
+            const speed = randomBetween(2.8, 4.2);
+            pop.style.left = `${x}px`;
+            pop.style.top = `${y}px`;
+            gameArea.appendChild(pop);
+
+            const interval = setInterval(() => {
+              if (!state.running) {
+                clearInterval(interval);
+                pop.remove();
+                return;
+              }
+              y += speed;
+              pop.style.top = `${y}px`;
+              if (y > gameArea.clientHeight - 64) {
+                clearInterval(interval);
+                const caught = Math.abs(x - bucketX) < 34;
+                pop.remove();
+                if (caught) {
+                  setScore(state.score + 1);
+                  if (state.score >= state.goal) {
+                    win("Snack time victory. Every pop found the bucket.");
+                  }
+                } else {
+                  misses += 1;
+                  if (misses >= 4) {
+                    lose("Too much popcorn escaped to the floor.");
+                  } else {
+                    setMessage(`Missed popcorn: ${misses}/4`);
+                  }
+                }
+              }
+            }, 16);
+
+            schedule(spawnPop, randomBetween(460, 760));
+          }
+
+          spawnPop();
+        }
+      },
+      melty: {
+        emoji: "🫠",
+        title: "Cool Me Down",
+        gameName: "Save the melty face",
+        note: "Grab ice, fans, and shade before it fully melts.",
+        subtitle: "Tap cool items before the heat bar fills up.",
+        instructions: "Press Start. Tap the ice, fans, and umbrellas to cool the melty face. Fill the cool score with 10 helpers before the heat bar reaches the end.",
+        goal: 10,
+        areaClass: "sunny",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const center = document.createElement("div");
+          center.className = "center-stage";
+          const melty = document.createElement("div");
+          melty.textContent = "🫠";
+          melty.style.fontSize = "5rem";
+          center.appendChild(melty);
+          gameArea.appendChild(center);
+
+          const heatBar = document.createElement("div");
+          heatBar.className = "heat-bar";
+          heatBar.innerHTML = '<div class="heat-fill"></div>';
+          gameArea.appendChild(heatBar);
+          const heatFill = heatBar.querySelector(".heat-fill");
+
+          let heat = 0;
+
+          function spawnCoolItem() {
+            if (!state.running) {
+              return;
+            }
+
+            const helpers = ["🧊", "🪭", "☂️"];
+            const item = document.createElement("div");
+            item.className = "sprite cool-item";
+            item.textContent = helpers[Math.floor(Math.random() * helpers.length)];
+            item.style.left = `${randomBetween(20, gameArea.clientWidth - 50)}px`;
+            item.style.top = `${randomBetween(90, gameArea.clientHeight - 80)}px`;
+            gameArea.appendChild(item);
+
+            const lifetime = schedule(() => item.remove(), 1800);
+            item.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearTimeout(lifetime);
+              item.remove();
+              setScore(state.score + 1);
+              heat = Math.max(0, heat - 12);
+              heatFill.style.width = `${heat}%`;
+              if (state.score >= state.goal) {
+                win("The melty face survived the sun. Cool job.");
+              }
+            });
+
+            schedule(spawnCoolItem, randomBetween(520, 760));
+          }
+
+          function heatTick() {
+            if (!state.running) {
+              return;
+            }
+            heat += 2.1;
+            heatFill.style.width = `${Math.min(heat, 100)}%`;
+            if (heat >= 100) {
+              lose("Oh no. Total puddle mode.");
+              return;
+            }
+            schedule(heatTick, 180);
+          }
+
+          spawnCoolItem();
+          heatTick();
+        }
+      }
+    };
+
+    function renderLauncher() {
+      launcherGrid.innerHTML = "";
+      Object.entries(games).forEach(([id, game]) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "card";
+        card.innerHTML = `
+          <div class="art">${game.emoji}</div>
+          <p class="name">${game.title}</p>
+          <p class="game-name">${game.gameName}</p>
+          <p class="note">${game.note}</p>
+        `;
+        card.addEventListener("click", () => openGame(id));
+        launcherGrid.appendChild(card);
+      });
+    }
+
+    function openGame(id) {
+      const game = games[id];
+      if (!game) {
+        return;
+      }
+
+      state.currentGameId = id;
+      launcherView.classList.add("hide");
+      gameView.classList.remove("hide");
+      heroEmoji.textContent = game.emoji;
+      heroTitle.textContent = game.title;
+      heroSubtitle.textContent = game.subtitle;
+      instructionsText.textContent = game.instructions;
+      setGoal(game.goal);
+      game.start();
+    }
+
+    function goHome() {
+      clearTimers();
+      state.running = false;
+      launcherView.classList.remove("hide");
+      gameView.classList.add("hide");
+      gameArea.innerHTML = "";
+      gameArea.className = "game-area";
+      gameArea.onpointermove = null;
+      gameArea.onpointerdown = null;
+      document.onkeydown = null;
+      setMessage("");
+    }
+
+    startButton.addEventListener("click", () => {
+      const game = games[state.currentGameId];
+      if (game) {
+        game.start();
+      }
+    });
+
+    restartButton.addEventListener("click", () => {
+      const game = games[state.currentGameId];
+      if (game) {
+        game.start();
+      }
+    });
+
+    backButton.addEventListener("click", goHome);
+
+    renderLauncher();
+  </script>
+</body>
+</html>
