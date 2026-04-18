@@ -212,6 +212,11 @@
       box-shadow: 0 12px 20px rgba(255, 127, 153, 0.3);
     }
 
+    .action.primary.start-attention {
+      animation: start-bounce 0.9s ease-in-out infinite, start-rainbow 2.8s linear infinite;
+      box-shadow: 0 16px 28px rgba(255, 127, 153, 0.38);
+    }
+
     .action.secondary {
       color: white;
       background: linear-gradient(135deg, #5d9df7, #70d6ff);
@@ -580,9 +585,56 @@
       color: var(--ink);
     }
 
+    .start-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .start-card {
+      max-width: 34rem;
+      padding: 1.4rem 1.2rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 18px 30px rgba(23, 50, 77, 0.16);
+    }
+
+    .start-emoji {
+      font-size: clamp(4rem, 10vw, 5.5rem);
+      line-height: 1;
+    }
+
+    .start-title {
+      margin: 0.6rem 0 0;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .start-text {
+      margin: 0.55rem 0 0;
+      font-size: 1rem;
+    }
+
     @keyframes bob {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
+    }
+
+    @keyframes start-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.06); }
+    }
+
+    @keyframes start-rainbow {
+      0% { background: linear-gradient(135deg, #ff7f99, #ffb04d); }
+      25% { background: linear-gradient(135deg, #ff6ea8, #ffd154); }
+      50% { background: linear-gradient(135deg, #67d7c4, #70d6ff); }
+      75% { background: linear-gradient(135deg, #8f7bff, #ff93c1); }
+      100% { background: linear-gradient(135deg, #ff7f99, #ffb04d); }
     }
 
     @keyframes trophy-spin {
@@ -629,12 +681,74 @@
     }
 
     @media (max-width: 700px) {
+      .page {
+        width: min(100%, calc(100% - 0.5rem));
+        padding: 0.35rem 0 1rem;
+      }
+
+      .hero-box {
+        padding: 0.7rem;
+        margin-bottom: 0.55rem;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .subtitle {
+        margin-top: 0.5rem;
+        padding: 0.55rem 0.7rem;
+        border-radius: 18px;
+        font-size: 0.78rem;
+        line-height: 1.25;
+      }
+
+      .grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.35rem;
+      }
+
+      .card {
+        min-height: 0;
+        padding: 0.35rem;
+        border-radius: 18px;
+      }
+
+      .art {
+        height: 44px;
+        margin-bottom: 0;
+        border-radius: 14px;
+        font-size: 1.9rem;
+      }
+
+      .name,
+      .game-name,
+      .note {
+        display: none;
+      }
+
       .game-area {
         min-height: 520px;
       }
 
       .bucket-zone {
         width: 31%;
+      }
+
+      .form-section {
+        margin-top: 0.65rem;
+        padding: 0.8rem;
+        border-radius: 20px;
+      }
+
+      .form-title {
+        font-size: 1.1rem;
+      }
+
+      .form-note {
+        margin: 0.45rem auto 0.7rem;
+        font-size: 0.88rem;
       }
     }
   </style>
@@ -768,6 +882,22 @@ If you share more ideas with me - I can build them for you!</p>
       setScore(0);
     }
 
+    function showStartState(game) {
+      resetArea(game.areaClass);
+      setGoal(game.goal);
+      startButton.classList.add("start-attention");
+      gameArea.innerHTML = `
+        <div class="start-placeholder">
+          <div class="start-card">
+            <div class="start-emoji">${game.emoji}</div>
+            <div class="start-title">${game.title}</div>
+            <p class="start-text">${game.instructions}</p>
+            <p class="start-text">Press the big Start Game button above to begin.</p>
+          </div>
+        </div>
+      `;
+    }
+
     function win(text) {
       state.running = false;
       setMessage(text || "You did it!", "#2b9b63");
@@ -887,7 +1017,7 @@ If you share more ideas with me - I can build them for you!</p>
             gameArea.appendChild(ball);
 
             let top = -10;
-            const speed = randomBetween(2.2, 3.6);
+            const speed = randomBetween(1.1, 1.8);
             const interval = setInterval(() => {
               if (!state.running) {
                 clearInterval(interval);
@@ -1407,7 +1537,11 @@ If you share more ideas with me - I can build them for you!</p>
               }
               if (player.length === sequence.length) {
                 setScore(round);
-                schedule(nextRound, 600);
+                if (round >= state.goal) {
+                  win("Disco legend. The crowd wants an encore.");
+                } else {
+                  schedule(nextRound, 600);
+                }
               }
             });
             pads.push(pad);
@@ -1680,8 +1814,7 @@ If you share more ideas with me - I can build them for you!</p>
       heroTitle.textContent = game.title;
       heroSubtitle.textContent = game.subtitle;
       instructionsText.textContent = game.instructions;
-      setGoal(game.goal);
-      game.start();
+      showStartState(game);
     }
 
     function goHome() {
@@ -1700,6 +1833,7 @@ If you share more ideas with me - I can build them for you!</p>
     startButton.addEventListener("click", () => {
       const game = games[state.currentGameId];
       if (game) {
+        startButton.classList.remove("start-attention");
         game.start();
       }
     });
@@ -1707,6 +1841,7 @@ If you share more ideas with me - I can build them for you!</p>
     restartButton.addEventListener("click", () => {
       const game = games[state.currentGameId];
       if (game) {
+        startButton.classList.remove("start-attention");
         game.start();
       }
     });
