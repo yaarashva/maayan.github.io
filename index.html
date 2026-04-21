@@ -117,10 +117,7 @@
       position: relative;
       overflow: hidden;
       padding: 1.3rem 1rem 1.15rem;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.9) 0 8%, transparent 9%),
-        radial-gradient(circle at 82% 20%, rgba(255, 255, 255, 0.88) 0 7%, transparent 8%),
-        linear-gradient(135deg, #ffbfdc 0%, #ffd86f 36%, #8fe8d3 68%, #9dc7ff 100%);
+      background: linear-gradient(135deg, #ffbfdc 0%, #ffd86f 36%, #8fe8d3 68%, #9dc7ff 100%);
       border: 4px solid rgba(255, 255, 255, 0.78);
       box-shadow: 0 22px 38px rgba(255, 105, 160, 0.22);
     }
@@ -162,10 +159,7 @@
     #launcher-view .hero-box {
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(circle at 16% 24%, rgba(255, 255, 255, 0.82) 0 4%, transparent 5%),
-        radial-gradient(circle at 83% 18%, rgba(255, 255, 255, 0.75) 0 3%, transparent 4%),
-        linear-gradient(135deg, rgba(255, 245, 188, 0.96), rgba(255, 210, 235, 0.94), rgba(199, 235, 255, 0.96));
+      background: linear-gradient(135deg, rgba(255, 245, 188, 0.96), rgba(255, 210, 235, 0.94), rgba(199, 235, 255, 0.96));
       border: 3px solid rgba(255, 255, 255, 0.86);
       box-shadow: 0 22px 38px rgba(255, 186, 84, 0.22);
     }
@@ -211,11 +205,8 @@
       overflow: hidden;
       padding: 1.2rem 1rem 1.1rem;
       border: 3px solid rgba(255, 255, 255, 0.68);
-      background:
-        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.34) 0 4%, transparent 5%),
-        radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.28) 0 3%, transparent 4%),
-        linear-gradient(135deg, var(--hero-1, #ff99c8), var(--hero-2, #ffd166), var(--hero-3, #7bdff2));
-      background-size: 100% 100%, 100% 100%, 180% 180%;
+      background: linear-gradient(135deg, var(--hero-1, #ff99c8), var(--hero-2, #ffd166), var(--hero-3, #7bdff2));
+      background-size: 180% 180%;
       box-shadow: 0 24px 42px rgba(23, 50, 77, 0.2);
       animation: hero-swish 10s ease-in-out infinite alternate;
       text-align: center;
@@ -482,6 +473,16 @@
       margin: 0.45rem 0 0;
       font-size: 0.92rem;
       opacity: 0.82;
+    }
+
+    .mobile-tag {
+      display: none;
+      margin: 0.3rem 0 0;
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8a3415;
     }
 
     .topbar {
@@ -997,18 +998,26 @@
     }
 
     .form-section {
-      margin-top: 1.25rem;
-      padding: 0.45rem;
+      width: min(100%, 480px);
+      margin: 1rem auto 0;
+      padding: 0.35rem;
       border-radius: 28px;
       background: var(--panel);
       box-shadow: 0 18px 34px var(--shadow);
       text-align: center;
     }
 
+    .form-label {
+      margin: 0 0 0.45rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #8c1f56;
+    }
+
     .form-frame {
       width: 100%;
-      max-width: 640px;
-      height: 620px;
+      max-width: 460px;
+      height: 320px;
       border: 0;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.72);
@@ -1284,6 +1293,102 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0.75rem;
       margin-top: 1rem;
+    }
+
+    .math-reward-title {
+      margin: 0.4rem 0 0;
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      font-weight: 900;
+      color: #8a3415;
+    }
+
+    .math-reward-text {
+      margin: 0.45rem 0 0;
+      font-size: 0.98rem;
+      color: #6b4a24;
+    }
+
+    .math-reward-scene {
+      position: relative;
+      min-height: 250px;
+      margin-top: 1rem;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.34) 0 4%, transparent 5%),
+        radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.3) 0 3%, transparent 4%),
+        linear-gradient(180deg, rgba(255, 241, 199, 0.92), rgba(255, 216, 167, 0.92));
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.36), 0 14px 24px rgba(23, 50, 77, 0.12);
+      overflow: hidden;
+    }
+
+    .math-reward-target,
+    .math-reward-item,
+    .math-reward-button {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      user-select: none;
+      -webkit-user-select: none;
+      line-height: 1;
+    }
+
+    .math-reward-target {
+      width: 116px;
+      height: 116px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 12px 20px rgba(23, 50, 77, 0.12);
+      font-size: 3.5rem;
+    }
+
+    .math-reward-item {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      border: 3px solid rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 12px 20px rgba(23, 50, 77, 0.14);
+      font-size: 2.4rem;
+      cursor: grab;
+      touch-action: none;
+      z-index: 2;
+    }
+
+    .math-reward-item.locked {
+      cursor: default;
+      border-style: solid;
+      box-shadow: none;
+    }
+
+    .math-reward-button {
+      border: 0;
+      width: 94px;
+      height: 120px;
+      background: transparent;
+      font-size: 4rem;
+      cursor: pointer;
+    }
+
+    .math-reward-drop {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      font-size: 2rem;
+      filter: drop-shadow(0 6px 8px rgba(23, 50, 77, 0.16));
+    }
+
+    .math-reward-caption {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #8a3415;
+      white-space: nowrap;
     }
 
     .choice-button,
@@ -2003,6 +2108,10 @@
         display: none;
       }
 
+      #launcher-grid .mobile-tag {
+        display: block;
+      }
+
       .game-area {
         min-height: clamp(360px, 58svh, 470px);
         border-radius: 20px;
@@ -2018,13 +2127,19 @@
       }
 
       .form-section {
+        width: min(100%, 360px);
         margin-top: 0.65rem;
         padding: 0.25rem;
         border-radius: 20px;
       }
 
+      .form-label {
+        font-size: 0.8rem;
+      }
+
       .form-frame {
-        height: 700px;
+        max-width: 340px;
+        height: 250px;
       }
 
       #game-view .topbar {
@@ -2181,6 +2296,48 @@
       .choice-grid {
         grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 0.42rem;
+      }
+
+      .math-reward-title {
+        font-size: 1.05rem;
+      }
+
+      .math-reward-text {
+        font-size: 0.84rem;
+      }
+
+      .math-reward-scene {
+        min-height: 210px;
+        margin-top: 0.75rem;
+        border-radius: 20px;
+      }
+
+      .math-reward-target {
+        width: 90px;
+        height: 90px;
+        border-radius: 22px;
+        font-size: 2.8rem;
+      }
+
+      .math-reward-item {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        font-size: 2rem;
+      }
+
+      .math-reward-button {
+        width: 76px;
+        height: 100px;
+        font-size: 3.2rem;
+      }
+
+      .math-reward-drop {
+        font-size: 1.55rem;
+      }
+
+      .math-reward-caption {
+        font-size: 0.72rem;
       }
 
       .choice-button {
@@ -2488,6 +2645,20 @@
       </div>
 
       <section class="grid category-grid" id="category-grid" aria-label="Game categories"></section>
+
+      <section class="form-section" id="ideas-form" aria-label="Share feedback">
+        <p class="form-label">Send a quick idea or feedback note</p>
+        <iframe
+          class="form-frame"
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdbfpXFBppBtAHbLXijHvwn-ujRisyUEIUkE7rtd0Ix1DiwpA/viewform?embedded=true"
+          width="640"
+          height="385"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="Feedback form"
+          loading="lazy">Loading…</iframe>
+      </section>
     </section>
 
     <section id="launcher-view" class="hide collection-view">
@@ -2505,18 +2676,6 @@ Tap any game to jump in.</p>
 
       <p class="section-intro" id="launcher-intro">A playful mix of action, memory, sorting, and silly challenges.</p>
       <section class="grid" id="launcher-grid" aria-label="Emoji game launcher"></section>
-      <section class="form-section" id="ideas-form" aria-label="Share more game ideas">
-        <iframe
-          class="form-frame"
-          src="https://docs.google.com/forms/d/e/1FAIpQLSdbfpXFBppBtAHbLXijHvwn-ujRisyUEIUkE7rtd0Ix1DiwpA/viewform?embedded=true"
-          width="640"
-          height="385"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="Game ideas form"
-          loading="lazy">Loading…</iframe>
-      </section>
       <p class="footer-note" id="launcher-footer">Thanks for playing! I hope you liked it</p>
     </section>
 
@@ -2598,6 +2757,17 @@ Tap any game to jump in.</p>
       currentCategoryId: null
     };
 
+    function getLauncherShortName(game) {
+      return (game.shortName || game.title || game.gameName || "Play").split(" ")[0];
+    }
+
+    function pushHistoryState(view, extra = {}) {
+      if (!window.history || !window.history.pushState) {
+        return;
+      }
+      window.history.pushState({ view, ...extra }, "");
+    }
+
     const heroThemes = [
       { colors: ["#ff7eb6", "#ffd166", "#76e4f7"], accent: "#fff6a9" },
       { colors: ["#7b8cff", "#7ce7c7", "#ffe066"], accent: "#ffeef9" },
@@ -2633,7 +2803,6 @@ Tap any game to jump in.</p>
       {
         id: "fun-games",
         title: "Fun Games",
-        badge: "Play Now",
         art: "🎉🎮🪁",
         copy: "Open the arcade with 10 silly, playful games that are ready to play.",
         status: "10 games ready",
@@ -2642,7 +2811,6 @@ Tap any game to jump in.</p>
       {
         id: "electric-games",
         title: "Letter Games ABC",
-        badge: "Play Now",
         art: "🔤✏️🅰️",
         copy: "Letter sounds, matching, and jumping games for early reading fun.",
         status: "5 letter games ready",
@@ -2651,7 +2819,6 @@ Tap any game to jump in.</p>
       {
         id: "number-games",
         title: "Number & Math Games",
-        badge: "Play Now",
         art: "🔢➕📐",
         copy: "Multiplication, silly addition, and number-ordering games for fast math fun.",
         status: "3 math games ready",
@@ -2660,7 +2827,6 @@ Tap any game to jump in.</p>
       {
         id: "story-games",
         title: "Story & Puzzle Games",
-        badge: "Play Now",
         art: "📚🧩✨",
         copy: "Utah story adventures and desert puzzle games that are ready to play.",
         status: "3 games ready",
@@ -2674,7 +2840,6 @@ Tap any game to jump in.</p>
         subtitle: "These are the current games already built and ready to play.\nTap any game to jump in.",
         intro: "A playful mix of action, memory, sorting, and silly challenges.",
         footer: "Thanks for playing! I hope you liked it.",
-        showForm: true,
         filter(game) {
           return !game.category;
         }
@@ -2684,7 +2849,6 @@ Tap any game to jump in.</p>
         subtitle: "Pick a letter game and start practicing sounds, matching, and quick reactions.",
         intro: "Five alphabet games so far: matching, sounds, soup, monsters, and dancing donuts.",
         footer: "More ABC ideas can be added here next.",
-        showForm: false,
         filter(game) {
           return game.category === "electric-games";
         }
@@ -2694,7 +2858,6 @@ Tap any game to jump in.</p>
         subtitle: "Choose a math game and practice multiplying, adding, and ordering numbers up to 10.",
         intro: "Three number games: multiplication practice, silly addition, and a playful number-ordering challenge.",
         footer: "More number games can be added here next.",
-        showForm: false,
         filter(game) {
           return game.category === "number-games";
         }
@@ -2704,7 +2867,6 @@ Tap any game to jump in.</p>
         subtitle: "Choose a Utah desert story or puzzle game and jump in.",
         intro: "A playful desert corner with a story quiz, a canyon maze, and a matching challenge.",
         footer: "More story and puzzle games can be added here next.",
-        showForm: false,
         filter(game) {
           return game.category === "story-games";
         }
@@ -4911,12 +5073,12 @@ Tap any game to jump in.</p>
       },
       multiplication: {
         category: "number-games",
-        emoji: "✖️",
-        title: "Treasure Multiplication Splash",
-        gameName: "Multiply for treasure",
-        note: "Solve tougher multiplication questions to unlock treasure chests and win a crown.",
-        subtitle: "Pick the correct multiplication answer and collect treasure.",
-        instructions: "Press Start. Solve multiplication problems with bigger numbers and almost no zero questions. Every right answer wins treasure, and every 3 right answers unlock a chest. Get 9 right to win.",
+        emoji: "🐠",
+        title: "Treasure Number Splash",
+        gameName: "Multiply and divide",
+        note: "Solve multiplication and division questions to unlock treasure chests and win a crown.",
+        subtitle: "Pick the correct multiplication or division answer and collect treasure.",
+        instructions: "Press Start. Solve multiplication and division problems. Division questions always come out even. Every right answer wins treasure, and every 3 right answers unlock a chest. Get 9 right to win.",
         goal: 9,
         areaClass: "phonics-stage",
         start() {
@@ -4928,7 +5090,7 @@ Tap any game to jump in.</p>
           wrap.className = "phonics-wrap";
           wrap.innerHTML = `
             <div class="phonics-card" id="multiplication-card">
-              <div class="phonics-symbol" id="math-treasure">💎✖️</div>
+              <div class="phonics-symbol" id="math-treasure">🐠🏆</div>
               <p class="game-name" id="math-question"></p>
               <div class="choice-grid"></div>
             </div>
@@ -4944,24 +5106,34 @@ Tap any game to jump in.</p>
 
           function updateTreasureDisplay() {
             const chestIcons = chestCount ? " " + "📦".repeat(chestCount) : "";
-            treasureEl.textContent = `💎${"✨".repeat(Math.min(streak, 3))}${chestIcons}`;
+            treasureEl.textContent = `🐠${"✨".repeat(Math.min(streak, 3))}${chestIcons}`;
           }
 
           function nextRound() {
-            let a = Math.floor(randomBetween(3, 13));
-            let b = Math.floor(randomBetween(3, 13));
-            if (a * b > 100) {
-              const bigger = Math.max(a, b);
-              const smaller = Math.min(a, b);
-              a = smaller;
-              b = Math.max(3, Math.floor(100 / bigger));
+            const useDivision = Math.random() < 0.35;
+            let a;
+            let b;
+            if (useDivision) {
+              correctAnswer = Math.floor(randomBetween(2, 11));
+              b = Math.floor(randomBetween(2, 11));
+              a = correctAnswer * b;
+              questionEl.textContent = `${a} ÷ ${b} = ?`;
+            } else {
+              a = Math.floor(randomBetween(3, 13));
+              b = Math.floor(randomBetween(3, 13));
+              if (a * b > 100) {
+                const bigger = Math.max(a, b);
+                const smaller = Math.min(a, b);
+                a = smaller;
+                b = Math.max(3, Math.floor(100 / bigger));
+              }
+              if (Math.random() < 0.08) {
+                a = Math.floor(randomBetween(1, 11));
+                b = 0;
+              }
+              correctAnswer = a * b;
+              questionEl.textContent = `${a} x ${b} = ?`;
             }
-            if (Math.random() < 0.08) {
-              a = Math.floor(randomBetween(1, 11));
-              b = 0;
-            }
-            correctAnswer = a * b;
-            questionEl.textContent = `${a} x ${b} = ?`;
             const minOption = Math.max(0, correctAnswer - 18);
             const maxOption = Math.min(100, correctAnswer + 18);
             const options = makeNumberChoices(correctAnswer, minOption, maxOption, 5);
@@ -5001,7 +5173,7 @@ Tap any game to jump in.</p>
           }
 
           updateTreasureDisplay();
-          setMessage("Solve the multiplication problem and collect treasure.", "#17324d");
+          setMessage("Solve the multiplication and division problem and collect treasure.", "#17324d");
           nextRound();
         }
       },
@@ -5650,7 +5822,7 @@ Tap any game to jump in.</p>
         card.className = "card category-card";
         card.style.setProperty("--category-bg", category.background);
         card.innerHTML = `
-          <span class="category-badge">${category.badge}</span>
+          ${category.badge ? `<span class="category-badge">${category.badge}</span>` : ""}
           <div class="category-art" aria-hidden="true">${category.art}</div>
           <h2 class="category-title">${category.title}</h2>
           <p class="category-copy">${category.copy}</p>
@@ -5669,7 +5841,6 @@ Tap any game to jump in.</p>
       launcherSubtitle.textContent = config.subtitle;
       launcherIntro.textContent = config.intro;
       launcherFooter.textContent = config.footer;
-      ideasForm.classList.toggle("hide", !config.showForm);
       applyHeroTheme(
         launcherHero,
         launcherJoke,
@@ -5686,6 +5857,7 @@ Tap any game to jump in.</p>
           <div class="art">${game.emoji}</div>
           <p class="name">${game.title}</p>
           <p class="game-name">${game.gameName}</p>
+          <p class="mobile-tag">${getLauncherShortName(game)}</p>
           <p class="note">${game.note}</p>
         `;
         card.addEventListener("click", () => openGame(id));
@@ -5693,7 +5865,7 @@ Tap any game to jump in.</p>
       });
     }
 
-    function openCategory(categoryId) {
+    function openCategory(categoryId, options = {}) {
       const category = categories.find((item) => item.id === categoryId);
       if (!category) {
         return;
@@ -5705,6 +5877,9 @@ Tap any game to jump in.</p>
         homeView.classList.add("hide");
         launcherView.classList.remove("hide");
         gameView.classList.add("hide");
+        if (!options.fromHistory) {
+          pushHistoryState("launcher", { categoryId });
+        }
         return;
       }
 
@@ -5712,7 +5887,7 @@ Tap any game to jump in.</p>
       alert(`${soonText}\n\n${category.copy}`);
     }
 
-    function openGame(id) {
+    function openGame(id, options = {}) {
       const game = games[id];
       if (!game) {
         return;
@@ -5735,9 +5910,12 @@ Tap any game to jump in.</p>
       );
       instructionsText.textContent = game.instructions;
       showStartState(game);
+      if (!options.fromHistory) {
+        pushHistoryState("game", { categoryId: state.currentCategoryId, gameId: id });
+      }
     }
 
-    function goHome() {
+    function goHome(options = {}) {
       clearTimers();
       state.running = false;
       state.currentView = "home";
@@ -5751,9 +5929,12 @@ Tap any game to jump in.</p>
       gameArea.onclick = null;
       document.onkeydown = null;
       setMessage("");
+      if (!options.fromHistory) {
+        pushHistoryState("home");
+      }
     }
 
-    function goToLauncher() {
+    function goToLauncher(options = {}) {
       clearTimers();
       state.running = false;
       state.currentView = "launcher";
@@ -5768,6 +5949,9 @@ Tap any game to jump in.</p>
       gameArea.onclick = null;
       document.onkeydown = null;
       setMessage("");
+      if (!options.fromHistory) {
+        pushHistoryState("launcher", { categoryId: state.currentCategoryId || "fun-games" });
+      }
     }
 
     startButton.addEventListener("click", () => {
@@ -5778,12 +5962,39 @@ Tap any game to jump in.</p>
       restartCurrentGame();
     });
 
-    backButton.addEventListener("click", goToLauncher);
+    backButton.addEventListener("click", () => {
+      if (window.history && window.history.state && state.currentView === "game") {
+        window.history.back();
+        return;
+      }
+      goToLauncher();
+    });
     mainPageButton.addEventListener("click", goHome);
     categoriesButton.addEventListener("click", goHome);
 
+    window.addEventListener("popstate", (event) => {
+      const nextState = event.state;
+      if (!nextState || nextState.view === "home") {
+        goHome({ fromHistory: true });
+        return;
+      }
+      if (nextState.view === "launcher") {
+        openCategory(nextState.categoryId || "fun-games", { fromHistory: true });
+        return;
+      }
+      if (nextState.view === "game" && nextState.gameId) {
+        if (nextState.categoryId) {
+          state.currentCategoryId = nextState.categoryId;
+        }
+        openGame(nextState.gameId, { fromHistory: true });
+      }
+    });
+
     renderCategories();
     applyHeroTheme(homeHero, homeJoke, homeRain, "home-view", ["💖", "🎮", "🌈", "✨", "🪁", "🎈", "😂", "⭐"]);
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState({ view: "home" }, "");
+    }
     renderLauncher("fun-games");
   </script>
 </body>
