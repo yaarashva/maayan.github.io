@@ -1,0 +1,9 @@
+.venv-podcast/
+utah podcast/
+*.m4a
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+*:Zone.Identifier

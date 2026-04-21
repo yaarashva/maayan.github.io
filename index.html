@@ -113,10 +113,243 @@
       white-space: pre-line;
     }
 
+    #home-view .hero-box {
+      position: relative;
+      overflow: hidden;
+      padding: 1.3rem 1rem 1.15rem;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.9) 0 8%, transparent 9%),
+        radial-gradient(circle at 82% 20%, rgba(255, 255, 255, 0.88) 0 7%, transparent 8%),
+        linear-gradient(135deg, #ffbfdc 0%, #ffd86f 36%, #8fe8d3 68%, #9dc7ff 100%);
+      border: 4px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 22px 38px rgba(255, 105, 160, 0.22);
+    }
+
+    #home-view .hero-box::before,
+    #home-view .hero-box::after {
+      position: absolute;
+      top: 0.7rem;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1;
+      filter: drop-shadow(0 6px 8px rgba(255, 255, 255, 0.45));
+    }
+
+    #home-view .hero-box::before {
+      content: "💖";
+      left: 1rem;
+      transform: rotate(-10deg);
+    }
+
+    #home-view .hero-box::after {
+      content: "💜";
+      right: 1rem;
+      transform: rotate(10deg);
+    }
+
+    #home-view h1 {
+      color: #a02b68;
+      text-shadow:
+        0 4px 0 rgba(255, 255, 255, 0.72),
+        0 10px 18px rgba(160, 43, 104, 0.2);
+    }
+
+    #home-view .subtitle {
+      background: rgba(255, 255, 255, 0.82);
+      color: #8c1f56;
+      box-shadow: 0 14px 28px rgba(255, 105, 160, 0.18);
+    }
+
+    #launcher-view .hero-box {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 16% 24%, rgba(255, 255, 255, 0.82) 0 4%, transparent 5%),
+        radial-gradient(circle at 83% 18%, rgba(255, 255, 255, 0.75) 0 3%, transparent 4%),
+        linear-gradient(135deg, rgba(255, 245, 188, 0.96), rgba(255, 210, 235, 0.94), rgba(199, 235, 255, 0.96));
+      border: 3px solid rgba(255, 255, 255, 0.86);
+      box-shadow: 0 22px 38px rgba(255, 186, 84, 0.22);
+    }
+
+    #launcher-title {
+      position: relative;
+      display: inline-block;
+      padding: 0.2rem 0.85rem 0.35rem;
+      background: linear-gradient(90deg, #ff67a5 0%, #ffbf47 28%, #fff7c6 46%, #83d8ff 68%, #b68cff 100%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 3px 0 rgba(255, 255, 255, 0.9)) drop-shadow(0 10px 18px rgba(255, 174, 68, 0.28));
+      animation: shiny-title 4s linear infinite;
+    }
+
+    #launcher-title::before,
+    #launcher-title::after {
+      position: absolute;
+      top: 50%;
+      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      transform: translateY(-50%);
+      line-height: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+      animation: sparkle-twinkle 1.8s ease-in-out infinite;
+    }
+
+    #launcher-title::before {
+      content: "✦";
+      left: -0.45rem;
+    }
+
+    #launcher-title::after {
+      content: "✧";
+      right: -0.45rem;
+      animation-delay: 0.5s;
+    }
+
+    .hero-box {
+      position: relative;
+      overflow: hidden;
+      padding: 1.2rem 1rem 1.1rem;
+      border: 3px solid rgba(255, 255, 255, 0.68);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.34) 0 4%, transparent 5%),
+        radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.28) 0 3%, transparent 4%),
+        linear-gradient(135deg, var(--hero-1, #ff99c8), var(--hero-2, #ffd166), var(--hero-3, #7bdff2));
+      background-size: 100% 100%, 100% 100%, 180% 180%;
+      box-shadow: 0 24px 42px rgba(23, 50, 77, 0.2);
+      animation: hero-swish 10s ease-in-out infinite alternate;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .hero-box::before {
+      content: "";
+      position: absolute;
+      inset: -40% auto auto -15%;
+      width: 42%;
+      height: 190%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      transform: rotate(18deg);
+      animation: hero-shine 5.8s linear infinite;
+      pointer-events: none;
+    }
+
+    .hero-box h1 {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      padding: 0.2rem 1rem 0.35rem;
+      margin: 0;
+      text-transform: uppercase;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, #fff7d6, #ffffff, #ffe1fb, #d6f6ff, #fff7d6);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 4px 0 rgba(97, 35, 88, 0.18)) drop-shadow(0 12px 18px rgba(23, 50, 77, 0.2));
+      animation: shiny-title 5s linear infinite, title-bop 2.8s ease-in-out infinite;
+    }
+
+    .hero-box .subtitle {
+      position: relative;
+      z-index: 2;
+      width: fit-content;
+      max-width: min(100%, 46rem);
+      margin: 0.9rem auto 0;
+      padding: 0.95rem 1.2rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+      border: 3px solid rgba(255, 255, 255, 0.34);
+      border-radius: 28px;
+      box-shadow: 0 14px 28px rgba(23, 50, 77, 0.18);
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      color: #fff8ff;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(70, 24, 66, 0.32);
+      white-space: pre-line;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-rain {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-drop {
+      position: absolute;
+      top: -18%;
+      font-size: clamp(1rem, 2.2vw, 1.7rem);
+      opacity: 0.82;
+      animation: hero-drop-fall linear infinite;
+      filter: drop-shadow(0 4px 7px rgba(255, 255, 255, 0.2));
+    }
+
+    .hero-joke {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 42rem);
+      margin: 0.9rem auto 0;
+      padding: 0.9rem 1rem;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(58, 25, 74, 0.3), rgba(26, 74, 92, 0.26));
+      border: 2px solid rgba(255, 255, 255, 0.24);
+      color: #fff9ff;
+      box-shadow: 0 14px 24px rgba(23, 50, 77, 0.16);
+    }
+
+    .hero-joke-tag {
+      display: inline-block;
+      margin-bottom: 0.35rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-joke-setup {
+      margin: 0;
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .hero-joke-punchline {
+      margin: 0.35rem 0 0;
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #fff6a9;
+    }
+
+    #home-view .hero-box h1,
+    #game-view .hero-box h1 {
+      color: transparent;
+      text-shadow: none;
+    }
+
+    #home-view .hero-box .subtitle,
+    #launcher-view .hero-box .subtitle,
+    #game-view .hero-box .subtitle {
+      background: linear-gradient(135deg, rgba(58, 25, 74, 0.24), rgba(26, 74, 92, 0.22));
+      color: #fff9ff;
+      box-shadow: 0 14px 28px rgba(23, 50, 77, 0.18);
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
+    }
+
+    .category-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 1.2rem;
     }
 
     .card {
@@ -132,6 +365,84 @@
       box-shadow: 0 18px 34px var(--shadow);
       transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
       cursor: pointer;
+    }
+
+    .category-card {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+      padding: 1.15rem;
+    }
+
+    .category-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.34)),
+        var(--category-bg, linear-gradient(135deg, #ffd972, #ff8c7a));
+      opacity: 0.98;
+    }
+
+    .category-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #22425f;
+    }
+
+    .category-art {
+      display: grid;
+      place-items: center;
+      min-height: 150px;
+      margin: 1rem 0 0.8rem;
+      font-size: clamp(3.6rem, 10vw, 5rem);
+      text-shadow: 0 10px 20px rgba(23, 50, 77, 0.16);
+    }
+
+    .category-title {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .category-copy {
+      margin: 0.7rem 0 0;
+      max-width: 18rem;
+      font-size: 1rem;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .category-status {
+      margin-top: 0.95rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      opacity: 0.9;
+    }
+
+    .collection-view {
+      margin-top: 1rem;
+    }
+
+    .section-intro {
+      margin: 0 0 1rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      opacity: 0.86;
     }
 
     .card:hover,
@@ -245,6 +556,11 @@
       touch-action: none;
     }
 
+    .game-area.puzzle-fit {
+      min-height: clamp(600px, 78vh, 760px);
+      height: clamp(600px, 78vh, 760px);
+    }
+
     .instructions,
     .message {
       padding: 1rem 1.1rem;
@@ -324,6 +640,18 @@
 
     .sunny {
       background: linear-gradient(180deg, #ffe27c, #ff9f6e);
+    }
+
+    .alphabet-sky {
+      background: linear-gradient(180deg, #dff6ff, #a7d4ff 46%, #fff2d6);
+    }
+
+    .phonics-stage {
+      background: linear-gradient(180deg, #fff5db, #ffcde1 46%, #d6efff);
+    }
+
+    .meadow {
+      background: linear-gradient(180deg, #bfe8ff, #e9fbff 42%, #9be28d 43%, #68b95d 100%);
     }
 
     .floor {
@@ -685,9 +1013,726 @@
       font-size: 1rem;
     }
 
+    .target-banner {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: min(84vw, 280px);
+      padding: 0.7rem 1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 28px rgba(23, 50, 77, 0.18);
+      text-align: center;
+      font-weight: 900;
+      color: #21425f;
+      z-index: 3;
+    }
+
+    .target-banner .label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+    }
+
+    .target-banner .target-letter {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      line-height: 1;
+      color: #ff5c8c;
+    }
+
+    .flying-letter {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.86);
+      border: 3px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.15);
+      font-size: 2rem;
+      font-weight: 900;
+      color: #21425f;
+      user-select: none;
+    }
+
+    .soup-pot {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      width: min(76vw, 360px);
+      height: 140px;
+      border-radius: 0 0 110px 110px;
+      background: linear-gradient(180deg, #6f7ca3, #35425e);
+      box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.16), 0 16px 24px rgba(23, 50, 77, 0.18);
+    }
+
+    .soup-pot::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: -18px;
+      height: 34px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ffd666, #ff9f5a);
+      box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.34);
+    }
+
+    .soup-word {
+      position: absolute;
+      left: 50%;
+      bottom: 180px;
+      transform: translateX(-50%);
+      padding: 0.7rem 1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 24px rgba(23, 50, 77, 0.16);
+      text-align: center;
+      z-index: 3;
+    }
+
+    .soup-word .word-label {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+    }
+
+    .soup-word .word-value {
+      display: block;
+      margin-top: 0.12rem;
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+      font-weight: 900;
+      color: #ef5a65;
+    }
+
+    .monster-mouth {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      width: min(80vw, 360px);
+      height: 230px;
+      border-radius: 50% 50% 42% 42%;
+      background: linear-gradient(180deg, #9d6cff, #5f49d7);
+      box-shadow: inset 0 -16px 0 rgba(0, 0, 0, 0.1), 0 18px 28px rgba(23, 50, 77, 0.18);
+    }
+
+    .monster-mouth::before,
+    .monster-mouth::after {
+      content: "👀";
+      position: absolute;
+      top: 26px;
+      font-size: 2rem;
+    }
+
+    .monster-mouth::before { left: 24%; }
+    .monster-mouth::after { right: 24%; }
+
+    .monster-target {
+      position: absolute;
+      left: 50%;
+      top: 26px;
+      transform: translateX(-50%);
+      padding: 0.7rem 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      z-index: 3;
+      text-align: center;
+      box-shadow: 0 12px 22px rgba(23, 50, 77, 0.14);
+    }
+
+    .monster-target .target-letter {
+      font-size: 2.2rem;
+    }
+
+    .snack-letter,
+    .donut-letter {
+      display: grid;
+      place-items: center;
+      border: 3px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.14);
+      font-weight: 900;
+      user-select: none;
+    }
+
+    .snack-letter {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      font-size: 2rem;
+      color: #21425f;
+    }
+
+    .donut-target {
+      position: absolute;
+      left: 50%;
+      top: 22px;
+      transform: translateX(-50%);
+      padding: 0.7rem 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      text-align: center;
+      box-shadow: 0 12px 22px rgba(23, 50, 77, 0.14);
+      z-index: 3;
+    }
+
+    .donut-letter {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffd9ef 0 42%, #c47b3d 43% 66%, #ffe7f6 67% 100%);
+      font-size: 1.85rem;
+      color: #7d3f1a;
+      animation: bob 1.5s ease-in-out infinite;
+    }
+
+    .phonics-wrap {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    .phonics-card {
+      width: min(92%, 620px);
+      padding: 1.3rem 1rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 20px 34px rgba(23, 50, 77, 0.18);
+      text-align: center;
+    }
+
+    .phonics-symbol {
+      font-size: clamp(3rem, 9vw, 4.8rem);
+      line-height: 1;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .choice-button,
+    .replay-button {
+      border: 0;
+      border-radius: 22px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+      box-shadow: 0 12px 20px rgba(23, 50, 77, 0.16);
+    }
+
+    .choice-button {
+      min-height: 82px;
+      background: linear-gradient(135deg, #ffffff, #e8f5ff);
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      color: #21425f;
+    }
+
+    .replay-button {
+      margin-top: 1rem;
+      padding: 0.9rem 1.15rem;
+      background: linear-gradient(135deg, #ff8eb6, #ffd36b);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .field-ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 74px;
+      background: linear-gradient(180deg, rgba(125, 191, 89, 0.2), rgba(57, 124, 51, 0.72));
+    }
+
+    .runner-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 56px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .runner {
+      left: 58px;
+      bottom: 60px;
+      width: 86px;
+      height: 86px;
+      transition: bottom 90ms linear;
+      z-index: 2;
+    }
+
+    .runner-body {
+      display: block;
+      font-size: 3.2rem;
+      line-height: 1;
+      transform: scaleX(-1);
+      animation: runner-bounce 0.45s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .runner-feet {
+      display: block;
+      margin-top: -0.5rem;
+      font-size: 1.1rem;
+      letter-spacing: -0.12rem;
+      line-height: 1;
+      text-align: center;
+      animation: runner-feet 0.24s linear infinite;
+      filter: drop-shadow(0 2px 2px rgba(23, 50, 77, 0.16));
+    }
+
+    .runner-item {
+      font-size: 2.2rem;
+      line-height: 1;
+      font-weight: 900;
+      text-shadow: 0 6px 10px rgba(23, 50, 77, 0.18);
+    }
+
+    .puzzle-wrap,
+    .book-wrap {
+      position: absolute;
+      inset: 0;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .puzzle-card,
+    .book-card {
+      width: min(100%, 860px);
+      margin: 0 auto;
+      padding: 1rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 18px 34px rgba(23, 50, 77, 0.16);
+    }
+
+    .puzzle-card {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      padding: 0.4rem 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .puzzle-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .chip-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #ffffff, #eef7ff);
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.14);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      color: #21425f;
+    }
+
+    .chip-button.active {
+      background: linear-gradient(135deg, #ff8eb6, #ffd66b);
+      color: white;
+    }
+
+    .puzzle-layout {
+      position: relative;
+      height: 100%;
+      min-height: 420px;
+    }
+
+    .puzzle-board {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      gap: 0.5rem;
+      width: min(54vw, 380px);
+      aspect-ratio: 1;
+      z-index: 2;
+    }
+
+    .puzzle-slot {
+      position: relative;
+      border-radius: 18px;
+      border: 3px dashed rgba(33, 66, 95, 0.2);
+      background: rgba(214, 239, 255, 0.45);
+      overflow: hidden;
+    }
+
+    .puzzle-slot.filled {
+      border-style: solid;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .puzzle-slot .slot-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      color: rgba(33, 66, 95, 0.28);
+      pointer-events: none;
+    }
+
+    .puzzle-stage {
+      position: relative;
+      height: 100%;
+      min-height: 420px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.28) 0 4%, transparent 5%),
+        radial-gradient(circle at 80% 18%, rgba(255, 255, 255, 0.22) 0 4%, transparent 5%),
+        linear-gradient(135deg, rgba(255, 237, 182, 0.38), rgba(255, 203, 227, 0.34), rgba(185, 232, 255, 0.34));
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .puzzle-piece {
+      position: absolute;
+      border-radius: 16px;
+      border: 3px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.14);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      cursor: grab;
+      z-index: 1;
+    }
+
+    .puzzle-piece::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.28);
+      pointer-events: none;
+    }
+
+    .book-page {
+      min-height: 240px;
+      padding: 1rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 248, 236, 0.98), rgba(255, 255, 255, 0.96));
+      color: #5c3c16;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      box-shadow: inset 0 0 0 2px rgba(255, 211, 155, 0.38);
+    }
+
+    .book-page h3 {
+      margin: 0 0 0.7rem;
+      font-size: 1.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #9b5b16;
+    }
+
+    .page-count {
+      margin: 0 0 0.75rem;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      opacity: 0.76;
+    }
+
+    .story-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .duck-wrap {
+      position: absolute;
+      inset: 0;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    .duck-panel {
+      width: min(100%, 900px);
+      margin: 0 auto;
+      padding: 1rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.24);
+    }
+
+    .duck-levels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .duck-level-card {
+      width: min(100%, 260px);
+      padding: 1rem;
+      border: 0;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(228, 247, 255, 0.92));
+      box-shadow: 0 14px 24px rgba(23, 50, 77, 0.14);
+      color: #21425f;
+      text-align: center;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .duck-level-card strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .duck-pond {
+      position: relative;
+      min-height: 430px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.26) 0 6%, transparent 7%),
+        radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.22) 0 5%, transparent 6%),
+        linear-gradient(180deg, rgba(226, 248, 255, 0.8), rgba(130, 216, 255, 0.86) 42%, rgba(74, 170, 223, 0.96));
+      box-shadow: inset 0 -30px 0 rgba(70, 137, 78, 0.14), 0 18px 30px rgba(23, 50, 77, 0.16);
+    }
+
+    .duck-pond::before {
+      content: "☁️   ☁️";
+      position: absolute;
+      top: 12px;
+      left: 22px;
+      font-size: 1.8rem;
+      opacity: 0.75;
+      letter-spacing: 5rem;
+    }
+
+    .duck-pond::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 76px;
+      background: linear-gradient(180deg, rgba(104, 194, 92, 0.1), rgba(76, 148, 71, 0.62));
+    }
+
+    .duck-instruction {
+      margin: 0 0 0.85rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #144461;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .duck-button {
+      position: absolute;
+      width: 120px;
+      min-height: 102px;
+      padding: 0.55rem 0.45rem 0.65rem;
+      border: 0;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 252, 216, 0.96), rgba(255, 236, 159, 0.96));
+      box-shadow: 0 14px 22px rgba(23, 50, 77, 0.16);
+      color: #8a4d00;
+      cursor: pointer;
+      animation: duck-float 2.2s ease-in-out infinite;
+    }
+
+    .duck-button:nth-child(odd) {
+      animation-duration: 2.7s;
+    }
+
+    .duck-button.done {
+      opacity: 0.45;
+      transform: scale(0.94);
+      cursor: default;
+    }
+
+    .duck-emoji {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .duck-number {
+      display: block;
+      margin-top: 0.18rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .duck-count {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.16rem;
+      margin-top: 0.3rem;
+      min-height: 1.65rem;
+    }
+
+    .duck-count-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7ed957, #4da942);
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+    }
+
+    .duck-count-text {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #22506d;
+    }
+
+    .pizza-math-wrap {
+      position: absolute;
+      inset: 0;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    .pizza-math-layout {
+      display: grid;
+      grid-template-columns: minmax(250px, 390px) minmax(260px, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .pizza-math-panel {
+      padding: 1rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 18px 30px rgba(23, 50, 77, 0.16);
+    }
+
+    .pizza-question {
+      margin: 0.4rem 0 0;
+      font-size: clamp(1.25rem, 3vw, 1.9rem);
+      line-height: 1.35;
+      font-weight: 900;
+      color: #8a3415;
+    }
+
+    .pizza-stage {
+      display: grid;
+      justify-items: center;
+      gap: 0.75rem;
+    }
+
+    .pizza-math-base {
+      width: min(78vw, 360px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f4b85b 0 62%, #c97b2f 63% 72%, transparent 73%);
+      position: relative;
+      box-shadow: inset 0 0 0 18px rgba(255, 122, 61, 0.45), 0 16px 28px rgba(23, 50, 77, 0.12);
+      overflow: hidden;
+    }
+
+    .pizza-bank {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 52px;
+    }
+
+    .pizza-reward {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.14);
+      font-size: 2rem;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
     @keyframes bob {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
+    }
+
+    @keyframes runner-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes runner-feet {
+      0%, 100% { transform: translateX(-2px) rotate(-6deg); }
+      50% { transform: translateX(2px) rotate(6deg); }
+    }
+
+    @keyframes shiny-title {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 220% 50%; }
+    }
+
+    @keyframes hero-swish {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    @keyframes hero-shine {
+      0% { transform: translateX(-120%) rotate(18deg); }
+      100% { transform: translateX(360%) rotate(18deg); }
+    }
+
+    @keyframes sparkle-twinkle {
+      0%, 100% {
+        opacity: 0.7;
+        transform: translateY(-50%) scale(0.9) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.18) rotate(16deg);
+      }
+    }
+
+    @keyframes title-bop {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(-1deg) translateY(-2px); }
+    }
+
+    @keyframes hero-drop-fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.95; }
+      100% { transform: translateY(155%) rotate(540deg); opacity: 0; }
+    }
+
+    @keyframes duck-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(-1.5deg); }
     }
 
     @keyframes balloon-burst {
@@ -805,10 +1850,43 @@
         gap: 0.35rem;
       }
 
+      .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+      }
+
       .card {
         min-height: 0;
         padding: 0.35rem;
         border-radius: 18px;
+      }
+
+      .category-card {
+        min-height: 210px;
+        padding: 0.75rem;
+      }
+
+      .category-badge {
+        padding: 0.35rem 0.58rem;
+        font-size: 0.62rem;
+      }
+
+      .category-art {
+        min-height: 92px;
+        margin: 0.5rem 0 0.35rem;
+        font-size: 2.6rem;
+      }
+
+      .category-title {
+        font-size: 1.02rem;
+      }
+
+      .category-copy,
+      .category-status {
+        display: block;
+        max-width: none;
+        font-size: 0.76rem;
+        line-height: 1.25;
       }
 
       .art {
@@ -827,6 +1905,11 @@
       .game-area {
         min-height: clamp(320px, 52svh, 410px);
         border-radius: 20px;
+      }
+
+      .game-area.puzzle-fit {
+        min-height: clamp(460px, 68svh, 620px);
+        height: clamp(460px, 68svh, 620px);
       }
 
       .bucket-zone {
@@ -914,6 +1997,210 @@
 
       .start-text {
         font-size: 0.9rem;
+      }
+
+      .target-banner {
+        top: 10px;
+        min-width: min(88vw, 220px);
+        padding: 0.55rem 0.8rem;
+        border-radius: 18px;
+      }
+
+      .target-banner .label {
+        font-size: 0.64rem;
+      }
+
+      .target-banner .target-letter {
+        font-size: 2.2rem;
+      }
+
+      .flying-letter {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        font-size: 1.55rem;
+      }
+
+      .soup-pot {
+        height: 110px;
+      }
+
+      .soup-word {
+        bottom: 150px;
+        padding: 0.55rem 0.75rem;
+      }
+
+      .monster-mouth {
+        width: min(84vw, 300px);
+        height: 190px;
+      }
+
+      .snack-letter {
+        width: 56px;
+        height: 56px;
+        font-size: 1.6rem;
+      }
+
+      .donut-letter {
+        width: 62px;
+        height: 62px;
+        font-size: 1.45rem;
+      }
+
+      .phonics-card {
+        padding: 1rem 0.8rem;
+        border-radius: 20px;
+      }
+
+      .choice-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.42rem;
+      }
+
+      .choice-button {
+        min-height: 64px;
+        border-radius: 16px;
+        font-size: 1.25rem;
+      }
+
+      .replay-button {
+        padding: 0.7rem 0.8rem;
+        border-radius: 16px;
+        font-size: 0.88rem;
+      }
+
+      .hero-box {
+        padding: 0.85rem 0.72rem 0.82rem;
+        border-radius: 20px;
+      }
+
+      .hero-box h1 {
+        padding: 0.1rem 0.35rem 0.2rem;
+      }
+
+      .hero-box .subtitle {
+        padding: 0.72rem 0.82rem;
+        border-radius: 18px;
+        font-size: 0.82rem;
+      }
+
+      .hero-joke {
+        margin-top: 0.65rem;
+        padding: 0.72rem 0.8rem;
+        border-radius: 18px;
+      }
+
+      .hero-joke-setup,
+      .hero-joke-punchline {
+        font-size: 0.84rem;
+      }
+
+      #launcher-title {
+        padding: 0.15rem 0.55rem 0.25rem;
+      }
+
+      #launcher-title::before {
+        left: -0.2rem;
+      }
+
+      #launcher-title::after {
+        right: -0.2rem;
+      }
+
+      .runner {
+        left: 32px;
+        bottom: 58px;
+        width: 68px;
+        height: 68px;
+      }
+
+      .runner-body {
+        font-size: 2.55rem;
+      }
+
+      .runner-feet {
+        margin-top: -0.38rem;
+        font-size: 0.95rem;
+      }
+
+      .puzzle-layout,
+      .puzzle-stage {
+        min-height: 360px;
+      }
+
+      .puzzle-board {
+        width: min(58vw, 280px);
+      }
+
+      .pizza-math-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .duck-panel {
+        padding: 0.8rem;
+        border-radius: 20px;
+      }
+
+      .duck-pond {
+        min-height: 520px;
+        border-radius: 22px;
+      }
+
+      .duck-button {
+        width: 94px;
+        min-height: 88px;
+        padding: 0.45rem 0.35rem 0.55rem;
+        border-radius: 22px;
+      }
+
+      .duck-emoji {
+        font-size: 1.7rem;
+      }
+
+      .duck-number {
+        font-size: 1.2rem;
+      }
+
+      .duck-count-dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .pizza-math-panel {
+        padding: 0.85rem;
+        border-radius: 18px;
+      }
+
+      .pizza-question {
+        font-size: 1.08rem;
+      }
+
+      .pizza-math-base {
+        width: min(74vw, 280px);
+      }
+
+      .pizza-reward {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        font-size: 1.65rem;
+      }
+
+      .puzzle-card,
+      .book-card {
+        padding: 0.8rem;
+        border-radius: 20px;
+      }
+
+      .book-page {
+        min-height: 210px;
+        padding: 0.85rem;
+        border-radius: 18px;
+        font-size: 0.95rem;
+      }
+
+      .runner-item {
+        font-size: 1.75rem;
       }
 
       .juggler,
@@ -1033,16 +2320,33 @@
 </head>
 <body>
   <main class="page">
-    <section id="launcher-view">
-      <div class="hero-box">
+    <section id="home-view">
+      <div class="hero-box" id="home-hero">
         <h1>Maayan's Game World</h1>
-        <p class="subtitle">Dear friends, these are 10 games that I built with Codex AI
-I hope you enjoy!
-If you share more ideas with me - I can build them for you!</p>
+        <p class="subtitle">Choose a fun game world to explore.</p>
+        <div class="hero-joke" id="home-joke"></div>
+        <div class="hero-rain" id="home-rain" aria-hidden="true"></div>
       </div>
 
+      <section class="grid category-grid" id="category-grid" aria-label="Game categories"></section>
+    </section>
+
+    <section id="launcher-view" class="hide collection-view">
+      <div class="topbar">
+        <button class="back" id="categories-button" type="button">← Back To Categories</button>
+      </div>
+
+      <div class="hero-box" id="launcher-hero">
+        <h1 id="launcher-title">Fun Games</h1>
+        <p class="subtitle" id="launcher-subtitle">These are the current games already built and ready to play.
+Tap any game to jump in.</p>
+        <div class="hero-joke" id="launcher-joke"></div>
+        <div class="hero-rain" id="launcher-rain" aria-hidden="true"></div>
+      </div>
+
+      <p class="section-intro" id="launcher-intro">A playful mix of action, memory, sorting, and silly challenges.</p>
       <section class="grid" id="launcher-grid" aria-label="Emoji game launcher"></section>
-      <section class="form-section" aria-label="Share more game ideas">
+      <section class="form-section" id="ideas-form" aria-label="Share more game ideas">
         <iframe
           class="form-frame"
           src="https://docs.google.com/forms/d/e/1FAIpQLSdbfpXFBppBtAHbLXijHvwn-ujRisyUEIUkE7rtd0Ix1DiwpA/viewform?embedded=true"
@@ -1054,18 +2358,21 @@ If you share more ideas with me - I can build them for you!</p>
           title="Game ideas form"
           loading="lazy">Loading…</iframe>
       </section>
-      <p class="footer-note">Thanks for playing! I hope you liked it</p>
+      <p class="footer-note" id="launcher-footer">Thanks for playing! I hope you liked it</p>
     </section>
 
     <section id="game-view" class="hide">
       <div class="topbar">
         <button class="back" id="back-button" type="button">← Back To Arcade</button>
+        <button class="back" id="main-page-button" type="button">⌂ Main Page</button>
       </div>
 
-      <div class="hero-box">
+      <div class="hero-box" id="game-hero">
         <div id="hero-emoji" style="font-size: clamp(3rem, 8vw, 5rem); line-height: 1;">🎮</div>
         <h1 id="hero-title">Emoji Game</h1>
         <p class="subtitle" id="hero-subtitle"></p>
+        <div class="hero-joke" id="game-joke"></div>
+        <div class="hero-rain" id="game-rain" aria-hidden="true"></div>
         <div class="action-row">
           <button class="action primary" id="start-button" type="button">Start Game</button>
           <button class="action secondary" id="restart-button" type="button">Restart</button>
@@ -1088,10 +2395,28 @@ If you share more ideas with me - I can build them for you!</p>
   </main>
 
   <script>
+    const homeView = document.getElementById("home-view");
     const launcherView = document.getElementById("launcher-view");
     const gameView = document.getElementById("game-view");
+    const homeHero = document.getElementById("home-hero");
+    const launcherHero = document.getElementById("launcher-hero");
+    const gameHero = document.getElementById("game-hero");
+    const homeJoke = document.getElementById("home-joke");
+    const launcherJoke = document.getElementById("launcher-joke");
+    const gameJoke = document.getElementById("game-joke");
+    const homeRain = document.getElementById("home-rain");
+    const launcherRain = document.getElementById("launcher-rain");
+    const gameRain = document.getElementById("game-rain");
+    const categoryGrid = document.getElementById("category-grid");
     const launcherGrid = document.getElementById("launcher-grid");
+    const launcherTitle = document.getElementById("launcher-title");
+    const launcherSubtitle = document.getElementById("launcher-subtitle");
+    const launcherIntro = document.getElementById("launcher-intro");
+    const launcherFooter = document.getElementById("launcher-footer");
+    const ideasForm = document.getElementById("ideas-form");
+    const categoriesButton = document.getElementById("categories-button");
     const backButton = document.getElementById("back-button");
+    const mainPageButton = document.getElementById("main-page-button");
     const gameArea = document.getElementById("game-area");
     const scorePill = document.getElementById("score-pill");
     const goalPill = document.getElementById("goal-pill");
@@ -1109,11 +2434,395 @@ If you share more ideas with me - I can build them for you!</p>
       score: 0,
       goal: 0,
       running: false,
-      currentGameId: null
+      currentGameId: null,
+      currentView: "home",
+      currentCategoryId: null
     };
+
+    const heroThemes = [
+      { colors: ["#ff7eb6", "#ffd166", "#76e4f7"], accent: "#fff6a9" },
+      { colors: ["#7b8cff", "#7ce7c7", "#ffe066"], accent: "#ffeef9" },
+      { colors: ["#ff9a76", "#ff6fb5", "#8bd3ff"], accent: "#fff0a8" },
+      { colors: ["#8fd14f", "#ffd166", "#ff8ec6"], accent: "#f6faff" },
+      { colors: ["#b68cff", "#ffb86c", "#73f0d4"], accent: "#fff5d6" },
+      { colors: ["#62b7ff", "#ff92b2", "#ffe985"], accent: "#ffffff" }
+    ];
+
+    const jokeBank = [
+      { setup: "Why did the math book look grumpy?", punchline: "It had too many problems." },
+      { setup: "Which tables are easiest to learn?", punchline: "Dinner tables." },
+      { setup: "What did the calculator tell the student?", punchline: "You can count on me." },
+      { setup: "What cheese does not belong to you?", punchline: "Nacho cheese." },
+      { setup: "What did the bun do when plans changed?", punchline: "It rolled with it." },
+      { setup: "What do you call a fake noodle?", punchline: "An impasta." },
+      { setup: "Why do eggs skip joke night?", punchline: "They might crack each other up." },
+      { setup: "What did one ocean say to the other ocean?", punchline: "Nothing. They just waved." },
+      { setup: "Why did the pig leave the party?", punchline: "Everyone thought he was a boar." },
+      { setup: "Where do cats go when they lose their tails?", punchline: "To the re-tail store." },
+      { setup: "Why do bees hum?", punchline: "They do not know the words." },
+      { setup: "What do you call birds that stick together?", punchline: "Velcrows." },
+      { setup: "What do you call a dinosaur with a giant vocabulary?", punchline: "A thesaurus." },
+      { setup: "Why was the barn so noisy?", punchline: "All the cows had horns." },
+      { setup: "What dessert is a math teacher's favorite?", punchline: "Pie, of course." },
+      { setup: "Why did the student bring a ladder to math?", punchline: "To reach the high numbers." },
+      { setup: "Why should you avoid cards in the jungle?", punchline: "There are too many cheetahs." },
+      { setup: "What do you call a sheep that knows karate?", punchline: "A lamb chop." }
+    ];
+    const currentJoke = jokeBank[Math.floor(Math.random() * jokeBank.length)];
+
+    const categories = [
+      {
+        id: "fun-games",
+        title: "Fun Games",
+        badge: "Play Now",
+        art: "🎉🎮🪁",
+        copy: "Open the full arcade with all the games that already exist.",
+        status: "19 games ready",
+        background: "linear-gradient(135deg, #ffd55f, #ff8f6b)"
+      },
+      {
+        id: "electric-games",
+        title: "Letter Games ABC",
+        badge: "Play Now",
+        art: "🔤✏️🅰️",
+        copy: "Letter sounds, matching, and jumping games for early reading fun.",
+        status: "5 letter games ready",
+        background: "linear-gradient(135deg, #8fe3ff, #6f9cff)"
+      },
+      {
+        id: "number-games",
+        title: "Number & Math Games",
+        badge: "Play Now",
+        art: "🔢➕📐",
+        copy: "Multiplication, silly addition, and number-ordering games for fast math fun.",
+        status: "3 math games ready",
+        background: "linear-gradient(135deg, #97ef9f, #f7d86b)"
+      },
+      {
+        id: "story-games",
+        title: "Story & Puzzle Games",
+        badge: "Play Now",
+        art: "📚🧩✨",
+        copy: "Utah story adventures with questions to solve, plus room for more puzzle ideas later.",
+        status: "1 story game ready",
+        background: "linear-gradient(135deg, #ffb8d8, #c89bff)"
+      }
+    ];
+
+    const launcherConfigs = {
+      "fun-games": {
+        title: "Fun Games",
+        subtitle: "These are the current games already built and ready to play.\nTap any game to jump in.",
+        intro: "A playful mix of action, memory, sorting, silly challenges, and now letter games too.",
+        footer: "Thanks for playing! I hope you liked it.",
+        showForm: true,
+        filter(game) {
+          return true;
+        }
+      },
+      "electric-games": {
+        title: "Letter Games ABC",
+        subtitle: "Pick a letter game and start practicing sounds, matching, and quick reactions.",
+        intro: "Five alphabet games so far: matching, sounds, soup, monsters, and dancing donuts.",
+        footer: "More ABC ideas can be added here next.",
+        showForm: false,
+        filter(game) {
+          return game.category === "electric-games";
+        }
+      },
+      "number-games": {
+        title: "Number & Math Games",
+        subtitle: "Choose a math game and practice multiplying, adding, and ordering numbers up to 10.",
+        intro: "Three number games: multiplication practice, silly addition, and a playful number-ordering challenge.",
+        footer: "More number games can be added here next.",
+        showForm: false,
+        filter(game) {
+          return game.category === "number-games";
+        }
+      },
+      "story-games": {
+        title: "Story & Puzzle Games",
+        subtitle: "Choose a Utah desert story and answer questions about what happened.",
+        intro: "A growing story corner set in Utah, with room for more puzzle games later.",
+        footer: "Two more puzzle ideas: Canyon Maze Quest and Desert Tracks Memory Match.",
+        showForm: false,
+        filter(game) {
+          return game.category === "story-games";
+        }
+      }
+    };
+
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const letterSoundMap = {
+      A: { prompt: "a, like apple", display: "/a/ like apple" },
+      B: { prompt: "b, like bat", display: "/b/ like bat" },
+      C: { prompt: "c, like cat", display: "/k/ like cat" },
+      D: { prompt: "d, like dog", display: "/d/ like dog" },
+      E: { prompt: "e, like elephant", display: "/e/ like elephant" },
+      F: { prompt: "ffff, like fish", display: "/f/ like fish" },
+      G: { prompt: "g, like goat", display: "/g/ like goat" },
+      H: { prompt: "h, like hat", display: "/h/ like hat" },
+      I: { prompt: "i, like igloo", display: "/i/ like igloo" },
+      J: { prompt: "j, like jam", display: "/j/ like jam" },
+      K: { prompt: "k, like kite", display: "/k/ like kite" },
+      L: { prompt: "llll, like lamp", display: "/l/ like lamp" },
+      M: { prompt: "mmmm, like moon", display: "/m/ like moon" },
+      N: { prompt: "nnnn, like nest", display: "/n/ like nest" },
+      O: { prompt: "o, like octopus", display: "/o/ like octopus" },
+      P: { prompt: "p, like pig", display: "/p/ like pig" },
+      Q: { prompt: "qu, like queen", display: "/kw/ like queen" },
+      R: { prompt: "rrrr, like robot", display: "/r/ like robot" },
+      S: { prompt: "ssss, like sun", display: "/s/ like sun" },
+      T: { prompt: "t, like tap", display: "/t/ like tap" },
+      U: { prompt: "u, like umbrella", display: "/u/ like umbrella" },
+      V: { prompt: "vvvv, like van", display: "/v/ like van" },
+      W: { prompt: "w, like wagon", display: "/w/ like wagon" },
+      X: { prompt: "ks, like fox", display: "/ks/ like fox" },
+      Y: { prompt: "y, like yellow", display: "/y/ like yellow" },
+      Z: { prompt: "zzzz, like zipper", display: "/z/ like zipper" }
+    };
+    const phonicsWords = ["SAND", "ROCK", "DUNE", "MESA", "CAMP", "DUST", "PATH", "STAR"];
+    const sillyLetterWords = ["CAT", "SUN", "PIG", "BUG", "HAT", "MOP", "PAN", "DOG", "HEN", "MAP"];
+    const easyStorySeeds = [
+      { title: "Ori And Maayan Find A Desert Heart", place: "the Utah desert trail", thing: "a heart-shaped rock", snack: "apple slices", animal: "a raven", oriFavorite: "sitting in the cool shade", maayanFavorite: "the heart rock" },
+      { title: "Ori And Maayan At Sand Hill", place: "a sandy hill near Moab", thing: "a shiny pebble", snack: "orange slices", animal: "a hopping rabbit", oriFavorite: "sliding down the sand", maayanFavorite: "the shiny pebble" },
+      { title: "Ori And Maayan By The Arch", place: "a trail under a tall arch", thing: "a striped feather", snack: "crackers", animal: "a lizard", oriFavorite: "looking up at the arch", maayanFavorite: "the striped feather" },
+      { title: "Ori And Maayan See Pink Sky", place: "a quiet desert path", thing: "a smooth red stone", snack: "grapes", animal: "two ravens", oriFavorite: "the pink sky", maayanFavorite: "the red stone" },
+      { title: "Ori And Maayan In The Canyon Shade", place: "a shady canyon walk", thing: "a tiny shell-shaped rock", snack: "pretzels", animal: "a desert bird", oriFavorite: "the cool shade", maayanFavorite: "the tiny treasure rock" },
+      { title: "Ori And Maayan At Sunrise Rocks", place: "the sunrise rocks in Utah", thing: "a rock that looked like a star", snack: "banana slices", animal: "a small lizard", oriFavorite: "the sunrise colors", maayanFavorite: "the star rock" },
+      { title: "Ori And Maayan Cross The Flat Trail", place: "a flat red trail", thing: "a swirly pebble", snack: "cheese crackers", animal: "a soaring hawk", oriFavorite: "watching the hawk", maayanFavorite: "the swirly pebble" },
+      { title: "Ori And Maayan Under Blue Sky", place: "a bright desert path", thing: "a tiny round rock", snack: "strawberries", animal: "a sleepy rabbit", oriFavorite: "the blue sky", maayanFavorite: "the tiny round rock" },
+      { title: "Ori And Maayan Near The Big Cliff", place: "a trail by a big cliff", thing: "a heart pebble", snack: "granola bites", animal: "three ravens", oriFavorite: "counting the ravens", maayanFavorite: "the heart pebble" },
+      { title: "Ori And Maayan On The Red Path", place: "a red desert path", thing: "a smooth orange stone", snack: "pear slices", animal: "a quick lizard", oriFavorite: "the orange stone", maayanFavorite: "the quiet path" },
+      { title: "Ori And Maayan Find Desert Treasure", place: "a rocky Utah trail", thing: "a sparkling pebble", snack: "raisins", animal: "a bird in the sky", oriFavorite: "the sparkling pebble", maayanFavorite: "sharing snack time" }
+    ];
+    const mediumStorySeeds = [
+      { title: "Sunrise Trail In Utah", place: "the red rocks near Moab", hatColor: "blue", foundThing: "a smooth stone shaped like a heart", drawThing: "a glowing arch", animal: "three ravens", snack: "a snack with Ori", bestPart: "the glowing arch and the peaceful wind" },
+      { title: "Ori And Maayan At Canyon Morning", place: "a winding canyon trail", hatColor: "purple", foundThing: "a striped rock", drawThing: "a tall sandstone tower", animal: "two ravens", snack: "orange slices with Ori", bestPart: "the tall tower glowing in the sun" },
+      { title: "Ori And Maayan In Arches Light", place: "a sandy path near an arch", hatColor: "red", foundThing: "a star-shaped pebble", drawThing: "a giant arch", animal: "one hawk", snack: "crackers with Ori", bestPart: "the arch turning orange" },
+      { title: "Ori And Maayan On The Quiet Trail", place: "a quiet desert trail", hatColor: "teal", foundThing: "a smooth red stone", drawThing: "a curvy canyon wall", animal: "three lizards", snack: "granola bars with Ori", bestPart: "the quiet wind in the canyon" },
+      { title: "Ori And Maayan Near The Cliffs", place: "the cliffs outside Moab", hatColor: "green", foundThing: "a heart pebble", drawThing: "a high cliff edge", animal: "two ravens", snack: "apple slices with Ori", bestPart: "the shadows moving across the cliffs" },
+      { title: "Ori And Maayan Find Shade", place: "a sunny Utah wash", hatColor: "yellow", foundThing: "a shiny little stone", drawThing: "a wide arch", animal: "a rabbit", snack: "pear slices with Ori", bestPart: "resting in the cool shade" },
+      { title: "Ori And Maayan On The Desert Bend", place: "a bend in the desert trail", hatColor: "pink", foundThing: "a striped feather", drawThing: "a tall red rock", animal: "four birds", snack: "raisins with Ori", bestPart: "seeing the big red rock up close" },
+      { title: "Ori And Maayan At The Windy Path", place: "a windy path through the canyon", hatColor: "orange", foundThing: "a smooth tan pebble", drawThing: "a stone archway", animal: "a raven", snack: "pretzels with Ori", bestPart: "hearing the wind sing" },
+      { title: "Ori And Maayan In The Desert Glow", place: "a glowing Utah trail", hatColor: "navy", foundThing: "a rock with swirls", drawThing: "the glowing cliffs", animal: "two hawks", snack: "banana chips with Ori", bestPart: "the glowing cliffs" },
+      { title: "Ori And Maayan See The Canyon Sky", place: "a trail under the canyon sky", hatColor: "white", foundThing: "a tiny heart stone", drawThing: "a ribbon of cliffs", animal: "three ravens", snack: "apple slices with Ori", bestPart: "the sky over the canyon" },
+      { title: "Ori And Maayan Walk To The Arch", place: "an arch trail in Utah", hatColor: "black", foundThing: "a bright pebble", drawThing: "a sandstone arch", animal: "a lizard", snack: "trail mix with Ori", bestPart: "reaching the arch together" }
+    ];
+    const hardStorySeeds = [
+      { title: "Ori And Maayan In The Utah Canyons", place: "a quiet Utah trail near Moab", seekReason: "find shapes in the rocks", foundThing: "a stone that looked exactly like a heart", snack: "apple slices and granola bars", remember: "the heart rock, the ravens, and the way the cool wind sounded in the canyon", animal: "three ravens", beautifulMoment: "the arch turning orange in the morning sun" },
+      { title: "Ori And Maayan At The Desert Overlook", place: "a high overlook trail", seekReason: "spot patterns in the cliffs", foundThing: "a smooth pebble with white stripes", snack: "orange slices and crackers", remember: "the striped pebble, the wide canyon, and the cool shadow under the rocks", animal: "two hawks", beautifulMoment: "the sunlight spilling across the canyon floor" },
+      { title: "Ori And Maayan On The Red Ridge", place: "a red ridge above the desert", seekReason: "search for unusual rocks", foundThing: "a tiny heart pebble", snack: "pear slices and granola bars", remember: "the heart pebble, the far cliffs, and the wind on the ridge", animal: "one raven", beautifulMoment: "the cliffs glowing red and gold" },
+      { title: "Ori And Maayan By The Sandstone Arch", place: "a path below a sandstone arch", seekReason: "look for shapes and colors", foundThing: "a sandy stone with swirls", snack: "trail mix and apple slices", remember: "the swirly stone, the arch, and the sound of the breeze", animal: "three birds", beautifulMoment: "the arch shining bright orange" },
+      { title: "Ori And Maayan At The Windy Wash", place: "a windy desert wash", seekReason: "collect ideas for drawings", foundThing: "a red stone shaped like a leaf", snack: "pretzels and fruit", remember: "the leaf rock, the bird calls, and the wide blue sky", animal: "two ravens", beautifulMoment: "the sunlight on the sandstone walls" },
+      { title: "Ori And Maayan In The Quiet Basin", place: "a quiet rocky basin", seekReason: "notice interesting shapes in nature", foundThing: "a rounded stone with a silver stripe", snack: "raisins and crackers", remember: "the striped stone, the stillness, and the echo in the basin", animal: "a lizard", beautifulMoment: "the basin glowing after sunrise" },
+      { title: "Ori And Maayan Near The Tall Tower", place: "a trail beside a tall rock tower", seekReason: "search for special treasures", foundThing: "a pebble shaped like a tiny moon", snack: "banana chips and granola bars", remember: "the moon pebble, the tower, and the chilly breeze", animal: "two hawks", beautifulMoment: "the tall tower lit by morning sun" },
+      { title: "Ori And Maayan On The Curving Path", place: "a curving canyon path", seekReason: "find shapes and colors for later stories", foundThing: "a smooth orange stone", snack: "apple slices and pretzels", remember: "the orange stone, the curving path, and the fluttering ravens", animal: "three ravens", beautifulMoment: "the orange cliffs glowing above them" },
+      { title: "Ori And Maayan At Golden Light Trail", place: "a golden-light desert trail", seekReason: "look for patterns in the sand and rocks", foundThing: "a rock with tiny sparkles", snack: "cheese crackers and fruit", remember: "the sparkly rock, the soft wind, and the warm colors on the cliffs", animal: "a rabbit", beautifulMoment: "the gold light on the trail" },
+      { title: "Ori And Maayan In The Stone Garden", place: "a rocky place like a stone garden", seekReason: "find the strangest desert shapes", foundThing: "a stone shaped like a heart", snack: "trail mix and orange slices", remember: "the heart stone, the giant rocks, and the quiet shade", animal: "one hawk", beautifulMoment: "the giant rocks glowing orange and pink" },
+      { title: "Ori And Maayan At Morning Arch", place: "a morning trail to an arch", seekReason: "look closely at the colors in the rock", foundThing: "a smooth pink pebble", snack: "granola bars and grapes", remember: "the pink pebble, the arch, and the cool canyon wind", animal: "three ravens", beautifulMoment: "the arch lighting up with sunrise" }
+    ];
+
+    function buildEasyStory(seed) {
+      return {
+        title: seed.title,
+        pages: [
+          `Maayan and her sister Ori walked on ${seed.place} early in the morning. The rocks were red and the sky looked soft and bright. Ori smiled and stayed close to Maayan as they looked around together.`,
+          `Soon they found ${seed.thing}. Ori said it looked like a tiny treasure. Then they sat down, shared ${seed.snack}, and watched ${seed.animal} nearby.`,
+          `Before going home, Maayan said her favorite part was ${seed.maayanFavorite}. Ori said her favorite part was ${seed.oriFavorite}. Both sisters said they wanted to come back again.`
+        ],
+        questions: [
+          {
+            prompt: "Who walked with Maayan?",
+            choices: ["Her sister Ori", "A ranger", "A puppy", "A teacher"],
+            answer: "Her sister Ori"
+          },
+          {
+            prompt: "What did they find on the trail?",
+            choices: [seed.thing, "a kite", "a toy boat", "a snowball"],
+            answer: seed.thing
+          },
+          {
+            prompt: "What did Ori say was her favorite part?",
+            choices: [seed.oriFavorite, "the parking lot", "the clouds", "the backpack"],
+            answer: seed.oriFavorite
+          }
+        ]
+      };
+    }
+
+    function buildMediumStory(seed) {
+      return {
+        title: seed.title,
+        pages: [
+          `Maayan woke up early for a walk to ${seed.place}. She and her sister Ori packed water, a notebook, and Maayan's ${seed.hatColor} hat before stepping onto the trail. The air still felt cool, and the desert colors looked soft in the morning light.`,
+          `On the trail, Ori found ${seed.foundThing} and tucked it away carefully. Soon they reached a beautiful view, and Maayan sat in the shade to draw ${seed.drawThing} while they watched ${seed.animal}. The wind moved gently through the canyon.`,
+          `Before heading back, Maayan shared ${seed.snack} with Ori and smiled at the colors on the cliffs. On the way home, Maayan said the best part was ${seed.bestPart}.`
+        ],
+        questions: [
+          {
+            prompt: "What color hat did Maayan wear?",
+            choices: [seed.hatColor, "silver", "brown", "purple"],
+            answer: seed.hatColor
+          },
+          {
+            prompt: "What did Maayan draw?",
+            choices: [seed.drawThing, "a river", "a cactus", "a backpack"],
+            answer: seed.drawThing
+          },
+          {
+            prompt: "What did Maayan say was the best part?",
+            choices: [seed.bestPart, "the car ride", "the parking lot", "the map"],
+            answer: seed.bestPart
+          }
+        ]
+      };
+    }
+
+    function buildHardStory(seed) {
+      return {
+        title: seed.title,
+        pages: [
+          `Before sunrise, Maayan and her sister Ori stepped onto ${seed.place} with their family. Maayan carried a notebook, while Ori kept looking carefully at the rocks because she wanted to ${seed.seekReason}. The desert still felt cool, and the cliffs looked dark red in the early light.`,
+          `As they walked higher, Ori discovered ${seed.foundThing} and slipped it into her pocket for safekeeping. Later they rested in the shade, shared ${seed.snack}, and watched ${seed.animal} while the wind moved through the canyon. Maayan quietly took in ${seed.beautifulMoment}.`,
+          `When it was time to head back, both sisters tried to remember every detail. Maayan talked about the colors and light, while Ori said she would always remember ${seed.remember}.`
+        ],
+        questions: [
+          {
+            prompt: "Why was Ori studying the rocks so carefully?",
+            choices: [seed.seekReason, "find a lost shoe", "look for a snake", "count footprints"],
+            answer: seed.seekReason
+          },
+          {
+            prompt: "What did the family share while resting?",
+            choices: [seed.snack, "pizza and soup", "cake and ice cream", "chips and salsa"],
+            answer: seed.snack
+          },
+          {
+            prompt: "What did Ori say she would always remember?",
+            choices: [seed.remember, "the parking lot and the map", "the gift shop and the snacks", "the ride home and the radio"],
+            answer: seed.remember
+          }
+        ]
+      };
+    }
+
+    const utahStoryLevels = [
+      {
+        id: "easy",
+        label: "Level 1",
+        description: "Shorter and easier for younger readers.",
+        stories: easyStorySeeds.map(buildEasyStory)
+      },
+      {
+        id: "medium",
+        label: "Level 2",
+        description: "The current style story with a little more detail.",
+        stories: mediumStorySeeds.map(buildMediumStory)
+      },
+      {
+        id: "hard",
+        label: "Level 3",
+        description: "More details for stronger readers.",
+        stories: hardStorySeeds.map(buildHardStory)
+      }
+    ];
 
     function randomBetween(min, max) {
       return Math.random() * (max - min) + min;
+    }
+
+    function hashSeed(text) {
+      return [...String(text)].reduce((total, char) => total + char.charCodeAt(0), 0);
+    }
+
+    function pickHeroTheme(seed) {
+      return heroThemes[hashSeed(seed) % heroThemes.length];
+    }
+
+    function renderJoke(target) {
+      if (!target) {
+        return;
+      }
+      target.innerHTML = `
+        <div class="hero-joke-tag">Giggle Break</div>
+        <p class="hero-joke-setup">${currentJoke.setup}</p>
+        <p class="hero-joke-punchline">${currentJoke.punchline}</p>
+      `;
+    }
+
+    function populateHeroRain(target, emojis) {
+      if (!target) {
+        return;
+      }
+      target.innerHTML = "";
+      emojis.forEach((emoji, index) => {
+        const drop = document.createElement("span");
+        drop.className = "hero-drop";
+        drop.textContent = emoji;
+        drop.style.left = `${8 + (index * 11) % 88}%`;
+        drop.style.animationDelay = `${(index % 6) * 0.45}s`;
+        drop.style.animationDuration = `${4.8 + (index % 4) * 0.9}s`;
+        target.appendChild(drop);
+      });
+    }
+
+    function applyHeroTheme(hero, jokeEl, rainEl, seed, emojis) {
+      if (!hero) {
+        return;
+      }
+      const theme = pickHeroTheme(seed);
+      hero.style.setProperty("--hero-1", theme.colors[0]);
+      hero.style.setProperty("--hero-2", theme.colors[1]);
+      hero.style.setProperty("--hero-3", theme.colors[2]);
+      hero.style.setProperty("--hero-accent", theme.accent);
+      renderJoke(jokeEl);
+      populateHeroRain(rainEl, emojis);
+    }
+
+    function randomLetter(exclude = []) {
+      const blocked = new Set(exclude);
+      const choices = alphabet.filter((letter) => !blocked.has(letter));
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    function makeLetterChoices(correct, total = 5) {
+      const picks = [correct];
+      while (picks.length < total) {
+        const next = randomLetter(picks);
+        picks.push(next);
+      }
+      return picks.sort(() => Math.random() - 0.5);
+    }
+
+    function makeNumberChoices(correct, min, max, total = 5) {
+      const picks = [correct];
+      while (picks.length < total) {
+        const next = Math.floor(randomBetween(min, max + 1));
+        if (!picks.includes(next)) {
+          picks.push(next);
+        }
+      }
+      return picks.sort(() => Math.random() - 0.5);
+    }
+
+    function shuffleArray(items) {
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function getPuzzleShape(pieceCount) {
+      if (pieceCount === 3) {
+        return { cols: 3, rows: 1 };
+      }
+      if (pieceCount === 6) {
+        return { cols: 3, rows: 2 };
+      }
+      return { cols: 5, rows: 2 };
     }
 
     function schedule(fn, delay) {
@@ -1122,9 +2831,20 @@ If you share more ideas with me - I can build them for you!</p>
       return id;
     }
 
+    function scheduleInterval(fn, delay) {
+      const id = setInterval(fn, delay);
+      timers.push(id);
+      return id;
+    }
+
     function clearTimers() {
       while (timers.length) {
-        clearTimeout(timers.pop());
+        const id = timers.pop();
+        clearTimeout(id);
+        clearInterval(id);
+      }
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
       }
     }
 
@@ -1156,6 +2876,7 @@ If you share more ideas with me - I can build them for you!</p>
       gameArea.innerHTML = "";
       gameArea.onpointermove = null;
       gameArea.onpointerdown = null;
+      gameArea.onclick = null;
       document.onkeydown = null;
       setMessage("");
       setScore(0);
@@ -1318,6 +3039,31 @@ If you share more ideas with me - I can build them for you!</p>
       oscillator.stop(now + 0.24);
     }
 
+    function speakLetter(letter) {
+      speakText(letter, 0.82, 1.15);
+    }
+
+    function speakText(text, rate = 0.82, pitch = 1.15) {
+      if (!window.speechSynthesis) {
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = rate;
+      utterance.pitch = pitch;
+      utterance.volume = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakLetterSound(letter) {
+      const sound = letterSoundMap[letter];
+      if (!sound) {
+        speakText(letter.toLowerCase(), 0.72, 1.0);
+        return;
+      }
+      speakText(sound.prompt, 0.68, 1.0);
+    }
+
     function showBalloonBurst(x, y, good) {
       const burst = document.createElement("div");
       burst.className = "balloon-burst";
@@ -1416,6 +3162,17 @@ If you share more ideas with me - I can build them for you!</p>
 
       element.addEventListener("pointerdown", (event) => {
         dragging = true;
+        const elementRect = element.getBoundingClientRect();
+        const areaRect = gameArea.getBoundingClientRect();
+        if (element.parentElement !== gameArea) {
+          element.style.width = `${elementRect.width}px`;
+          element.style.height = `${elementRect.height}px`;
+          element.style.position = "absolute";
+          element.style.left = `${elementRect.left - areaRect.left}px`;
+          element.style.top = `${elementRect.top - areaRect.top}px`;
+          gameArea.appendChild(element);
+        }
+        element.style.zIndex = "6";
         element.setPointerCapture(event.pointerId);
       });
 
@@ -1432,11 +3189,13 @@ If you share more ideas with me - I can build them for you!</p>
 
       element.addEventListener("pointerup", () => {
         dragging = false;
+        element.style.zIndex = "";
         onDrop();
       });
 
       element.addEventListener("pointercancel", () => {
         dragging = false;
+        element.style.zIndex = "";
       });
     }
 
@@ -2371,12 +4130,1058 @@ If you share more ideas with me - I can build them for you!</p>
           spawnCoolItem();
           heatTick();
         }
+      },
+      letterfind: {
+        category: "electric-games",
+        emoji: "🔠",
+        title: "Find The Letter",
+        gameName: "Identify the letter",
+        note: "Tap the flying letter that matches the big one on top.",
+        subtitle: "Spot the same letter and tap it fast.",
+        instructions: "Press Start. Look at the big letter on top. Tap flying letters that match it. Find 10 matching letters to win.",
+        goal: 10,
+        areaClass: "alphabet-sky",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const banner = document.createElement("div");
+          banner.className = "target-banner";
+          gameArea.appendChild(banner);
+
+          let targetLetter = randomLetter();
+
+          function updateTarget() {
+            banner.innerHTML = `
+              <span class="label">Find This Letter</span>
+              <span class="target-letter">${targetLetter}</span>
+            `;
+          }
+
+          function spawnLetter() {
+            if (!state.running) {
+              return;
+            }
+
+            const correct = Math.random() < 0.38;
+            const letter = correct ? targetLetter : randomLetter([targetLetter]);
+            const flyer = document.createElement("button");
+            flyer.type = "button";
+            flyer.className = "sprite flying-letter";
+            flyer.textContent = letter;
+            let x = gameArea.clientWidth + 20;
+            const y = randomBetween(100, gameArea.clientHeight - 82);
+            flyer.style.left = `${x}px`;
+            flyer.style.top = `${y}px`;
+            gameArea.appendChild(flyer);
+
+            const speed = randomBetween(2.2, 3.6);
+            const drift = randomBetween(-0.4, 0.4);
+            const interval = scheduleInterval(() => {
+              if (!state.running) {
+                flyer.remove();
+                return;
+              }
+              x -= speed;
+              flyer.style.left = `${x}px`;
+              flyer.style.top = `${y + Math.sin(x / 30) * 8 + drift * x * 0.03}px`;
+              if (x < -70) {
+                clearInterval(interval);
+                flyer.remove();
+              }
+            }, 16);
+
+            flyer.addEventListener("pointerdown", (event) => {
+              event.stopPropagation();
+              if (!state.running) {
+                return;
+              }
+              clearInterval(interval);
+              flyer.remove();
+              speakLetter(letter);
+              if (letter === targetLetter) {
+                setScore(state.score + 1, true);
+                if (state.score >= state.goal) {
+                  win("You found all 10 letters. Alphabet superstar!");
+                  return;
+                }
+                targetLetter = randomLetter([targetLetter]);
+                updateTarget();
+                setMessage(`Nice job. Now find ${targetLetter}.`, "#17324d");
+              } else {
+                setMessage(`That was ${letter}. Look for ${targetLetter}.`);
+              }
+            });
+          }
+
+          updateTarget();
+          setMessage(`Tap the flying ${targetLetter}.`, "#17324d");
+          spawnLetter();
+          scheduleInterval(spawnLetter, 760);
+        }
+      },
+      lettersound: {
+        category: "electric-games",
+        emoji: "🔊",
+        title: "Letter Sound Match",
+        gameName: "Hear sounds, build words",
+        note: "Listen to letter sounds, choose the matching letter, and build short words.",
+        subtitle: "Hear the sound, choose the letter, and make a word.",
+        instructions: "Press Start. Listen to the sound the letter makes, not the letter name. Choose the matching letter from five choices. After 4 or 5 letters, the sounds make a whole word.",
+        goal: 9,
+        areaClass: "phonics-stage",
+        start() {
+          resetArea(this.areaClass);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "phonics-wrap";
+          wrap.innerHTML = `
+            <div class="phonics-card">
+              <div class="phonics-symbol">🔊</div>
+              <p class="game-name" id="phonics-word"></p>
+              <p class="note" id="phonics-sound-note"></p>
+              <div class="choice-grid"></div>
+              <button type="button" class="replay-button">Hear Sound Again</button>
+            </div>
+          `;
+          gameArea.appendChild(wrap);
+
+          const wordEl = wrap.querySelector("#phonics-word");
+          const soundNoteEl = wrap.querySelector("#phonics-sound-note");
+          const choiceGrid = wrap.querySelector(".choice-grid");
+          const replayButton = wrap.querySelector(".replay-button");
+          const chosenWords = shuffleArray(phonicsWords).slice(0, 2);
+          const totalLetters = chosenWords.join("").length;
+          setGoal(totalLetters);
+
+          let wordIndex = 0;
+          let letterIndex = 0;
+          let correctLetter = chosenWords[wordIndex][letterIndex];
+
+          function currentWord() {
+            return chosenWords[wordIndex];
+          }
+
+          function updateWordDisplay() {
+            const word = currentWord();
+            const built = word
+              .split("")
+              .map((letter, index) => (index < letterIndex ? letter : "_"))
+              .join(" ");
+            wordEl.textContent = `Build the word: ${built}`;
+            soundNoteEl.textContent = `Sound clue: ${(letterSoundMap[correctLetter] && letterSoundMap[correctLetter].display) || correctLetter}`;
+          }
+
+          function speakCurrent() {
+            schedule(() => speakLetterSound(correctLetter), 80);
+          }
+
+          function renderRound() {
+            const options = makeLetterChoices(correctLetter, 5);
+            updateWordDisplay();
+            choiceGrid.innerHTML = "";
+            options.forEach((letter) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "choice-button";
+              button.textContent = letter;
+              button.addEventListener("pointerdown", () => {
+                if (!state.running) {
+                  return;
+                }
+                if (letter === correctLetter) {
+                  setScore(state.score + 1, true);
+                  const word = currentWord();
+                  letterIndex += 1;
+
+                  if (letterIndex >= word.length) {
+                    wordEl.textContent = `You built: ${word.split("").join(" ")}`;
+                    setMessage(`You made the word ${word}. Great reading!`, "#17324d");
+                    schedule(() => speakText(word.toLowerCase(), 0.78, 1.02), 220);
+
+                    if (state.score >= state.goal) {
+                      schedule(() => win("You matched the sounds and built the words. Amazing reading!"), 600);
+                      return;
+                    }
+
+                    schedule(() => {
+                      wordIndex += 1;
+                      letterIndex = 0;
+                      correctLetter = chosenWords[wordIndex][letterIndex];
+                      setMessage(`Now build the next word. Listen for the first sound.`, "#17324d");
+                      renderRound();
+                      speakCurrent();
+                    }, 1200);
+                    return;
+                  }
+
+                  correctLetter = word[letterIndex];
+                  setMessage(`Correct. Now listen for the next sound in ${word}.`, "#17324d");
+                  renderRound();
+                  speakCurrent();
+                } else {
+                  setMessage("Not that one. Listen to the sound again and try another letter.");
+                  speakCurrent();
+                }
+              });
+              choiceGrid.appendChild(button);
+            });
+          }
+
+          replayButton.addEventListener("pointerdown", () => {
+            if (!state.running) {
+              return;
+            }
+            speakCurrent();
+          });
+
+          renderRound();
+          setMessage("Listen to the sound and build the word one letter at a time.", "#17324d");
+          speakCurrent();
+        }
+      },
+      alphabetsoup: {
+        category: "electric-games",
+        emoji: "🍜",
+        title: "Alphabet Soup",
+        gameName: "Spell the silly soup word",
+        note: "Tap the bubbling letter noodles in the right order before the soup splashes over.",
+        subtitle: "Catch the right letters and spell a funny word.",
+        instructions: "Press Start. A word appears above the soup with blanks. Tap the letters in order to spell it before the splash meter fills up.",
+        goal: 2,
+        areaClass: "kitchen",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const target = document.createElement("div");
+          target.className = "soup-word";
+          const heatBar = document.createElement("div");
+          heatBar.className = "heat-bar";
+          heatBar.innerHTML = '<div class="heat-fill"></div>';
+          const pot = document.createElement("div");
+          pot.className = "soup-pot";
+          gameArea.append(target, heatBar, pot);
+          const heatFill = heatBar.querySelector(".heat-fill");
+
+          const chosenWords = shuffleArray(sillyLetterWords).slice(0, 2);
+          let wordIndex = 0;
+          let letterIndex = 0;
+          let heat = 0;
+
+          function currentWord() {
+            return chosenWords[wordIndex];
+          }
+
+          function updateWord() {
+            const word = currentWord();
+            target.innerHTML = `
+              <span class="word-label">Soup Word</span>
+              <span class="word-value">${word.split("").map((letter, index) => (index < letterIndex ? letter : "_")).join(" ")}</span>
+            `;
+          }
+
+          function spawnNoodle() {
+            if (!state.running) {
+              return;
+            }
+            const needed = currentWord()[letterIndex];
+            const letter = Math.random() < 0.42 ? needed : randomLetter([needed]);
+            const noodle = document.createElement("button");
+            noodle.type = "button";
+            noodle.className = "sprite flying-letter";
+            noodle.textContent = letter;
+            let x = randomBetween(18, gameArea.clientWidth - 82);
+            let y = 92;
+            noodle.style.left = `${x}px`;
+            noodle.style.top = `${y}px`;
+            gameArea.appendChild(noodle);
+
+            const interval = scheduleInterval(() => {
+              if (!state.running) {
+                noodle.remove();
+                return;
+              }
+              y += randomBetween(0.95, 1.35);
+              x += Math.sin(y / 28) * 1.1;
+              noodle.style.left = `${Math.max(8, Math.min(gameArea.clientWidth - 72, x))}px`;
+              noodle.style.top = `${y}px`;
+              if (y > gameArea.clientHeight - 130) {
+                clearInterval(interval);
+                noodle.remove();
+              }
+            }, 16);
+
+            noodle.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearInterval(interval);
+              noodle.remove();
+              if (letter === needed) {
+                setScore(state.score, true);
+                letterIndex += 1;
+                updateWord();
+                if (letterIndex >= currentWord().length) {
+                  setScore(state.score + 1, true);
+                  if (state.score >= state.goal) {
+                    win("The alphabet soup is spelled perfectly!");
+                    return;
+                  }
+                  wordIndex += 1;
+                  letterIndex = 0;
+                  heat = Math.max(0, heat - 35);
+                  heatFill.style.width = `${heat}%`;
+                  setMessage("Yum! New soup word coming up.", "#17324d");
+                  updateWord();
+                  return;
+                }
+                setMessage(`Good noodle. Now find ${currentWord()[letterIndex]}.`, "#17324d");
+              } else {
+                heat = Math.min(100, heat + 7);
+                heatFill.style.width = `${heat}%`;
+                setMessage("Oops. Wrong noodle!");
+              }
+            });
+          }
+
+          function heatTick() {
+            if (!state.running) {
+              return;
+            }
+            heat = Math.min(100, heat + 0.9);
+            heatFill.style.width = `${heat}%`;
+            if (heat >= 100) {
+              lose("Splash! The soup bubbled over.");
+              return;
+            }
+            schedule(heatTick, 300);
+          }
+
+          updateWord();
+          setMessage("Tap the letters in order before the soup splashes over.", "#17324d");
+          scheduleInterval(spawnNoodle, 1120);
+          spawnNoodle();
+          heatTick();
+        }
+      },
+      monstermouth: {
+        category: "electric-games",
+        emoji: "👾",
+        title: "Monster Mouth",
+        gameName: "Feed the silly monster",
+        note: "Feed the monster the matching letter snacks and avoid the stink bugs.",
+        subtitle: "Tap the right letter snacks for the monster.",
+        instructions: "Press Start. The monster shows the target letter sound. Tap only the matching letter snacks. Do not tap the stink bugs.",
+        goal: 8,
+        areaClass: "club",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const target = document.createElement("div");
+          target.className = "monster-target";
+          const monster = document.createElement("div");
+          monster.className = "monster-mouth";
+          gameArea.append(target, monster);
+
+          let targetLetter = randomLetter();
+          let bugHits = 0;
+
+          function updateTarget() {
+            target.innerHTML = `
+              <span class="label">Feed This Sound</span>
+              <span class="target-letter">${targetLetter}</span>
+            `;
+          }
+
+          function spawnSnack() {
+            if (!state.running) {
+              return;
+            }
+            const isBug = Math.random() < 0.18;
+            const letter = isBug ? "🪳" : (Math.random() < 0.5 ? targetLetter : randomLetter([targetLetter]));
+            const snack = document.createElement("button");
+            snack.type = "button";
+            snack.className = "sprite snack-letter";
+            snack.textContent = letter;
+            let x = randomBetween(14, gameArea.clientWidth - 84);
+            let y = 100;
+            snack.style.left = `${x}px`;
+            snack.style.top = `${y}px`;
+            gameArea.appendChild(snack);
+
+            const interval = scheduleInterval(() => {
+              if (!state.running) {
+                snack.remove();
+                return;
+              }
+              y += randomBetween(1.4, 2.1);
+              x += Math.sin(y / 28) * 1.4;
+              snack.style.left = `${Math.max(8, Math.min(gameArea.clientWidth - 72, x))}px`;
+              snack.style.top = `${y}px`;
+              if (y > gameArea.clientHeight - 140) {
+                clearInterval(interval);
+                snack.remove();
+              }
+            }, 16);
+
+            snack.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearInterval(interval);
+              snack.remove();
+              if (isBug) {
+                bugHits += 1;
+                if (bugHits >= 2) {
+                  lose("Eww. Too many stink bugs in the monster mouth.");
+                } else {
+                  setMessage("Yuck! Avoid the stink bugs.");
+                }
+                return;
+              }
+              if (letter === targetLetter) {
+                setScore(state.score + 1, true);
+                if (state.score >= state.goal) {
+                  win("The monster is full of perfect letter snacks!");
+                  return;
+                }
+                targetLetter = randomLetter([targetLetter]);
+                updateTarget();
+                setMessage(`Chomp! Now feed it ${targetLetter}.`, "#17324d");
+              } else {
+                setMessage(`That snack says ${letter}. The monster wants ${targetLetter}.`);
+              }
+            });
+          }
+
+          updateTarget();
+          setMessage("Feed the monster matching letters. Avoid the stink bugs.", "#17324d");
+          scheduleInterval(spawnSnack, 720);
+          spawnSnack();
+        }
+      },
+      donutletters: {
+        category: "electric-games",
+        emoji: "🍩",
+        title: "Dancing Donut Letters",
+        gameName: "Build the donut word",
+        note: "Tap dancing donut letters in order to spell a short word like cat or sun.",
+        subtitle: "Catch the right donut letters to build the word.",
+        instructions: "Press Start. A short word appears at the top. Tap the donut letters in the correct order to spell it. Finish 3 words to win.",
+        goal: 3,
+        areaClass: "circus",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const target = document.createElement("div");
+          target.className = "donut-target";
+          gameArea.appendChild(target);
+
+          const chosenWords = shuffleArray(sillyLetterWords).slice(0, 3);
+          let wordIndex = 0;
+          let letterIndex = 0;
+
+          function currentWord() {
+            return chosenWords[wordIndex];
+          }
+
+          function updateTarget() {
+            const word = currentWord();
+            target.innerHTML = `
+              <span class="word-label">Donut Word</span>
+              <span class="word-value">${word}</span>
+              <span class="note">Build it in order. Next letter: <strong>${word[letterIndex] || "✓"}</strong></span>
+            `;
+          }
+
+          function spawnDonut() {
+            if (!state.running) {
+              return;
+            }
+            const needed = currentWord()[letterIndex];
+            const letter = Math.random() < 0.45 ? needed : randomLetter([needed]);
+            const donut = document.createElement("button");
+            donut.type = "button";
+            donut.className = "sprite donut-letter";
+            donut.textContent = letter;
+            let x = randomBetween(18, gameArea.clientWidth - 90);
+            let y = randomBetween(100, gameArea.clientHeight - 110);
+            donut.style.left = `${x}px`;
+            donut.style.top = `${y}px`;
+            donut.style.animationDelay = `${Math.random()}s`;
+            gameArea.appendChild(donut);
+
+            const timeout = schedule(() => donut.remove(), 4200);
+            donut.addEventListener("pointerdown", () => {
+              if (!state.running) {
+                return;
+              }
+              clearTimeout(timeout);
+              donut.remove();
+              if (letter === needed) {
+                letterIndex += 1;
+                updateTarget();
+                if (letterIndex >= currentWord().length) {
+                  setScore(state.score + 1, true);
+                  if (state.score >= state.goal) {
+                    win("The donut letters spelled every silly word!");
+                    return;
+                  }
+                  wordIndex += 1;
+                  letterIndex = 0;
+                  setMessage("Sweet! A new donut word is dancing in.", "#17324d");
+                  updateTarget();
+                  return;
+                }
+                setMessage(`Yum. Now tap ${currentWord()[letterIndex]}.`, "#17324d");
+              } else {
+                setMessage(`That donut says ${letter}. Keep looking for ${needed}.`);
+              }
+            });
+          }
+
+          updateTarget();
+          setMessage(`Spell the word ${currentWord()} by tapping its letters in order.`, "#17324d");
+          scheduleInterval(spawnDonut, 1020);
+          spawnDonut();
+        }
+      },
+      multiplication: {
+        category: "number-games",
+        emoji: "✖️",
+        title: "Treasure Multiplication Splash",
+        gameName: "Multiply for treasure",
+        note: "Solve tougher multiplication questions to unlock treasure chests and win a crown.",
+        subtitle: "Pick the correct multiplication answer and collect treasure.",
+        instructions: "Press Start. Solve multiplication problems with bigger numbers and almost no zero questions. Every right answer wins treasure, and every 3 right answers unlock a chest. Get 9 right to win.",
+        goal: 9,
+        areaClass: "phonics-stage",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "phonics-wrap";
+          wrap.innerHTML = `
+            <div class="phonics-card">
+              <div class="phonics-symbol" id="math-treasure">💎✖️</div>
+              <p class="game-name" id="math-question"></p>
+              <div class="choice-grid"></div>
+            </div>
+          `;
+          gameArea.appendChild(wrap);
+
+          const treasureEl = wrap.querySelector("#math-treasure");
+          const questionEl = wrap.querySelector("#math-question");
+          const choiceGrid = wrap.querySelector(".choice-grid");
+          let correctAnswer = 0;
+          let streak = 0;
+          let chestCount = 0;
+
+          function updateTreasureDisplay() {
+            const chestIcons = chestCount ? " " + "📦".repeat(chestCount) : "";
+            treasureEl.textContent = `💎${"✨".repeat(Math.min(streak, 3))}${chestIcons}`;
+          }
+
+          function nextRound() {
+            let a = Math.floor(randomBetween(3, 13));
+            let b = Math.floor(randomBetween(3, 13));
+            if (a * b > 100) {
+              const bigger = Math.max(a, b);
+              const smaller = Math.min(a, b);
+              a = smaller;
+              b = Math.max(3, Math.floor(100 / bigger));
+            }
+            if (Math.random() < 0.08) {
+              a = Math.floor(randomBetween(1, 11));
+              b = 0;
+            }
+            correctAnswer = a * b;
+            questionEl.textContent = `${a} x ${b} = ?`;
+            const minOption = Math.max(0, correctAnswer - 18);
+            const maxOption = Math.min(100, correctAnswer + 18);
+            const options = makeNumberChoices(correctAnswer, minOption, maxOption, 5);
+            choiceGrid.innerHTML = "";
+            options.forEach((value) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "choice-button";
+              button.textContent = String(value);
+              button.addEventListener("pointerdown", () => {
+                if (!state.running) {
+                  return;
+                }
+                if (value === correctAnswer) {
+                  setScore(state.score + 1, true);
+                  streak += 1;
+                  if (streak % 3 === 0) {
+                    chestCount += 1;
+                    setMessage("Treasure chest unlocked! Great multiplying!", "#2b9b63");
+                  } else {
+                    setMessage("Correct. You found treasure!", "#17324d");
+                  }
+                  updateTreasureDisplay();
+                  if (state.score >= state.goal) {
+                    win("You opened the treasure chests and won the multiplication crown!");
+                    return;
+                  }
+                  nextRound();
+                } else {
+                  streak = 0;
+                  updateTreasureDisplay();
+                  setMessage(`Not quite. Try this one again: ${questionEl.textContent}`, "#d96b3b");
+                }
+              });
+              choiceGrid.appendChild(button);
+            });
+          }
+
+          updateTreasureDisplay();
+          setMessage("Solve the multiplication problem and collect treasure.", "#17324d");
+          nextRound();
+        }
+      },
+      addition: {
+        category: "number-games",
+        emoji: "🍕",
+        title: "Pickle Pizza Addition",
+        gameName: "Addition up to 10",
+        note: "Solve silly addition problems, earn toppings, and build your own goofy pizza.",
+        subtitle: "Count the toppings, answer the sum, then decorate your pizza.",
+        instructions: "Press Start. Count the two silly topping groups. The total will always be 10 or less. Every correct answer unlocks a topping you can drag anywhere onto your pizza.",
+        goal: 6,
+        areaClass: "kitchen",
+        start() {
+          resetArea(this.areaClass);
+          setGoal(this.goal);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "pizza-math-wrap";
+          wrap.innerHTML = `
+            <div class="pizza-math-layout">
+              <div class="pizza-stage">
+                <div class="pizza-math-base" id="pizza-canvas"></div>
+                <div class="pizza-bank" id="pizza-bank"></div>
+              </div>
+              <div class="pizza-math-panel">
+                <div class="phonics-symbol">🤪🍕</div>
+                <p class="pizza-question" id="addition-story"></p>
+                <div class="choice-grid"></div>
+              </div>
+            </div>
+          `;
+          gameArea.appendChild(wrap);
+
+          const pizzaCanvas = wrap.querySelector("#pizza-canvas");
+          const pizzaBank = wrap.querySelector("#pizza-bank");
+          const storyEl = wrap.querySelector("#addition-story");
+          const choiceGrid = wrap.querySelector(".choice-grid");
+          const sillyPairs = [
+            ["pickles", "🫒"],
+            ["marshmallows", "🍡"],
+            ["rubber ducks", "🦆"],
+            ["socks", "🧦"],
+            ["bananas", "🍌"],
+            ["cupcakes", "🧁"]
+          ];
+          const rewardToppings = ["🫒", "🍄", "🫑", "🧀", "🍍", "🌽", "🍅", "🧅", "🥒"];
+          let correctAnswer = 0;
+          let toppingIndex = 0;
+
+          function addRewardTopping() {
+            const topping = document.createElement("div");
+            topping.className = "pizza-reward";
+            topping.textContent = rewardToppings[toppingIndex % rewardToppings.length];
+            toppingIndex += 1;
+            pizzaBank.appendChild(topping);
+            enableSimpleDrag(topping, () => {
+              if (!state.running) {
+                return;
+              }
+              const toppingRect = topping.getBoundingClientRect();
+              const pizzaRect = pizzaCanvas.getBoundingClientRect();
+              const centerX = toppingRect.left + toppingRect.width / 2;
+              const centerY = toppingRect.top + toppingRect.height / 2;
+              const inside = centerX >= pizzaRect.left && centerX <= pizzaRect.right && centerY >= pizzaRect.top && centerY <= pizzaRect.bottom;
+              if (!inside) {
+                setMessage("Drag the topping onto the pizza so it can stick.");
+                return;
+              }
+              topping.style.cursor = "default";
+            });
+          }
+
+          function nextRound() {
+            const first = Math.floor(randomBetween(0, 6));
+            const second = Math.floor(randomBetween(0, 11 - first));
+            correctAnswer = first + second;
+            const [firstThing, firstEmoji] = sillyPairs[Math.floor(randomBetween(0, sillyPairs.length))];
+            const [secondThing, secondEmoji] = sillyPairs[Math.floor(randomBetween(0, sillyPairs.length))];
+            storyEl.textContent = `${first} ${firstThing} ${firstEmoji} + ${second} ${secondThing} ${secondEmoji} = ?`;
+            const options = makeNumberChoices(correctAnswer, 0, 10, 5);
+            choiceGrid.innerHTML = "";
+            options.forEach((value) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "choice-button";
+              button.textContent = String(value);
+              button.addEventListener("pointerdown", () => {
+                if (!state.running) {
+                  return;
+                }
+                if (value === correctAnswer) {
+                  setScore(state.score + 1, true);
+                  addRewardTopping();
+                  if (state.score >= state.goal) {
+                    setMessage("Final topping unlocked! Put it on your pizza and admire your masterpiece!", "#17324d");
+                    schedule(() => {
+                      win("You built a spectacular silly pizza!");
+                    }, 1800);
+                    return;
+                  }
+                  setMessage("Yum. Right answer. Drag your new topping onto the pizza!", "#17324d");
+                  nextRound();
+                } else {
+                  setMessage("Oops. Count the silly toppings again.");
+                }
+              });
+              choiceGrid.appendChild(button);
+            });
+          }
+
+          setMessage("Count the goofy toppings, answer the sum, then decorate your pizza.", "#17324d");
+          nextRound();
+        }
+      },
+      ordering: {
+        category: "number-games",
+        emoji: "🦆",
+        title: "Duck Parade Order",
+        gameName: "Float and count",
+        note: "Choose an easy pond for counting to 10 or a bigger-kid pond for skip counting by 2, 5, or 10.",
+        subtitle: "Help the ducks float into the right counting order.",
+        instructions: "Press Start. First choose a level. Level 1 is count from 1 to 10 with picture groups to help. Level 2 is skip counting by 2, 5, or 10 for older kids.",
+        goal: 10,
+        areaClass: "pond",
+        start() {
+          resetArea(this.areaClass);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "duck-wrap";
+          gameArea.appendChild(wrap);
+
+          const pondPositions = [
+            { left: 6, top: 20 }, { left: 28, top: 10 }, { left: 52, top: 18 }, { left: 73, top: 8 },
+            { left: 12, top: 42 }, { left: 36, top: 33 }, { left: 60, top: 40 }, { left: 80, top: 30 },
+            { left: 20, top: 66 }, { left: 48, top: 60 }
+          ];
+
+          function renderCountDots(value) {
+            return Array.from({ length: value }, () => '<span class="duck-count-dot"></span>').join("");
+          }
+
+          function buildPond(level) {
+            const skipStep = level === 2 ? [2, 5, 10][Math.floor(randomBetween(0, 3))] : 1;
+            const values = level === 2
+              ? Array.from({ length: 6 }, (_, index) => (index + 1) * skipStep)
+              : Array.from({ length: 10 }, (_, index) => index + 1);
+            const shuffled = shuffleArray(values);
+            let nextValue = values[0];
+
+            setGoal(values.length);
+            setScore(0);
+            wrap.innerHTML = `
+              <div class="duck-panel">
+                <p class="duck-instruction">
+                  ${level === 1
+                    ? "Level 1: Tap the ducks from 1 to 10. Each duck shows how many it means."
+                    : `Level 2: Skip count by ${skipStep}. Tap the ducks in order.`}
+                </p>
+                <div class="duck-pond" id="duck-pond"></div>
+              </div>
+            `;
+
+            const pond = wrap.querySelector("#duck-pond");
+            shuffled.forEach((value, index) => {
+              const pos = pondPositions[index];
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "duck-button";
+              button.style.left = `${pos.left}%`;
+              button.style.top = `${pos.top}%`;
+              button.innerHTML = `
+                <span class="duck-emoji">🦆</span>
+                <span class="duck-number">${value}</span>
+                ${level === 1
+                  ? `<div class="duck-count">${renderCountDots(value)}</div>`
+                  : `<div class="duck-count-text">Count by ${skipStep}</div>`}
+              `;
+              button.addEventListener("pointerdown", () => {
+                if (!state.running || button.disabled) {
+                  return;
+                }
+                if (value === nextValue) {
+                  button.disabled = true;
+                  button.classList.add("done");
+                  setScore(state.score + 1, true);
+                  const currentIndex = values.indexOf(nextValue);
+                  if (state.score >= state.goal) {
+                    win(level === 1 ? "All the ducks floated into counting order!" : `Amazing skip counting by ${skipStep}!`);
+                  } else {
+                    nextValue = values[currentIndex + 1];
+                    setMessage(level === 1 ? `Great. Now tap ${nextValue}.` : `Nice. Now find ${nextValue}.`, "#17324d");
+                  }
+                } else {
+                  setMessage(level === 1 ? `That duck is ${value}. Look for ${nextValue}.` : `That duck says ${value}. Keep skip counting to ${nextValue}.`);
+                }
+              });
+              pond.appendChild(button);
+            });
+
+            setMessage(level === 1 ? "Start by tapping duck number 1." : `Start by tapping ${nextValue}.`, "#17324d");
+          }
+
+          wrap.innerHTML = `
+            <div class="duck-panel">
+              <div class="phonics-symbol">🦆🔢</div>
+              <p class="game-name">Choose your duck pond level.</p>
+              <div class="duck-levels">
+                <button type="button" class="duck-level-card" id="duck-level-1">
+                  <strong>Level 1</strong>
+                  Count from 1 to 10 with picture groups on every duck.
+                </button>
+                <button type="button" class="duck-level-card" id="duck-level-2">
+                  <strong>Level 2</strong>
+                  Skip count by 2, 5, or 10 for older kids.
+                </button>
+              </div>
+            </div>
+          `;
+
+          wrap.querySelector("#duck-level-1").addEventListener("click", () => buildPond(1));
+          wrap.querySelector("#duck-level-2").addEventListener("click", () => buildPond(2));
+          setMessage("Choose Level 1 or Level 2 to start the duck pond.", "#17324d");
+        }
+      },
+      utahstory: {
+        category: "story-games",
+        emoji: "📖",
+        title: "Utah Story Quiz",
+        gameName: "Read and answer",
+        note: "Choose an easy, medium, or hard Utah desert story about Maayan and her sister Ori, then answer 3 questions.",
+        subtitle: "Pick a story level, read it, then show what you remember.",
+        instructions: "Press Start. Choose Level 1, 2, or 3. Read the three short story pages. Then answer the three questions about what happened in the story.",
+        goal: 3,
+        areaClass: "sunny",
+        start() {
+          resetArea(this.areaClass);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "book-wrap";
+          gameArea.appendChild(wrap);
+
+          let selectedLevel = null;
+          let selectedStory = null;
+          let pageIndex = 0;
+          let questionIndex = 0;
+          let inQuiz = false;
+
+          function renderLevelPicker() {
+            wrap.innerHTML = `
+              <div class="book-card">
+                <p class="page-count">Choose a story level</p>
+                <div class="book-page">
+                  <h3>Utah Stories With Maayan And Ori</h3>
+                  <p>Pick the story level that feels right. Every level has 3 pages and 3 questions.</p>
+                </div>
+                <div class="story-nav">
+                  ${utahStoryLevels.map((level) => `
+                    <button type="button" class="chip-button${level.id === "medium" ? " active" : ""}" data-level="${level.id}">
+                      ${level.label}: ${level.description}
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+            `;
+
+            [...wrap.querySelectorAll("[data-level]")].forEach((button) => {
+              button.addEventListener("click", () => {
+                selectedLevel = utahStoryLevels.find((level) => level.id === button.dataset.level);
+                selectedStory = selectedLevel.stories[Math.floor(Math.random() * selectedLevel.stories.length)];
+                pageIndex = 0;
+                questionIndex = 0;
+                inQuiz = false;
+                setGoal(selectedStory.questions.length);
+                setScore(0);
+                renderPage();
+              });
+            });
+          }
+
+          function renderPage() {
+            wrap.innerHTML = `
+              <div class="book-card">
+                <p class="page-count" id="story-progress"></p>
+                <div class="book-page" id="story-page"></div>
+                <div class="story-nav" id="story-nav"></div>
+              </div>
+            `;
+
+            const progress = wrap.querySelector("#story-progress");
+            const pageEl = wrap.querySelector("#story-page");
+            const navEl = wrap.querySelector("#story-nav");
+
+            progress.textContent = `${selectedLevel.label} • Story ${selectedLevel.stories.indexOf(selectedStory) + 1} of ${selectedLevel.stories.length} • Page ${pageIndex + 1} of ${selectedStory.pages.length}`;
+            pageEl.innerHTML = `
+              <h3>${selectedStory.title}</h3>
+              <p>${selectedStory.pages[pageIndex]}</p>
+            `;
+            navEl.innerHTML = "";
+
+            const backToLevels = document.createElement("button");
+            backToLevels.type = "button";
+            backToLevels.className = "chip-button";
+            backToLevels.textContent = "Choose Another Level";
+            backToLevels.addEventListener("click", renderLevelPicker);
+            navEl.appendChild(backToLevels);
+
+            if (pageIndex > 0) {
+              const back = document.createElement("button");
+              back.type = "button";
+              back.className = "chip-button";
+              back.textContent = "Previous Page";
+              back.addEventListener("click", () => {
+                pageIndex -= 1;
+                renderPage();
+              });
+              navEl.appendChild(back);
+            }
+
+            const next = document.createElement("button");
+            next.type = "button";
+            next.className = "chip-button active";
+            next.textContent = pageIndex === selectedStory.pages.length - 1 ? "Start Questions" : "Next Page";
+            next.addEventListener("click", () => {
+              if (pageIndex === selectedStory.pages.length - 1) {
+                inQuiz = true;
+                questionIndex = 0;
+                renderQuestion();
+              } else {
+                pageIndex += 1;
+                renderPage();
+              }
+            });
+            navEl.appendChild(next);
+          }
+
+          function renderQuestion() {
+            wrap.innerHTML = `
+              <div class="book-card">
+                <p class="page-count" id="story-progress"></p>
+                <div class="book-page" id="story-page"></div>
+                <div class="story-nav" id="story-nav"></div>
+              </div>
+            `;
+
+            const progress = wrap.querySelector("#story-progress");
+            const pageEl = wrap.querySelector("#story-page");
+            const navEl = wrap.querySelector("#story-nav");
+            const question = selectedStory.questions[questionIndex];
+
+            progress.textContent = `${selectedLevel.label} • Story ${selectedLevel.stories.indexOf(selectedStory) + 1} of ${selectedLevel.stories.length} • Question ${questionIndex + 1} of ${selectedStory.questions.length}`;
+            pageEl.innerHTML = `
+              <h3>${selectedStory.title}</h3>
+              <p><strong>${question.prompt}</strong></p>
+            `;
+
+            const backToLevels = document.createElement("button");
+            backToLevels.type = "button";
+            backToLevels.className = "chip-button";
+            backToLevels.textContent = "Choose Another Level";
+            backToLevels.addEventListener("click", renderLevelPicker);
+            navEl.appendChild(backToLevels);
+
+            question.choices.forEach((choice) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "chip-button";
+              button.textContent = choice;
+              button.addEventListener("click", () => {
+                if (!state.running || !inQuiz) {
+                  return;
+                }
+                if (choice === question.answer) {
+                  setScore(state.score + 1, true);
+                  if (questionIndex === selectedStory.questions.length - 1) {
+                    win(`You finished ${selectedLevel.label} and answered all 3 questions!`);
+                    return;
+                  }
+                  questionIndex += 1;
+                  setMessage("Correct. Here comes the next question.", "#17324d");
+                  renderQuestion();
+                } else {
+                  setMessage("Not quite. Think back to the story and try again.");
+                }
+              });
+              navEl.appendChild(button);
+            });
+          }
+
+          setMessage("Choose a story level, read the pages, then answer the questions.", "#17324d");
+          renderLevelPicker();
+        }
       }
     };
 
-    function renderLauncher() {
+    function renderCategories() {
+      categoryGrid.innerHTML = "";
+      categories.forEach((category) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "card category-card";
+        card.style.setProperty("--category-bg", category.background);
+        card.innerHTML = `
+          <span class="category-badge">${category.badge}</span>
+          <div class="category-art" aria-hidden="true">${category.art}</div>
+          <h2 class="category-title">${category.title}</h2>
+          <p class="category-copy">${category.copy}</p>
+          <p class="category-status">${category.status}</p>
+        `;
+        card.addEventListener("click", () => openCategory(category.id));
+        categoryGrid.appendChild(card);
+      });
+    }
+
+    function renderLauncher(categoryId = "fun-games") {
+      state.currentCategoryId = categoryId;
+      const config = launcherConfigs[categoryId] || launcherConfigs["fun-games"];
+      const category = categories.find((item) => item.id === categoryId);
+      launcherTitle.textContent = config.title;
+      launcherSubtitle.textContent = config.subtitle;
+      launcherIntro.textContent = config.intro;
+      launcherFooter.textContent = config.footer;
+      ideasForm.classList.toggle("hide", !config.showForm);
+      applyHeroTheme(
+        launcherHero,
+        launcherJoke,
+        launcherRain,
+        `launcher-${categoryId}`,
+        [...Array.from(category?.art || "🎮"), "✨", "😂", "⭐", "💫", "🎈"]
+      );
       launcherGrid.innerHTML = "";
-      Object.entries(games).forEach(([id, game]) => {
+      Object.entries(games).filter(([, game]) => config.filter(game)).forEach(([id, game]) => {
         const card = document.createElement("button");
         card.type = "button";
         card.className = "card";
@@ -2391,6 +5196,25 @@ If you share more ideas with me - I can build them for you!</p>
       });
     }
 
+    function openCategory(categoryId) {
+      const category = categories.find((item) => item.id === categoryId);
+      if (!category) {
+        return;
+      }
+
+      if (launcherConfigs[categoryId]) {
+        renderLauncher(categoryId);
+        state.currentView = "launcher";
+        homeView.classList.add("hide");
+        launcherView.classList.remove("hide");
+        gameView.classList.add("hide");
+        return;
+      }
+
+      const soonText = `${category.title} is the next world to build.`;
+      alert(`${soonText}\n\n${category.copy}`);
+    }
+
     function openGame(id) {
       const game = games[id];
       if (!game) {
@@ -2398,11 +5222,20 @@ If you share more ideas with me - I can build them for you!</p>
       }
 
       state.currentGameId = id;
+      state.currentView = "game";
+      homeView.classList.add("hide");
       launcherView.classList.add("hide");
       gameView.classList.remove("hide");
       heroEmoji.textContent = game.emoji;
       heroTitle.textContent = game.title;
       heroSubtitle.textContent = game.subtitle;
+      applyHeroTheme(
+        gameHero,
+        gameJoke,
+        gameRain,
+        `game-${id}`,
+        [game.emoji, "✨", "🎉", "😂", "⭐", "💫", "🌈"]
+      );
       instructionsText.textContent = game.instructions;
       showStartState(game);
     }
@@ -2410,12 +5243,32 @@ If you share more ideas with me - I can build them for you!</p>
     function goHome() {
       clearTimers();
       state.running = false;
-      launcherView.classList.remove("hide");
+      state.currentView = "home";
+      homeView.classList.remove("hide");
+      launcherView.classList.add("hide");
       gameView.classList.add("hide");
       gameArea.innerHTML = "";
       gameArea.className = "game-area";
       gameArea.onpointermove = null;
       gameArea.onpointerdown = null;
+      gameArea.onclick = null;
+      document.onkeydown = null;
+      setMessage("");
+    }
+
+    function goToLauncher() {
+      clearTimers();
+      state.running = false;
+      state.currentView = "launcher";
+      homeView.classList.add("hide");
+      launcherView.classList.remove("hide");
+      gameView.classList.add("hide");
+      renderLauncher(state.currentCategoryId || "fun-games");
+      gameArea.innerHTML = "";
+      gameArea.className = "game-area";
+      gameArea.onpointermove = null;
+      gameArea.onpointerdown = null;
+      gameArea.onclick = null;
       document.onkeydown = null;
       setMessage("");
     }
@@ -2428,9 +5281,13 @@ If you share more ideas with me - I can build them for you!</p>
       restartCurrentGame();
     });
 
-    backButton.addEventListener("click", goHome);
+    backButton.addEventListener("click", goToLauncher);
+    mainPageButton.addEventListener("click", goHome);
+    categoriesButton.addEventListener("click", goHome);
 
-    renderLauncher();
+    renderCategories();
+    applyHeroTheme(homeHero, homeJoke, homeRain, "home-view", ["💖", "🎮", "🌈", "✨", "🪁", "🎈", "😂", "⭐"]);
+    renderLauncher("fun-games");
   </script>
 </body>
 </html>
