@@ -591,7 +591,7 @@
 
     .maze-stage {
       place-items: start center;
-      overflow: auto;
+      overflow: hidden;
       padding: 1rem 0 1.5rem;
     }
 
@@ -812,6 +812,41 @@
     .memory-pad.active {
       transform: scale(1.06);
       filter: brightness(1.25);
+    }
+
+    .tracks-match-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      width: min(100%, 430px);
+      margin: 1rem auto 0;
+    }
+
+    .track-card {
+      aspect-ratio: 1;
+      min-height: 0;
+      border: 0;
+      border-radius: 22px;
+      cursor: pointer;
+      font: inherit;
+      font-size: clamp(1.2rem, 4.5vw, 2rem);
+      font-weight: 900;
+      color: #8a5b1c;
+      background: linear-gradient(180deg, #fff6d7, #f6d39d);
+      box-shadow: 0 12px 20px rgba(23, 50, 77, 0.16);
+      transition: transform 160ms ease, filter 160ms ease, opacity 160ms ease;
+    }
+
+    .track-card.revealed {
+      background: linear-gradient(180deg, #fffdf2, #ffe8bf);
+      transform: translateY(-2px);
+    }
+
+    .track-card.matched {
+      background: linear-gradient(180deg, #dff7d8, #b8e8a5);
+      color: #2d7b3f;
+      cursor: default;
+      opacity: 0.92;
     }
 
     .balloon {
@@ -1113,6 +1148,26 @@
       color: #ef5a65;
     }
 
+    .soup-word .word-next {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.98rem;
+      font-weight: 900;
+      color: #8a3415;
+    }
+
+    .soup-word .next-letter {
+      display: inline-grid;
+      place-items: center;
+      min-width: 2.1rem;
+      padding: 0.18rem 0.45rem;
+      margin-left: 0.35rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fff2a8, #ffc86b);
+      color: #8a3415;
+      box-shadow: 0 6px 12px rgba(23, 50, 77, 0.12);
+    }
+
     .monster-mouth {
       position: absolute;
       left: 50%;
@@ -1217,6 +1272,13 @@
       line-height: 1;
     }
 
+    #math-question {
+      margin: 0.35rem 0 0;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      line-height: 1.15;
+      color: #8a3415;
+    }
+
     .choice-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1307,7 +1369,7 @@
     .book-wrap {
       position: absolute;
       inset: 0;
-      padding: 1rem;
+      padding: 0.8rem;
       overflow: hidden;
     }
 
@@ -1315,16 +1377,17 @@
     .book-card {
       width: min(100%, 860px);
       margin: 0 auto;
-      padding: 1rem;
+      padding: 0.8rem;
       border-radius: 28px;
       background: rgba(255, 255, 255, 0.88);
       box-shadow: 0 18px 34px rgba(23, 50, 77, 0.16);
     }
 
     .puzzle-card {
-      height: 100%;
+      min-height: 100%;
+      height: auto;
       display: grid;
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto 1fr;
       padding: 0.4rem 0;
       background: transparent;
       box-shadow: none;
@@ -1429,29 +1492,67 @@
       pointer-events: none;
     }
 
+    .canyon-board {
+      width: min(100%, 420px);
+      margin: 0.6rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .canyon-cell {
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 235, 186, 0.96), rgba(255, 207, 143, 0.96));
+      box-shadow: 0 10px 18px rgba(23, 50, 77, 0.12);
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      color: #8a4f18;
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .canyon-cell.wall {
+      background: linear-gradient(180deg, #b66f40, #8f4f2a);
+      color: rgba(255, 255, 255, 0.88);
+      cursor: not-allowed;
+      box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    .canyon-cell.reachable:not(.wall) {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.75), 0 12px 20px rgba(23, 50, 77, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .canyon-cell.finish {
+      background: linear-gradient(180deg, #fff3af, #ffd06a);
+    }
+
     .book-page {
-      min-height: 240px;
-      padding: 1rem;
+      min-height: 0;
+      padding: 0.85rem;
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255, 248, 236, 0.98), rgba(255, 255, 255, 0.96));
       color: #5c3c16;
-      font-size: 1.05rem;
-      line-height: 1.6;
+      font-size: 1rem;
+      line-height: 1.45;
       box-shadow: inset 0 0 0 2px rgba(255, 211, 155, 0.38);
     }
 
     .book-page h3 {
-      margin: 0 0 0.7rem;
-      font-size: 1.35rem;
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: #9b5b16;
     }
 
     .page-count {
-      margin: 0 0 0.75rem;
+      margin: 0 0 0.45rem;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       font-weight: 800;
       opacity: 0.76;
     }
@@ -1468,7 +1569,7 @@
       position: absolute;
       inset: 0;
       padding: 1rem;
-      overflow: auto;
+      overflow: hidden;
     }
 
     .duck-panel {
@@ -1615,7 +1716,7 @@
       position: absolute;
       inset: 0;
       padding: 1rem;
-      overflow: auto;
+      overflow: hidden;
     }
 
     .pizza-math-layout {
@@ -1896,20 +1997,20 @@
         font-size: 1.9rem;
       }
 
-      .name,
-      .game-name,
-      .note {
+      #launcher-grid .name,
+      #launcher-grid .game-name,
+      #launcher-grid .note {
         display: none;
       }
 
       .game-area {
-        min-height: clamp(320px, 52svh, 410px);
+        min-height: clamp(360px, 58svh, 470px);
         border-radius: 20px;
       }
 
       .game-area.puzzle-fit {
-        min-height: clamp(460px, 68svh, 620px);
-        height: clamp(460px, 68svh, 620px);
+        min-height: clamp(520px, 74svh, 680px);
+        height: clamp(520px, 74svh, 680px);
       }
 
       .bucket-zone {
@@ -2047,9 +2148,34 @@
         font-size: 1.45rem;
       }
 
+      .phonics-wrap {
+        place-items: start center;
+      }
+
+      .phonics-wrap,
+      .pizza-math-wrap,
+      .duck-wrap {
+        overflow: hidden;
+        padding: 0.85rem;
+      }
+
       .phonics-card {
-        padding: 1rem 0.8rem;
+        width: min(100%, 620px);
+        padding: 0.8rem 0.75rem;
         border-radius: 20px;
+      }
+
+      .phonics-symbol {
+        font-size: 2.2rem;
+      }
+
+      #math-treasure {
+        display: none;
+      }
+
+      #math-question {
+        margin-top: 0;
+        font-size: 1.5rem;
       }
 
       .choice-grid {
@@ -2188,15 +2314,26 @@
 
       .puzzle-card,
       .book-card {
-        padding: 0.8rem;
+        padding: 0.6rem;
         border-radius: 20px;
       }
 
       .book-page {
-        min-height: 210px;
-        padding: 0.85rem;
+        min-height: 0;
+        padding: 0.7rem;
         border-radius: 18px;
-        font-size: 0.95rem;
+        font-size: 0.88rem;
+        line-height: 1.3;
+      }
+
+      .book-page h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1rem;
+      }
+
+      .page-count {
+        margin-bottom: 0.35rem;
+        font-size: 0.74rem;
       }
 
       .runner-item {
@@ -2277,6 +2414,28 @@
 
       .memory-pad {
         border-radius: 14px;
+      }
+
+      .tracks-match-grid {
+        width: min(84vw, 280px);
+        gap: 0.35rem;
+        margin-top: 0.65rem;
+      }
+
+      .track-card {
+        border-radius: 14px;
+        font-size: clamp(0.92rem, 4.8vw, 1.35rem);
+      }
+
+      .canyon-board {
+        width: min(84vw, 280px);
+        gap: 0.24rem;
+        margin-top: 0.55rem;
+      }
+
+      .canyon-cell {
+        border-radius: 10px;
+        font-size: 1rem;
       }
 
       .balloon {
@@ -2476,8 +2635,8 @@ Tap any game to jump in.</p>
         title: "Fun Games",
         badge: "Play Now",
         art: "🎉🎮🪁",
-        copy: "Open the full arcade with all the games that already exist.",
-        status: "19 games ready",
+        copy: "Open the arcade with 10 silly, playful games that are ready to play.",
+        status: "10 games ready",
         background: "linear-gradient(135deg, #ffd55f, #ff8f6b)"
       },
       {
@@ -2503,8 +2662,8 @@ Tap any game to jump in.</p>
         title: "Story & Puzzle Games",
         badge: "Play Now",
         art: "📚🧩✨",
-        copy: "Utah story adventures with questions to solve, plus room for more puzzle ideas later.",
-        status: "1 story game ready",
+        copy: "Utah story adventures and desert puzzle games that are ready to play.",
+        status: "3 games ready",
         background: "linear-gradient(135deg, #ffb8d8, #c89bff)"
       }
     ];
@@ -2513,11 +2672,11 @@ Tap any game to jump in.</p>
       "fun-games": {
         title: "Fun Games",
         subtitle: "These are the current games already built and ready to play.\nTap any game to jump in.",
-        intro: "A playful mix of action, memory, sorting, silly challenges, and now letter games too.",
+        intro: "A playful mix of action, memory, sorting, and silly challenges.",
         footer: "Thanks for playing! I hope you liked it.",
         showForm: true,
         filter(game) {
-          return true;
+          return !game.category;
         }
       },
       "electric-games": {
@@ -2542,9 +2701,9 @@ Tap any game to jump in.</p>
       },
       "story-games": {
         title: "Story & Puzzle Games",
-        subtitle: "Choose a Utah desert story and answer questions about what happened.",
-        intro: "A growing story corner set in Utah, with room for more puzzle games later.",
-        footer: "Two more puzzle ideas: Canyon Maze Quest and Desert Tracks Memory Match.",
+        subtitle: "Choose a Utah desert story or puzzle game and jump in.",
+        intro: "A playful desert corner with a story quiz, a canyon maze, and a matching challenge.",
+        footer: "More story and puzzle games can be added here next.",
         showForm: false,
         filter(game) {
           return game.category === "story-games";
@@ -3161,6 +3320,9 @@ Tap any game to jump in.</p>
       let dragging = false;
 
       element.addEventListener("pointerdown", (event) => {
+        if (element.dataset.locked === "true") {
+          return;
+        }
         dragging = true;
         const elementRect = element.getBoundingClientRect();
         const areaRect = gameArea.getBoundingClientRect();
@@ -3268,6 +3430,97 @@ Tap any game to jump in.</p>
         size,
         start: path[0],
         sparkleSet,
+        wallSet
+      };
+    }
+
+    function generateCanyonMaze() {
+      const size = 7;
+      let path = [];
+
+      while (path.length < 18) {
+        const start = 0;
+        path = [start];
+        const visited = new Set(path);
+
+        while (path.length < 22) {
+          const current = path[path.length - 1];
+          const row = Math.floor(current / size);
+          const col = current % size;
+          const candidates = [];
+
+          if (col > 0) {
+            candidates.push(current - 1);
+          }
+          if (col < size - 1) {
+            candidates.push(current + 1);
+          }
+          if (row > 0) {
+            candidates.push(current - size);
+          }
+          if (row < size - 1) {
+            candidates.push(current + size);
+          }
+
+          const nextOptions = candidates.filter((cell) => !visited.has(cell));
+          if (!nextOptions.length) {
+            break;
+          }
+
+          const next = nextOptions[Math.floor(Math.random() * nextOptions.length)];
+          path.push(next);
+          visited.add(next);
+        }
+      }
+
+      const pathSet = new Set(path);
+      const branchSet = new Set();
+      const branchAnchors = shuffleArray(path.slice(2, -2)).slice(0, 4);
+
+      branchAnchors.forEach((anchor) => {
+        const row = Math.floor(anchor / size);
+        const col = anchor % size;
+        const candidates = [];
+
+        if (col > 0) {
+          candidates.push(anchor - 1);
+        }
+        if (col < size - 1) {
+          candidates.push(anchor + 1);
+        }
+        if (row > 0) {
+          candidates.push(anchor - size);
+        }
+        if (row < size - 1) {
+          candidates.push(anchor + size);
+        }
+
+        const freeOptions = candidates.filter((cell) => !pathSet.has(cell) && !branchSet.has(cell));
+        if (freeOptions.length) {
+          branchSet.add(freeOptions[Math.floor(Math.random() * freeOptions.length)]);
+        }
+      });
+
+      const markerCandidates = [...path.slice(2, -1)];
+      const markerSet = new Set();
+      while (markerSet.size < 8 && markerCandidates.length) {
+        const pickIndex = Math.floor(Math.random() * markerCandidates.length);
+        markerSet.add(markerCandidates.splice(pickIndex, 1)[0]);
+      }
+
+      const walkableSet = new Set([...path, ...branchSet]);
+      const wallSet = new Set();
+      Array.from({ length: size * size }, (_, index) => index).forEach((index) => {
+        if (!walkableSet.has(index)) {
+          wallSet.add(index);
+        }
+      });
+
+      return {
+        size,
+        start: path[0],
+        finish: path[path.length - 1],
+        markerSet,
         wallSet
       };
     }
@@ -4347,9 +4600,9 @@ Tap any game to jump in.</p>
         emoji: "🍜",
         title: "Alphabet Soup",
         gameName: "Spell the silly soup word",
-        note: "Tap the bubbling letter noodles in the right order before the soup splashes over.",
-        subtitle: "Catch the right letters and spell a funny word.",
-        instructions: "Press Start. A word appears above the soup with blanks. Tap the letters in order to spell it before the splash meter fills up.",
+        note: "Catch the exact next letter shown above the soup and build the word before the pot boils over.",
+        subtitle: "Catch the highlighted next letter to spell the word.",
+        instructions: "Press Start. Look at the word banner above the soup. It shows the word blanks and the exact next letter to catch. Tap that letter before the splash meter fills up.",
         goal: 2,
         areaClass: "kitchen",
         start() {
@@ -4378,9 +4631,11 @@ Tap any game to jump in.</p>
 
           function updateWord() {
             const word = currentWord();
+            const nextLetter = word[letterIndex] || "✓";
             target.innerHTML = `
               <span class="word-label">Soup Word</span>
               <span class="word-value">${word.split("").map((letter, index) => (index < letterIndex ? letter : "_")).join(" ")}</span>
+              <span class="word-next">Catch next:<span class="next-letter">${nextLetter}</span></span>
             `;
           }
 
@@ -4462,7 +4717,7 @@ Tap any game to jump in.</p>
           }
 
           updateWord();
-          setMessage("Tap the letters in order before the soup splashes over.", "#17324d");
+          setMessage(`Catch the highlighted next letter: ${currentWord()[letterIndex]}.`, "#17324d");
           scheduleInterval(spawnNoodle, 1120);
           spawnNoodle();
           heatTick();
@@ -4672,7 +4927,7 @@ Tap any game to jump in.</p>
           const wrap = document.createElement("div");
           wrap.className = "phonics-wrap";
           wrap.innerHTML = `
-            <div class="phonics-card">
+            <div class="phonics-card" id="multiplication-card">
               <div class="phonics-symbol" id="math-treasure">💎✖️</div>
               <p class="game-name" id="math-question"></p>
               <div class="choice-grid"></div>
@@ -4754,14 +5009,15 @@ Tap any game to jump in.</p>
         category: "number-games",
         emoji: "🍕",
         title: "Pickle Pizza Addition",
-        gameName: "Addition up to 10",
-        note: "Solve silly addition problems, earn toppings, and build your own goofy pizza.",
-        subtitle: "Count the toppings, answer the sum, then decorate your pizza.",
-        instructions: "Press Start. Count the two silly topping groups. The total will always be 10 or less. Every correct answer unlocks a topping you can drag anywhere onto your pizza.",
+        gameName: "Add and subtract up to 10",
+        note: "Solve silly adding and subtracting problems, earn toppings, and build your own goofy pizza.",
+        subtitle: "Count the toppings, solve the number sentence, then decorate your pizza.",
+        instructions: "Press Start. Solve silly addition and subtraction problems with answers from 0 to 10. Every correct answer unlocks a topping you can drag onto your pizza.",
         goal: 6,
         areaClass: "kitchen",
         start() {
           resetArea(this.areaClass);
+          gameArea.classList.add("puzzle-fit");
           setGoal(this.goal);
           state.running = true;
 
@@ -4794,9 +5050,10 @@ Tap any game to jump in.</p>
             ["bananas", "🍌"],
             ["cupcakes", "🧁"]
           ];
-          const rewardToppings = ["🫒", "🍄", "🫑", "🧀", "🍍", "🌽", "🍅", "🧅", "🥒"];
+          const rewardToppings = ["🫒", "🍄", "🍕", "🧀", "🍍", "🌽", "🍅", "🧅", "🥓"];
           let correctAnswer = 0;
           let toppingIndex = 0;
+          let awaitingFinalPlacement = false;
 
           function addRewardTopping() {
             const topping = document.createElement("div");
@@ -4817,17 +5074,39 @@ Tap any game to jump in.</p>
                 setMessage("Drag the topping onto the pizza so it can stick.");
                 return;
               }
+              const pizzaX = centerX - pizzaRect.left;
+              const pizzaY = centerY - pizzaRect.top;
+              topping.dataset.locked = "true";
               topping.style.cursor = "default";
+              topping.style.position = "absolute";
+              topping.style.left = `${Math.max(6, Math.min(pizzaCanvas.clientWidth - topping.offsetWidth - 6, pizzaX - topping.offsetWidth / 2))}px`;
+              topping.style.top = `${Math.max(6, Math.min(pizzaCanvas.clientHeight - topping.offsetHeight - 6, pizzaY - topping.offsetHeight / 2))}px`;
+              topping.style.zIndex = "2";
+              pizzaCanvas.appendChild(topping);
+              if (awaitingFinalPlacement) {
+                awaitingFinalPlacement = false;
+                win("You built a spectacular silly pizza!");
+                return;
+              }
+              setMessage("Nice. That topping sticks to the pizza now.", "#17324d");
             });
           }
 
           function nextRound() {
-            const first = Math.floor(randomBetween(0, 6));
-            const second = Math.floor(randomBetween(0, 11 - first));
-            correctAnswer = first + second;
+            const useSubtraction = Math.random() < 0.4;
+            let first = Math.floor(randomBetween(0, 6));
+            let second = Math.floor(randomBetween(0, 11 - first));
             const [firstThing, firstEmoji] = sillyPairs[Math.floor(randomBetween(0, sillyPairs.length))];
             const [secondThing, secondEmoji] = sillyPairs[Math.floor(randomBetween(0, sillyPairs.length))];
-            storyEl.textContent = `${first} ${firstThing} ${firstEmoji} + ${second} ${secondThing} ${secondEmoji} = ?`;
+            if (useSubtraction) {
+              first = Math.floor(randomBetween(3, 11));
+              second = Math.floor(randomBetween(0, first + 1));
+              correctAnswer = first - second;
+              storyEl.textContent = `${first} ${firstThing} ${firstEmoji} - ${second} ${secondThing} ${secondEmoji} = ?`;
+            } else {
+              correctAnswer = first + second;
+              storyEl.textContent = `${first} ${firstThing} ${firstEmoji} + ${second} ${secondThing} ${secondEmoji} = ?`;
+            }
             const options = makeNumberChoices(correctAnswer, 0, 10, 5);
             choiceGrid.innerHTML = "";
             options.forEach((value) => {
@@ -4843,10 +5122,8 @@ Tap any game to jump in.</p>
                   setScore(state.score + 1, true);
                   addRewardTopping();
                   if (state.score >= state.goal) {
+                    awaitingFinalPlacement = true;
                     setMessage("Final topping unlocked! Put it on your pizza and admire your masterpiece!", "#17324d");
-                    schedule(() => {
-                      win("You built a spectacular silly pizza!");
-                    }, 1800);
                     return;
                   }
                   setMessage("Yum. Right answer. Drag your new topping onto the pizza!", "#17324d");
@@ -4859,7 +5136,7 @@ Tap any game to jump in.</p>
             });
           }
 
-          setMessage("Count the goofy toppings, answer the sum, then decorate your pizza.", "#17324d");
+          setMessage("Solve the goofy adding and subtracting problem, then decorate your pizza.", "#17324d");
           nextRound();
         }
       },
@@ -4875,6 +5152,7 @@ Tap any game to jump in.</p>
         areaClass: "pond",
         start() {
           resetArea(this.areaClass);
+          gameArea.classList.add("puzzle-fit");
           state.running = true;
 
           const wrap = document.createElement("div");
@@ -4974,6 +5252,224 @@ Tap any game to jump in.</p>
           setMessage("Choose Level 1 or Level 2 to start the duck pond.", "#17324d");
         }
       },
+      canyonmaze: {
+        category: "story-games",
+        emoji: "🏜️",
+        title: "Canyon Maze Quest",
+        gameName: "Find the desert trail",
+        note: "Move one space at a time through a trickier canyon, collect all the trail markers, and avoid the canyon walls.",
+        subtitle: "Guide the hiker through the canyon and pick up every marker.",
+        instructions: "Press Start. Tap a square next to the hiker to move. Collect all 8 trail markers and then reach the flag without walking into the canyon walls.",
+        goal: 8,
+        areaClass: "sunny",
+        start() {
+          resetArea(this.areaClass);
+          gameArea.classList.add("puzzle-fit");
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "puzzle-wrap";
+          gameArea.appendChild(wrap);
+
+          const maze = generateCanyonMaze();
+          const size = maze.size;
+          const wallSet = new Set(maze.wallSet);
+          const markerSet = new Set(maze.markerSet);
+          const finishIndex = maze.finish;
+          let playerIndex = maze.start;
+          setGoal(markerSet.size);
+
+          function isAdjacent(index) {
+            const row = Math.floor(playerIndex / size);
+            const sameRowLeft = index === playerIndex - 1 && Math.floor(index / size) === row;
+            const sameRowRight = index === playerIndex + 1 && Math.floor(index / size) === row;
+            const verticalMove = index === playerIndex - size || index === playerIndex + size;
+            return sameRowLeft || sameRowRight || verticalMove;
+          }
+
+          function render() {
+            wrap.innerHTML = `
+              <div class="puzzle-card">
+                <p class="page-count">Collect all ${state.goal} trail markers, then reach the flag.</p>
+                <div class="book-page">
+                  <h3>Canyon Maze Quest</h3>
+                  <p>Tap a nearby square to move one step through the canyon. Pick up every trail marker 👣 before you head to the finish flag.</p>
+                  <div class="canyon-board" id="canyon-board"></div>
+                </div>
+              </div>
+            `;
+
+            const board = wrap.querySelector("#canyon-board");
+            board.style.gridTemplateColumns = `repeat(${size}, minmax(0, 1fr))`;
+            Array.from({ length: size * size }, (_, index) => index).forEach((index) => {
+              const cell = document.createElement("button");
+              cell.type = "button";
+              cell.className = "canyon-cell";
+
+              if (wallSet.has(index)) {
+                cell.classList.add("wall");
+                cell.textContent = "🪨";
+                cell.disabled = true;
+              } else {
+                if (isAdjacent(index) && index !== playerIndex) {
+                  cell.classList.add("reachable");
+                }
+                if (index === finishIndex) {
+                  cell.classList.add("finish");
+                  cell.textContent = markerSet.size === 0 ? "🏁" : "⛳";
+                }
+                if (markerSet.has(index)) {
+                  cell.textContent = "👣";
+                }
+                if (index === playerIndex) {
+                  cell.textContent = "🥾";
+                }
+              }
+
+              cell.addEventListener("pointerdown", () => {
+                if (!state.running || wallSet.has(index)) {
+                  return;
+                }
+                if (!isAdjacent(index)) {
+                  setMessage("Move one square at a time through the canyon.");
+                  return;
+                }
+
+                playerIndex = index;
+                if (markerSet.has(index)) {
+                  markerSet.delete(index);
+                  setScore(state.score + 1, true);
+                  if (markerSet.size > 0) {
+                    setMessage(`Nice trail find. ${markerSet.size} markers left.`, "#17324d");
+                  }
+                }
+
+                render();
+                if (playerIndex === finishIndex) {
+                  if (markerSet.size === 0) {
+                    win("You found every trail marker and escaped the canyon!");
+                  } else {
+                    setMessage("The flag is there, but you still need the rest of the trail markers.");
+                  }
+                }
+              });
+
+              board.appendChild(cell);
+            });
+          }
+
+          setMessage("Collect all the trail markers before heading to the flag.", "#17324d");
+          render();
+        }
+      },
+      deserttracks: {
+        category: "story-games",
+        emoji: "🐾",
+        title: "Desert Tracks Memory Match",
+        gameName: "Match the tracks",
+        note: "Flip the desert cards and find all the matching pairs.",
+        subtitle: "Turn over two desert track cards at a time and make pairs.",
+        instructions: "Press Start. Tap two cards to flip them over. Match all 6 pairs of desert creatures and tracks to win.",
+        goal: 6,
+        areaClass: "sunny",
+        start() {
+          resetArea(this.areaClass);
+          gameArea.classList.add("puzzle-fit");
+          setGoal(this.goal);
+          state.running = true;
+
+          const wrap = document.createElement("div");
+          wrap.className = "puzzle-wrap";
+          gameArea.appendChild(wrap);
+
+          const icons = ["🦎", "🐍", "🦂", "🦊", "🦉", "🐇"];
+          const cards = shuffleArray([...icons, ...icons]).map((icon, index) => ({
+            id: index,
+            icon,
+            revealed: false,
+            matched: false
+          }));
+
+          let firstPick = null;
+          let secondPick = null;
+          let locked = false;
+
+          function render() {
+            wrap.innerHTML = `
+              <div class="puzzle-card">
+                <p class="page-count">Match all 6 desert pairs.</p>
+                <div class="book-page">
+                  <h3>Desert Tracks Memory Match</h3>
+                  <p>Tap two cards to reveal what is hiding in the sand. Try to remember where each desert creature is hiding and match all the pairs.</p>
+                  <div class="tracks-match-grid" id="tracks-grid"></div>
+                </div>
+              </div>
+            `;
+
+            const grid = wrap.querySelector("#tracks-grid");
+            cards.forEach((card) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.className = "track-card";
+              if (card.revealed) {
+                button.classList.add("revealed");
+              }
+              if (card.matched) {
+                button.classList.add("matched");
+                button.disabled = true;
+              }
+              button.textContent = card.revealed || card.matched ? card.icon : "👣";
+              button.addEventListener("pointerdown", () => {
+                if (!state.running || locked || card.matched || card.revealed) {
+                  return;
+                }
+
+                card.revealed = true;
+                if (!firstPick) {
+                  firstPick = card;
+                  render();
+                  return;
+                }
+
+                secondPick = card;
+                locked = true;
+                render();
+
+                if (firstPick.icon === secondPick.icon) {
+                  schedule(() => {
+                    firstPick.matched = true;
+                    secondPick.matched = true;
+                    setScore(state.score + 1, true);
+                    firstPick = null;
+                    secondPick = null;
+                    locked = false;
+                    render();
+                    if (state.score >= state.goal) {
+                      win("You matched every desert track pair!");
+                    } else {
+                      setMessage("Match found. Keep going.", "#17324d");
+                    }
+                  }, 380);
+                } else {
+                  schedule(() => {
+                    firstPick.revealed = false;
+                    secondPick.revealed = false;
+                    firstPick = null;
+                    secondPick = null;
+                    locked = false;
+                    render();
+                    setMessage("Not a match. Try to remember where they were.");
+                  }, 700);
+                }
+              });
+              grid.appendChild(button);
+            });
+          }
+
+          setMessage("Flip two cards at a time and match all the desert pairs.", "#17324d");
+          render();
+        }
+      },
       utahstory: {
         category: "story-games",
         emoji: "📖",
@@ -4986,6 +5482,7 @@ Tap any game to jump in.</p>
         areaClass: "sunny",
         start() {
           resetArea(this.areaClass);
+          gameArea.classList.add("puzzle-fit");
           state.running = true;
 
           const wrap = document.createElement("div");
